@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Ridhwan Salaudeen is a product designer, developer, teacher and lifelong student based in Nigeria.",
 };
 
-const F = (id: string) => `https://framerusercontent.com/images/${id}`;
+const F = (id: string) => `/work/img/${id}`;
 
 export default function About() {
   return (
@@ -62,7 +62,7 @@ export default function About() {
           <p>Having benefited from other people&rsquo;s knowledge, I find it fulfilling to give back to people learning the way I did.</p>
         </div>
         <figure className={styles.video}>
-          <video src="https://framerusercontent.com/assets/u1dSpFl4jBU5QZriSwx2xmbbfw.mp4" controls playsInline preload="metadata" poster={F("81pJXMLq0ICGo6psgax9NdIF26g.png")} />
+          <video src="/work/img/u1dSpFl4jBU5QZriSwx2xmbbfw.mp4" controls playsInline preload="metadata" poster={F("81pJXMLq0ICGo6psgax9NdIF26g.png")} />
           <figcaption>Teaching a group of students web development at The Renewed Hope Agenda, 2025.</figcaption>
         </figure>
       </section>

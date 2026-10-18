@@ -1,8 +1,8 @@
-/* Drop the font files into /public/fonts. Any of these formats will be picked up. */
+/* KoreanFirst by Ridhwan Salaudeen: variable font, weight 200–700. */
 @font-face {
   font-family: "KoreanFirst";
-  src: url("/fonts/KoreanFirst.woff2") format("woff2"), url("/fonts/KoreanFirst.woff") format("woff"),
-    url("/fonts/KoreanFirst.otf") format("opentype"), url("/fonts/KoreanFirst.ttf") format("truetype");
+  src: url("/fonts/KoreanFirst-VF.ttf") format("truetype-variations"), url("/fonts/KoreanFirst-VF.ttf") format("truetype");
+  font-weight: 200 700;
   font-display: swap;
 }
 

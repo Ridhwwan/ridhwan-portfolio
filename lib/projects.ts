@@ -2,7 +2,9 @@
 // Layer 1 (universal skeleton): every case study is a "book" of pages, paired into spreads.
 // Layer 2 (per-project theme): each project carries its own palette, type and decoration.
 
-const F = (id: string) => `https://framerusercontent.com/images/${id}`;
+// Images live on this domain. scripts/fetch-images.mjs copies any missing ones
+// from the old Framer site into public/work/img before every build.
+const F = (id: string) => `/work/img/${id}`;
 
 export type Decoration =
   | "route"
@@ -48,7 +50,7 @@ export type Project = {
   years: string;
   summary: string;
   featured?: boolean;
-  external?: string; // projects without a book link out
+  external?: string; // card links out instead of to a book (a book may still exist as an unlinked draft)
   cover?: string;
   role?: string;
   team?: string[];
@@ -183,6 +185,8 @@ export const projects: Project[] = [
     years: "2024 – present",
     featured: true,
     summary: "A multi-portal school management system for Nigerian secondary schools.",
+    // The book below is a draft, kept for review. Until then the card opens the live product.
+    external: "https://bentosms.com",
     role: "Founder, product designer and developer",
     tools: ["Figma", "Next.js", "Supabase", "Vercel"],
     contributions: ["Product strategy", "Design system", "Every portal", "Engineering", "School onboarding"],
@@ -601,5 +605,8 @@ export const projects: Project[] = [
   },
 ];
 
-export const caseStudies = projects.filter((p) => !p.external);
+/** Every project that has a book, including unlinked drafts. */
+export const caseStudies = projects.filter((p) => p.pages.length > 0);
+/** Books linked from the site. */
+export const publishedStudies = caseStudies.filter((p) => !p.external);
 export const getProject = (slug: string) => caseStudies.find((p) => p.slug === slug);

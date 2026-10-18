@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import styles from "./playground.module.css";
 
-const GLYPHS =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&?!@#%()".split("");
-const HANGUL = "가나다라마바사아자차카타파하".split("");
+// Exactly the characters KoreanFirst contains.
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#$%&()+,-;=@[]_~\u2018\u201C".split("");
 
 export default function TypeTester() {
   const [size, setSize] = useState(120);
   const [track, setTrack] = useState(0);
+  const [weight, setWeight] = useState(400);
   const [loaded, setLoaded] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function TypeTester() {
     <section className={styles.tester} aria-label="KoreanFirst type tester">
       {loaded === false && (
         <p className={styles.notice} role="status">
-          KoreanFirst isn&rsquo;t installed yet, so you&rsquo;re seeing a fallback. Add KoreanFirst.woff2 to /public/fonts and it appears here automatically.
+          KoreanFirst didn&rsquo;t load, so you&rsquo;re seeing a fallback. Refresh the page to try again.
         </p>
       )}
 
@@ -32,6 +32,11 @@ export default function TypeTester() {
           <span>Size</span>
           <input type="range" min={32} max={260} value={size} onChange={(e) => setSize(+e.target.value)} />
           <output>{size}px</output>
+        </label>
+        <label>
+          <span>Weight</span>
+          <input type="range" min={200} max={700} step={10} value={weight} onChange={(e) => setWeight(+e.target.value)} />
+          <output>{weight}</output>
         </label>
         <label>
           <span>Tracking</span>
@@ -47,15 +52,15 @@ export default function TypeTester() {
         spellCheck={false}
         role="textbox"
         aria-label="Editable specimen text"
-        style={{ fontSize: size, letterSpacing: `${track / 100}em` }}
+        style={{ fontSize: size, letterSpacing: `${track / 100}em`, fontWeight: weight }}
       >
-        Stay curious, build kindly.
+        Stay curious, build kindly
       </div>
 
       <h2 className={styles.sub}>Character set</h2>
       <ul className={styles.glyphs}>
-        {[...GLYPHS, ...HANGUL].map((g) => (
-          <li key={g}>{g}</li>
+        {GLYPHS.map((g) => (
+          <li key={g} style={{ fontWeight: weight }}>{g}</li>
         ))}
       </ul>
     </section>

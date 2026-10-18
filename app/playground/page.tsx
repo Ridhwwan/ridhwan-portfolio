@@ -5,7 +5,7 @@ import styles from "./playground.module.css";
 
 export const metadata: Metadata = {
   title: "Playground",
-  description: "Experiments in type and 3D. Currently: the KoreanFirst typeface.",
+  description: "Experiments in type and 3D. Currently: KoreanFirst, a variable typeface by Ridhwan Salaudeen.",
 };
 
 export default function Playground() {
@@ -14,7 +14,7 @@ export default function Playground() {
       <section className={styles.head}>
         <div>
           <h1 className="h-xl">Playground</h1>
-          <p className="lede">Things I&rsquo;m trying out. First up, the KoreanFirst typeface. Type anything below.</p>
+          <p className="lede">Things I&rsquo;m trying out. First up, KoreanFirst, a typeface I designed. Type anything below.</p>
         </div>
         <div className={styles.cube} aria-hidden>
           <GlassCubes layout="single" />
