@@ -6,8 +6,10 @@
 // Run it yourself with: npm run images
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("..", import.meta.url).pathname;
+// fileURLToPath gives a correct path on Windows too (no leading slash before the drive letter).
+const root = fileURLToPath(new URL("..", import.meta.url));
 const out = join(root, "public/work/img");
 const sources = ["lib/projects.ts", "app/about/page.tsx"];
 
