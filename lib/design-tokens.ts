@@ -27,8 +27,6 @@ export const FONT_STACKS: Record<string, string> = {
 };
 const FONTS = Object.keys(FONT_STACKS);
 
-export type GroupDoc = { id: TokenGroup; title: string; intro: string; connects: string[] };
-
 export type GroupDef = { id: TokenGroup; title: string; intro: string; ties: string[] };
 
 /** Foundations. `ties` is the written explanation of how each one connects to the rest. */

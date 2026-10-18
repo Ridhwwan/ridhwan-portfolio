@@ -3,7 +3,39 @@
 import { useEditor } from "./EditorProvider";
 import type { TokenGroup } from "@/lib/design-tokens";
 import ButtonLink from "@/components/ui/ButtonLink";
+import { contrast, grade } from "@/lib/contrast";
 import styles from "./design.module.css";
+
+const PAIRS: [string, string, string][] = [
+  ["Text on page", "--ink", "--bg"],
+  ["Secondary text on page", "--ink-soft", "--bg"],
+  ["Button text on button", "--btn-ink", "--btn-bg"],
+  ["Text on placeholder fill", "--ink", "--tile"],
+];
+
+/** Live WCAG contrast for the colour pairs that actually appear together on the site. */
+function ContrastTable({ values }: { values: Record<string, string> }) {
+  return (
+    <div className={styles.contrast}>
+      <p className="label">Contrast checks</p>
+      <ul>
+        {PAIRS.map(([label, fg, bg]) => {
+          const r = contrast(values[fg], values[bg]);
+          const g = r === null ? "—" : grade(r);
+          return (
+            <li key={label} data-grade={g === "Fails" ? "fail" : g === "AA large only" ? "warn" : "pass"}>
+              <span className={styles.contrastSample} style={{ color: `var(${fg})`, background: `var(${bg})` }}>Aa</span>
+              <span>{label}</span>
+              <span className={styles.contrastRatio}>{r === null ? "—" : `${r.toFixed(2)}:1`}</span>
+              <span className={styles.contrastGrade}>{g}</span>
+            </li>
+          );
+        })}
+      </ul>
+      <p className={styles.demoHint}>AA needs 4.5:1 for body text. These update as you edit.</p>
+    </div>
+  );
+}
 
 /** A live sample for each foundation group, styled entirely by the tokens so edits show instantly. */
 export default function GroupDemo({ group }: { group: TokenGroup }) {
@@ -25,6 +57,7 @@ export default function GroupDemo({ group }: { group: TokenGroup }) {
             </div>
           ))}
         </div>
+        <ContrastTable values={values} />
         <div className={styles.demoCard}>
           <p className="label">In context</p>
           <h3 className="h-lg">Readable on the page</h3>
@@ -39,8 +72,8 @@ export default function GroupDemo({ group }: { group: TokenGroup }) {
     return (
       <div className={styles.demo}>
         <p className="label">Label / eyebrow</p>
-        <h1 className="h-xl" style={{ margin: "8px 0 0" }}>Page title in the headline font</h1>
-        <h2 className="h-lg" style={{ margin: "20px 0 0" }}>A section heading</h2>
+        <p className="h-xl" style={{ margin: "8px 0 0" }}>Page title in the headline font</p>
+        <p className="h-lg" style={{ margin: "20px 0 0" }}>A section heading</p>
         <p style={{ marginTop: 16, maxWidth: "52ch" }}>
           Body text in the body font, at the base size. Everything scales from these few values, so a change here ripples
           through every page consistently.

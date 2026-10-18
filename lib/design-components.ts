@@ -100,16 +100,25 @@ export const COMPONENTS: ComponentDef[] = [
     file: "components/ui/FilterChips.tsx",
     description: "Single-choice row of buttons for filtering a list.",
     tokens: ["--radius-control", "--line", "--ink", "--btn-bg", "--btn-ink", ...label],
-    relations: [{ slug: "playground-card", how: "Filters the Playground rows by category." }, { slug: "button", how: "Shares control radius and the button colour pair." }],
+    relations: [{ slug: "playground-card", how: "Filters the Playground rows by category." }, { slug: "view-toggle", how: "Shares the row and the selected-state colours." }, { slug: "button", how: "Shares control radius and the button colour pair." }],
     usedOn: [{ label: "Playground", href: "/playground" }],
   },
   {
     slug: "playground-card",
     name: "Playground row",
     file: "components/playground/PlaygroundCard.tsx",
-    description: "Thumbnail, title, category and year, summary. Filled from the Notion Playground table.",
-    tokens: ["--radius", "--tile", "--serif", "--line", "--ink", "--ink-soft", ...label],
-    relations: [{ slug: "filter-chips", how: "Filtered by the chips above the list." }, { slug: "project-card", how: "Shares image radius, placeholder fill and label style with project cards." }],
+    description: "Thumbnail, title, category and year, summary. A row in list view, a square tile in grid view. Filled from the Notion Playground table.",
+    tokens: ["--radius", "--tile", "--serif", "--line", "--ink", "--ink-soft", "--grid-gap-x", "--grid-gap-y", ...label],
+    relations: [{ slug: "filter-chips", how: "Filtered by the chips above the list." }, { slug: "view-toggle", how: "Switches between rows and tiles." }, { slug: "project-card", how: "Shares image radius, placeholder fill and label style with project cards; in grid view it also uses the same grid gaps." }],
+    usedOn: [{ label: "Playground", href: "/playground" }],
+  },
+  {
+    slug: "view-toggle",
+    name: "View toggle",
+    file: "components/ui/ViewToggle.tsx",
+    description: "Two-button switch between list and grid layouts. Remembers the visitor's choice.",
+    tokens: ["--radius-control", "--line", "--bg", "--ink", "--ink-soft", "--btn-bg", "--btn-ink"],
+    relations: [{ slug: "filter-chips", how: "Sits on the same row as the chips; same control radius, border and selected colours." }, { slug: "playground-card", how: "Changes how Playground cards are laid out." }],
     usedOn: [{ label: "Playground", href: "/playground" }],
   },
   {
@@ -163,7 +172,9 @@ export const getComponent = (slug: string) => COMPONENTS.find((c) => c.slug === 
 export const affectedBy = (token: string) => COMPONENTS.filter((c) => c.tokens.includes(token));
 
 // Guard against typos: every token and related component must exist.
+// Shared token sets can overlap (e.g. the button set includes the body font), so dedupe.
 for (const c of COMPONENTS) {
+  c.tokens = [...new Set(c.tokens)];
   for (const t of c.tokens) {
     if (!TOKENS.some((d) => d.name === t)) throw new Error(`Component ${c.slug} lists unknown token ${t}`);
   }

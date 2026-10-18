@@ -3,8 +3,9 @@ import SmartLink, { isExternal } from "@/components/ui/SmartLink";
 import type { PlaygroundItem } from "@/lib/playground";
 import styles from "./PlaygroundCard.module.css";
 
-/** One Playground project: thumbnail, title, category and year, one-line summary. */
-export default function PlaygroundCard({ item }: { item: PlaygroundItem }) {
+/** One Playground project: thumbnail, title, category and year, one-line summary. Row in list view, tile in grid view. */
+export default function PlaygroundCard({ item, view = "list" }: { item: PlaygroundItem; view?: "list" | "grid" }) {
+  const grid = view === "grid";
   const body = (
     <>
       <div className={styles.thumb}>
@@ -27,11 +28,11 @@ export default function PlaygroundCard({ item }: { item: PlaygroundItem }) {
   );
 
   return (
-    <li className={styles.item}>
+    <li className={grid ? styles.tileItem : styles.item}>
       {item.href ? (
-        <SmartLink href={item.href} className={styles.row}>{body}</SmartLink>
+        <SmartLink href={item.href} className={grid ? styles.tile : styles.row}>{body}</SmartLink>
       ) : (
-        <div className={styles.row}>{body}</div>
+        <div className={grid ? styles.tile : styles.row}>{body}</div>
       )}
     </li>
   );

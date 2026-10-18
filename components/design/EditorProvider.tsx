@@ -2,24 +2,28 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { TOKEN_MAP, toCss, validate } from "@/lib/design-tokens";
-import { saveTokens } from "@/app/design-system/actions";
+import { isUnlocked, lock as lockAction, saveTokens } from "@/app/design-system/actions";
 
 /**
  * Holds the working copy of every token while someone edits the design system.
  *
  * - Any change previews instantly by writing the CSS variable onto <html>.
- * - When unlocked, changes auto-save to Notion a few seconds after you stop,
- *   and a bar lets you save now or discard.
- * - When locked, changes stay as a local preview only (nobody else sees them).
+ * - When unlocked, valid changes auto-save to Notion a few seconds after the
+ *   last edit (or on "Save now"), then the live site refreshes.
+ * - When locked, changes are a preview in this browser only.
+ *
+ * The lock state is fetched from the browser after load, so these pages stay
+ * statically prerendered (reading cookies on the server would make them dynamic).
  */
 
 type SaveState = "idle" | "pending" | "saving" | "saved" | "error";
 
 type Ctx = {
   values: Record<string, string>;
-  defaults: Record<string, string>;
+  saved: Record<string, string>;
   unlocked: boolean;
   dirty: string[];
+  invalid: string[];
   autosave: boolean;
   setAutosave: (on: boolean) => void;
   state: SaveState;
@@ -27,6 +31,8 @@ type Ctx = {
   set: (name: string, value: string) => void;
   saveNow: () => Promise<void>;
   reset: () => void;
+  markUnlocked: () => void;
+  lock: () => Promise<void>;
 };
 
 const EditorContext = createContext<Ctx | null>(null);
@@ -38,60 +44,77 @@ export const useEditor = () => {
 
 const AUTOSAVE_MS = 2500;
 
-export default function EditorProvider({
-  initial,
-  unlocked,
-  children,
-}: {
-  initial: Record<string, string>;
-  unlocked: boolean;
-  children: React.ReactNode;
-}) {
-  const [saved, setSaved] = useState(initial); // last persisted values
-  const [values, setValues] = useState(initial); // working copy
+function paint(name: string, value: string) {
+  const def = TOKEN_MAP.get(name);
+  if (!def) return;
+  const v = validate(def, value);
+  if (v !== null) document.documentElement.style.setProperty(name, toCss(def, v));
+}
+
+export default function EditorProvider({ initial, children }: { initial: Record<string, string>; children: React.ReactNode }) {
+  const [saved, setSaved] = useState(initial);
+  const [values, setValues] = useState(initial);
+  const [unlocked, setUnlocked] = useState(false);
   const [autosave, setAutosave] = useState(true);
   const [state, setState] = useState<SaveState>("idle");
   const [error, setError] = useState<string | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const dirty = useMemo(() => Object.keys(values).filter((k) => values[k] !== saved[k]), [values, saved]);
+  // Refs always hold the latest state, so a delayed auto-save never sends stale values.
+  const valuesRef = useRef(values);
+  const savedRef = useRef(saved);
+  useEffect(() => { valuesRef.current = values; }, [values]);
+  useEffect(() => { savedRef.current = saved; }, [saved]);
 
-  // Preview: push the working value onto the live stylesheet as it changes.
-  const paint = useCallback((name: string, value: string) => {
-    const def = TOKEN_MAP.get(name);
-    if (!def) return;
-    const v = validate(def, value);
-    if (v !== null) document.documentElement.style.setProperty(name, toCss(def, v));
+  useEffect(() => {
+    isUnlocked().then(setUnlocked).catch(() => {});
   }, []);
 
+  const dirty = useMemo(() => Object.keys(values).filter((k) => values[k] !== saved[k]), [values, saved]);
+  const invalid = useMemo(
+    () => dirty.filter((k) => { const d = TOKEN_MAP.get(k); return !d || validate(d, values[k]) === null; }),
+    [dirty, values],
+  );
+
   const commit = useCallback(async () => {
-    const changes = Object.fromEntries(dirty.map((k) => [k, values[k]]));
-    if (!Object.keys(changes).length) return;
+    const cur = valuesRef.current;
+    const base = savedRef.current;
+    // Only valid edits are sent; half-typed values (e.g. "#12") wait until they're complete.
+    const changes: Record<string, string> = {};
+    for (const k of Object.keys(cur)) {
+      if (cur[k] === base[k]) continue;
+      const d = TOKEN_MAP.get(k);
+      const v = d ? validate(d, cur[k]) : null;
+      if (v !== null) changes[k] = v;
+    }
+    if (!Object.keys(changes).length) { setState("idle"); return; }
     setState("saving");
     setError(null);
     const res = await saveTokens(changes);
     if (res.ok) {
       setSaved((s) => ({ ...s, ...changes }));
       setState("saved");
-      setTimeout(() => setState((cur) => (cur === "saved" ? "idle" : cur)), 2000);
+      setTimeout(() => setState((s) => (s === "saved" ? "idle" : s)), 2500);
     } else {
       setState("error");
       setError(res.error ?? "Couldn't save.");
+      if (res.error === "Unlock editing first.") setUnlocked(false);
     }
-  }, [dirty, values]);
+  }, []);
+
+  const schedule = useCallback(() => {
+    if (timer.current) clearTimeout(timer.current);
+    setState("pending");
+    timer.current = setTimeout(() => void commit(), AUTOSAVE_MS);
+  }, [commit]);
 
   const set = useCallback(
     (name: string, value: string) => {
       setValues((v) => ({ ...v, [name]: value }));
       paint(name, value);
-      if (!unlocked) return;
-      if (timer.current) clearTimeout(timer.current);
-      if (autosave) {
-        setState("pending");
-        timer.current = setTimeout(() => void commit(), AUTOSAVE_MS);
-      }
+      if (unlocked && autosave) schedule();
     },
-    [paint, unlocked, autosave, commit],
+    [unlocked, autosave, schedule],
   );
 
   const saveNow = useCallback(async () => {
@@ -101,39 +124,41 @@ export default function EditorProvider({
 
   const reset = useCallback(() => {
     if (timer.current) clearTimeout(timer.current);
-    for (const k of dirty) {
-      const def = TOKEN_MAP.get(k);
-      if (def) document.documentElement.style.setProperty(k, toCss(def, saved[k]));
-    }
-    setValues(saved);
+    const base = savedRef.current;
+    for (const k of Object.keys(base)) paint(k, base[k]);
+    setValues(base);
     setState("idle");
     setError(null);
-  }, [dirty, saved]);
+  }, []);
 
-  // Warn before leaving with unsaved local changes that won't persist.
+  const lock = useCallback(async () => {
+    await lockAction();
+    setUnlocked(false);
+  }, []);
+
+  // Turning auto-save on (or unlocking) with edits already waiting schedules them.
+  const hasPending = () => Object.keys(valuesRef.current).some((k) => valuesRef.current[k] !== savedRef.current[k]);
+  const toggleAutosave = (on: boolean) => {
+    setAutosave(on);
+    if (on && unlocked && hasPending()) schedule();
+    if (!on && timer.current) { clearTimeout(timer.current); setState("idle"); }
+  };
+  const markUnlocked = () => {
+    setUnlocked(true);
+    if (autosave && hasPending()) schedule();
+  };
+
+  // Warn before leaving with edits that haven't been saved.
   useEffect(() => {
     if (!dirty.length) return;
-    const h = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = "";
-    };
+    const h = (e: BeforeUnloadEvent) => { e.preventDefault(); e.returnValue = ""; };
     window.addEventListener("beforeunload", h);
     return () => window.removeEventListener("beforeunload", h);
   }, [dirty.length]);
 
   const ctx: Ctx = {
-    values,
-    defaults: initial,
-    unlocked,
-    dirty,
-    autosave,
-    setAutosave,
-    state,
-    error,
-    set,
-    saveNow,
-    reset,
+    values, saved, unlocked, dirty, invalid, autosave, setAutosave: toggleAutosave, state, error,
+    set, saveNow, reset, markUnlocked, lock,
   };
-
   return <EditorContext.Provider value={ctx}>{children}</EditorContext.Provider>;
 }

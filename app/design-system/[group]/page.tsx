@@ -31,6 +31,13 @@ export default async function GroupPage({ params }: PageProps<"/design-system/[g
       </section>
 
       <section className={styles.section}>
+        <h2 className="label">How these connect</h2>
+        <ul className={styles.ties}>
+          {meta.ties.map((t) => <li key={t}>{t}</li>)}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
         <h2 className="label">Tokens</h2>
         <div className={styles.controlGrid}>
           {tokens.map((t) => {

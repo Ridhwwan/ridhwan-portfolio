@@ -4,6 +4,7 @@ import { useState } from "react";
 import ButtonLink from "@/components/ui/ButtonLink";
 import FilterChips from "@/components/ui/FilterChips";
 import BackLink from "@/components/ui/BackLink";
+import ViewToggle, { type View } from "@/components/ui/ViewToggle";
 import SectionIntro from "@/components/ui/SectionIntro";
 import PageHeader from "@/components/ui/PageHeader";
 import styles from "./design.module.css";
@@ -11,6 +12,7 @@ import styles from "./design.module.css";
 /** Renders the real component so token edits preview on it directly. */
 export default function ComponentDemo({ slug }: { slug: string }) {
   const [chip, setChip] = useState("All");
+  const [view, setView] = useState<View>("grid");
 
   switch (slug) {
     case "button":
@@ -43,6 +45,8 @@ export default function ComponentDemo({ slug }: { slug: string }) {
       return <PageHeader label="About" title="A page title" subtitle="An optional serif subtitle" lede="And a lede line beneath it." />;
     case "filter-chips":
       return <FilterChips label="Demo" options={["All", "Type design", "Code", "Tools"]} value={chip} onChange={setChip} />;
+    case "view-toggle":
+      return <ViewToggle value={view} onChange={setView} />;
     case "back-link":
       return <BackLink href="#">All work</BackLink>;
     case "project-card":

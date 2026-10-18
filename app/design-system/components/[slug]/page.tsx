@@ -62,9 +62,26 @@ export default async function ComponentPage({ params }: PageProps<"/design-syste
         </ul>
       </section>
 
+      {c.relations.length > 0 && (
+        <section className={styles.section}>
+          <h2 className="label">Works with</h2>
+          <ul className={styles.tieList}>
+            {c.relations.map((r) => {
+              const o = getComponent(r.slug);
+              return (
+                <li key={r.slug}>
+                  <Link href={`/design-system/components/${r.slug}`} className={styles.tieName}>{o?.name ?? r.slug}</Link>
+                  <span className={styles.tieHow}>{r.how}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+
       {related.length > 0 && (
         <section className={styles.section}>
-          <h2 className="label">How it ties to other components</h2>
+          <h2 className="label">Shared tokens</h2>
           <p className={styles.tieIntro}>
             These components share tokens with {c.name}, so editing a shared token changes them together — that&rsquo;s what
             keeps the interface cohesive.
@@ -74,7 +91,8 @@ export default async function ComponentPage({ params }: PageProps<"/design-syste
               <li key={comp.slug}>
                 <Link href={`/design-system/components/${comp.slug}`} className={styles.tieName}>{comp.name}</Link>
                 <span className={styles.tieShared}>
-                  shares {shared.map((t) => <code key={t}>{TOKEN_MAP.get(t)?.label ?? t}</code>).reduce((a, b) => <>{a}, {b}</>)}
+                  shares{" "}
+                  {shared.map((t) => <code key={t}>{TOKEN_MAP.get(t)?.label ?? t}</code>)}
                 </span>
               </li>
             ))}

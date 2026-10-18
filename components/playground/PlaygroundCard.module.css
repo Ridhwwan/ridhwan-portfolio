@@ -24,3 +24,14 @@ a.row:hover .title { text-decoration: underline; text-underline-offset: 4px; tex
   .mono { font-size: 34px; }
   .ext { display: block; margin: 2px 0 0; }
 }
+
+/* grid view: square image on top, text below (matches the project cards) */
+.tileItem { list-style: none; }
+.tile { display: grid; gap: 14px; text-decoration: none; color: inherit; }
+.tile .thumb { width: 100%; aspect-ratio: 1; }
+.tile .mono { font-size: clamp(64px, 8vw, 110px); }
+.tile .text { gap: 6px; }
+a.tile:hover .thumb { transform: scale(1.02); }
+a.tile:hover .title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.tile .ext { display: block; margin: 2px 0 0; }
+@media (max-width: 560px) { .tile .thumb { width: 100%; } }
