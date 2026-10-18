@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 import type { Project } from "@/lib/projects";
 import styles from "./ProjectCard.module.css";
 
@@ -30,9 +30,5 @@ export default function ProjectCard({ p, size }: { p: Project; size: "feature" |
     </>
   );
   const cls = `${styles.card} ${size === "feature" ? styles.feature : ""}`;
-  return ext ? (
-    <a className={cls} href={href} target="_blank" rel="noreferrer">{inner}</a>
-  ) : (
-    <Link className={cls} href={href}>{inner}</Link>
-  );
+  return <SmartLink className={cls} href={href}>{inner}</SmartLink>;
 }

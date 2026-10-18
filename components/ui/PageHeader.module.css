@@ -1,0 +1,10 @@
+.head { display: grid; gap: 32px; padding: 88px 0 56px; }
+.withAside { grid-template-columns: minmax(0, 1fr) minmax(0, 400px); align-items: center; }
+.text { display: grid; gap: 18px; max-width: 760px; }
+.subtitle { margin: 0; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.25; letter-spacing: -0.02em; font-weight: 600; max-width: 30ch; }
+.aside { position: relative; height: 320px; }
+@media (max-width: 760px) {
+  .head { padding: 56px 0 40px; }
+  .withAside { grid-template-columns: 1fr; }
+  .aside { height: 200px; }
+}

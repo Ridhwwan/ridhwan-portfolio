@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./playground.module.css";
+import styles from "./TypeTester.module.css";
 
 // Exactly the characters KoreanFirst contains.
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#$%&()+,-;=@[]_~\u2018\u201C".split("");
 
+/** Live specimen for KoreanFirst: size, weight and tracking controls, editable text, character grid. */
 export default function TypeTester() {
   const [size, setSize] = useState(120);
   const [track, setTrack] = useState(0);

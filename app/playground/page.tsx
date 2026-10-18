@@ -1,26 +1,25 @@
 import type { Metadata } from "next";
-import TypeTester from "./TypeTester";
+import PageHeader from "@/components/ui/PageHeader";
+import PlaygroundList from "@/components/playground/PlaygroundList";
 import { GlassCubes } from "@/components/three/Scene";
-import styles from "./playground.module.css";
+import { getPlaygroundItems } from "@/lib/playground";
 
 export const metadata: Metadata = {
   title: "Playground",
-  description: "Experiments in type and 3D. Currently: KoreanFirst, a variable typeface by Ridhwan Salaudeen.",
+  description: "Side projects and experiments by Ridhwan Salaudeen: type design, small tools and things built for fun.",
 };
 
-export default function Playground() {
+export default async function Playground() {
+  const items = await getPlaygroundItems();
   return (
     <div className="wrap">
-      <section className={styles.head}>
-        <div>
-          <h1 className="h-xl">Playground</h1>
-          <p className="lede">Things I&rsquo;m trying out. First up, KoreanFirst, a typeface I designed. Type anything below.</p>
-        </div>
-        <div className={styles.cube} aria-hidden>
-          <GlassCubes layout="single" />
-        </div>
-      </section>
-      <TypeTester />
+      <PageHeader
+        title="Playground"
+        subtitle="They may not be job worthy, but they end up stealing my time somehow 😒"
+        lede="Design is my go-to, but bringing things to life is part of the process too."
+        aside={<GlassCubes layout="single" />}
+      />
+      <PlaygroundList items={items} />
     </div>
   );
 }

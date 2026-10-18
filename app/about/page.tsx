@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import styles from "./about.module.css";
+import PageHeader from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "About",
@@ -13,9 +14,7 @@ const F = (id: string) => `/work/img/${id}`;
 export default function About() {
   return (
     <div className="wrap">
-      <header className={styles.head}>
-        <h1 className="h-xl">I&rsquo;m a designer, builder, teacher and student</h1>
-      </header>
+      <PageHeader title={<>I&rsquo;m a designer, builder, teacher and student</>} />
 
       <section className={styles.block}>
         <div className="prose">

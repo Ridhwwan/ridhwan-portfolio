@@ -31,7 +31,7 @@ export default function Nav() {
         <ul id="nav-links" className="nav-links glass-mobile" data-open={open}>
           {links.map((l) => (
             <li key={l.href}>
-              <Link href={l.href} aria-current={path === l.href ? "page" : undefined} onClick={() => setOpen(false)}>{l.label}</Link>
+              <Link href={l.href} aria-current={path === l.href || (l.href !== "/#work" && path.startsWith(l.href + "/")) ? "page" : undefined} onClick={() => setOpen(false)}>{l.label}</Link>
             </li>
           ))}
           <li><a className="btn" href={RESUME} target="_blank" rel="noreferrer">Resume</a></li>

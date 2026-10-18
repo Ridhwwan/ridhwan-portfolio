@@ -6,10 +6,6 @@
   font-display: swap;
 }
 
-.head { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: 32px; align-items: center; padding: 72px 0 48px; }
-.head > div:first-child { display: grid; gap: 20px; }
-.cube { position: relative; height: 340px; }
-
 .tester { display: grid; gap: 28px; }
 .notice { margin: 0; padding: 14px 18px; border-radius: 14px; background: #fff; border: 1px dashed rgba(0, 0, 0, 0.3); font-size: 15px; }
 .controls { display: flex; flex-wrap: wrap; gap: 12px 32px; padding: 14px 22px; border-radius: 999px; position: sticky; top: 84px; z-index: 5; }
@@ -29,4 +25,4 @@
   transition: transform 0.2s ease, background 0.2s ease;
 }
 .glyphs li:hover { transform: scale(1.08); background: #fff; }
-@media (max-width: 760px) { .head { grid-template-columns: 1fr; } .cube { height: 220px; } .controls { border-radius: 20px; } .controls input { width: 120px; } }
+@media (max-width: 760px) { .controls { border-radius: 20px; } .controls input { width: 120px; } }
