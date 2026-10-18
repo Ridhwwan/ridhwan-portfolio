@@ -9,6 +9,14 @@
   --gutter: clamp(16px, 4.4vw, var(--gutter-max));
 }
 
+/* KoreanFirst by Ridhwan Salaudeen: variable font, weight 200–700. */
+@font-face {
+  font-family: "KoreanFirst";
+  src: url("/fonts/KoreanFirst-VF.ttf") format("truetype-variations"), url("/fonts/KoreanFirst-VF.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
 }

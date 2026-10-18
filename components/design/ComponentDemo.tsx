@@ -5,14 +5,24 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import FilterChips from "@/components/ui/FilterChips";
 import BackLink from "@/components/ui/BackLink";
 import ViewToggle, { type View } from "@/components/ui/ViewToggle";
+import PlaygroundCard from "@/components/playground/PlaygroundCard";
+import ProjectWindow from "@/components/playground/ProjectWindow";
+import type { PlaygroundItem } from "@/lib/playground";
+
 import SectionIntro from "@/components/ui/SectionIntro";
 import PageHeader from "@/components/ui/PageHeader";
 import styles from "./design.module.css";
+
+const SAMPLES: PlaygroundItem[] = [
+  { id: "demo-kf", title: "KoreanFirst", summary: "Live specimen.", category: "Type design", year: 2026, href: null, cover: null, preview: null, embed: null, live: "koreanfirst", order: 1 },
+  { id: "demo-drawn", title: "Sketch converter", summary: "Drawn placeholder until a screenshot is added.", category: "Code", year: null, href: null, cover: null, preview: null, embed: null, live: null, order: 2 },
+];
 
 /** Renders the real component so token edits preview on it directly. */
 export default function ComponentDemo({ slug }: { slug: string }) {
   const [chip, setChip] = useState("All");
   const [view, setView] = useState<View>("grid");
+  const [trying, setTrying] = useState<PlaygroundItem | null>(null);
 
   switch (slug) {
     case "button":
@@ -60,14 +70,15 @@ export default function ComponentDemo({ slug }: { slug: string }) {
         </div>
       );
     case "playground-card":
+    case "project-window":
       return (
-        <div className={styles.pgDemo}>
-          <span className={styles.pgThumb} />
-          <div>
-            <h3 style={{ margin: 0, fontWeight: 550 }}>KoreanFirst</h3>
-            <p className="label" style={{ marginTop: 4 }}>Type design, 2026</p>
-          </div>
-        </div>
+        <>
+          <ul className={styles.pgGrid}>
+            {SAMPLES.map((it) => <PlaygroundCard key={it.id} item={it} view="grid" onTry={setTrying} />)}
+          </ul>
+          <p className={styles.demoHint}>Hover a card, then press Try it.</p>
+          <ProjectWindow item={trying} onClose={() => setTrying(null)} />
+        </>
       );
     case "contact-form":
       return (

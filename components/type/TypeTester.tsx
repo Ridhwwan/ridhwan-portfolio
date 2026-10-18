@@ -7,8 +7,8 @@ import styles from "./TypeTester.module.css";
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#$%&()+,-;=@[]_~\u2018\u201C".split("");
 
 /** Live specimen for KoreanFirst: size, weight and tracking controls, editable text, character grid. */
-export default function TypeTester() {
-  const [size, setSize] = useState(120);
+export default function TypeTester({ initialSize = 120 }: { initialSize?: number }) {
+  const [size, setSize] = useState(initialSize);
   const [track, setTrack] = useState(0);
   const [weight, setWeight] = useState(400);
   const [loaded, setLoaded] = useState<boolean | null>(null);

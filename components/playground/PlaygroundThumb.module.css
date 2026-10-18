@@ -1,0 +1,36 @@
+/* Fills whatever box the card gives it (small square in rows, big square in tiles). */
+.specimen, .media, .drawn { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
+
+/* KoreanFirst: the font itself, weight sweeping 200 → 700 while active */
+.specimen { background: var(--ink); color: var(--bg); container-type: size; }
+.specimenGlyphs {
+  font-family: "KoreanFirst", var(--serif); font-size: 52cqmin; line-height: 1; font-weight: 400;
+  font-variation-settings: "wght" 400; transition: font-variation-settings 0.6s ease;
+}
+.specimen[data-active] .specimenGlyphs { animation: sweep 2.4s ease-in-out infinite alternate; }
+@keyframes sweep { from { font-variation-settings: "wght" 200; } to { font-variation-settings: "wght" 700; } }
+.specimenScale { position: absolute; left: 8%; bottom: 7%; font-size: 12px; letter-spacing: 0.06em; opacity: 0.55; }
+
+/* Cover image + hover clip */
+.media img, .media video { width: 100%; height: 100%; object-fit: cover; }
+.clip { position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s ease; }
+.media[data-active] .clip { opacity: 1; }
+
+/* Drawn app window */
+.drawn { background: var(--tile); color: var(--ink); container-type: size; }
+.window { width: 72%; height: auto; transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.drawn[data-active] .window { transform: translateY(-4%) scale(1.04); }
+.frame { fill: var(--bg); stroke: currentColor; stroke-opacity: 0.18; stroke-width: 0.8; }
+.rule { stroke: currentColor; stroke-opacity: 0.12; stroke-width: 0.8; }
+.light { fill: currentColor; fill-opacity: 0.18; }
+.line { fill: currentColor; fill-opacity: 0.16; transform-box: fill-box; transform-origin: left center; transform: scaleX(var(--s)); transition: transform 0.5s ease, fill-opacity 0.3s ease; }
+.drawn[data-active] .line { transform: scaleX(var(--sa)); fill-opacity: 0.32; }
+.cursor { fill: currentColor; opacity: 0; }
+.drawn[data-active] .cursor { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 1; } }
+.badge {
+  position: absolute; left: 7%; bottom: 7%; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; letter-spacing: 0.04em; text-transform: var(--label-case); color: var(--ink-soft);
+}
+/* Small row thumbnails: no room for the label */
+@container (max-width: 140px) { .badge, .specimenScale { display: none; } .window { width: 80%; } }

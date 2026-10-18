@@ -1,19 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import FilterChips from "@/components/ui/FilterChips";
 import ViewToggle, { type View } from "@/components/ui/ViewToggle";
 import PlaygroundCard from "./PlaygroundCard";
+import ProjectWindow from "./ProjectWindow";
 import type { PlaygroundItem } from "@/lib/playground";
 import styles from "./PlaygroundList.module.css";
 
 const ALL = "All";
 const KEY = "playground-view";
 
-/** Filter chips and a list/grid switch, then the (already sorted) projects. */
+/** Filter chips and a list/grid switch, the (already sorted) projects, and the Try it window. */
 export default function PlaygroundList({ items }: { items: PlaygroundItem[] }) {
   const [filter, setFilter] = useState(ALL);
   const [view, setView] = useState<View>("list");
+  const [trying, setTrying] = useState<PlaygroundItem | null>(null);
+  const close = useCallback(() => setTrying(null), []);
   const categories = [...new Set(items.map((i) => i.category))];
   const shown = filter === ALL ? items : items.filter((i) => i.category === filter);
 
@@ -43,8 +46,9 @@ export default function PlaygroundList({ items }: { items: PlaygroundItem[] }) {
         <ViewToggle value={view} onChange={choose} />
       </div>
       <ul className={view === "grid" ? styles.grid : styles.list}>
-        {shown.map((item) => <PlaygroundCard key={item.id} item={item} view={view} />)}
+        {shown.map((item) => <PlaygroundCard key={item.id} item={item} view={view} onTry={setTrying} />)}
       </ul>
+      <ProjectWindow item={trying} onClose={close} />
     </section>
   );
 }

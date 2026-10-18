@@ -107,9 +107,9 @@ export const COMPONENTS: ComponentDef[] = [
     slug: "playground-card",
     name: "Playground row",
     file: "components/playground/PlaygroundCard.tsx",
-    description: "Thumbnail, title, category and year, summary. A row in list view, a square tile in grid view. Filled from the Notion Playground table.",
+    description: "A Playground project. The image comes alive on hover (or when scrolled into view on phones): KoreanFirst sweeps through its weights, clips play over covers, and projects without images get a drawn app window. 'Try it' opens the project in a window. A row in list view, a tile in grid view.",
     tokens: ["--radius", "--tile", "--serif", "--line", "--ink", "--ink-soft", "--grid-gap-x", "--grid-gap-y", ...label],
-    relations: [{ slug: "filter-chips", how: "Filtered by the chips above the list." }, { slug: "view-toggle", how: "Switches between rows and tiles." }, { slug: "project-card", how: "Shares image radius, placeholder fill and label style with project cards; in grid view it also uses the same grid gaps." }],
+    relations: [{ slug: "filter-chips", how: "Filtered by the chips above the list." }, { slug: "view-toggle", how: "Switches between rows and tiles." }, { slug: "project-window", how: "Its Try it button opens the project here." }, { slug: "project-card", how: "Shares image radius, placeholder fill and label style with project cards; in grid view it also uses the same grid gaps." }],
     usedOn: [{ label: "Playground", href: "/playground" }],
   },
   {
@@ -119,6 +119,15 @@ export const COMPONENTS: ComponentDef[] = [
     description: "Two-button switch between list and grid layouts. Remembers the visitor's choice.",
     tokens: ["--radius-control", "--line", "--bg", "--ink", "--ink-soft", "--btn-bg", "--btn-ink"],
     relations: [{ slug: "filter-chips", how: "Sits on the same row as the chips; same control radius, border and selected colours." }, { slug: "playground-card", how: "Changes how Playground cards are laid out." }],
+    usedOn: [{ label: "Playground", href: "/playground" }],
+  },
+  {
+    slug: "project-window",
+    name: "Project window",
+    file: "components/playground/ProjectWindow.tsx",
+    description: "A desktop-style window that opens over the page so visitors can use a project without leaving: KoreanFirst's type tester, or any site set in the Notion 'Embed' field. Full-screen on phones; Esc closes it.",
+    tokens: ["--bg", "--ink", "--ink-soft", "--line", "--tile", "--radius", "--radius-control", "--gutter-max"],
+    relations: [{ slug: "playground-card", how: "Opened from a card's Try it button." }, { slug: "type-tester", how: "Shows the full KoreanFirst tester inside the window." }, { slug: "button", how: "Try it uses the outline button style." }],
     usedOn: [{ label: "Playground", href: "/playground" }],
   },
   {
@@ -148,7 +157,7 @@ export const COMPONENTS: ComponentDef[] = [
     file: "components/type/TypeTester.tsx",
     description: "Size, weight and tracking controls, editable sample text and the character grid for KoreanFirst.",
     tokens: ["--radius", "--tile", "--line", "--ink", "--ink-soft", "--nav-height"],
-    relations: [{ slug: "nav", how: "Its control bar sticks right under the top bar." }, { slug: "page-header", how: "Opened by a Page header on the KoreanFirst page." }],
+    relations: [{ slug: "project-window", how: "Also runs inside the Try it window, where its control bar sticks to the top of the window instead." }, { slug: "nav", how: "Its control bar sticks right under the top bar." }, { slug: "page-header", how: "Opened by a Page header on the KoreanFirst page." }],
     usedOn: [{ label: "KoreanFirst", href: "/playground/koreanfirst" }],
   },
   {

@@ -168,3 +168,4 @@
 .contrast li[data-grade="fail"] .contrastGrade { background: #fde8e7; color: #b42318; }
 @media (max-width: 560px) { .contrast li { grid-template-columns: 44px 1fr auto; } .contrastGrade { grid-column: 2 / -1; justify-self: start; } }
 @media (max-width: 860px) { .sideSub { display: none; } }
+.pgGrid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 560px; }

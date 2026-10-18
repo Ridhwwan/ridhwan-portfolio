@@ -18,8 +18,17 @@ export type PlaygroundItem = {
   year: number | null;
   href: string | null;
   cover: string | null;
+  /** Short clip or GIF that plays on hover. */
+  preview: { src: string; kind: "video" | "image" } | null;
+  /** What the "Try it" window loads. Null means no in-page window (unless `live` is set). */
+  embed: string | null;
+  /** A preview built into the site instead of an image or iframe. */
+  live: "koreanfirst" | null;
   order: number | null;
 };
+
+/** Built-in live previews, keyed by the project's on-site link. */
+const LIVE: Record<string, PlaygroundItem["live"]> = { "/playground/koreanfirst": "koreanfirst" };
 
 const DATABASE_ID = process.env.NOTION_PLAYGROUND_DB ?? "dbe395ab3ea346268bc3897c736fe27a";
 const NOTION_VERSION = "2022-06-28";
@@ -33,6 +42,9 @@ const fallback: PlaygroundItem[] = [
     year: 2026,
     href: "/playground/koreanfirst",
     cover: null,
+    preview: null,
+    embed: null,
+    live: "koreanfirst",
     order: 1,
   },
   {
@@ -43,6 +55,9 @@ const fallback: PlaygroundItem[] = [
     year: null,
     href: "https://sketch-converter.streamlit.app/",
     cover: null,
+    preview: null,
+    embed: "https://sketch-converter.streamlit.app/?embed=true",
+    live: null,
     order: 2,
   },
 ];
@@ -72,19 +87,33 @@ const text = (p: any) => (p?.title ?? p?.rich_text ?? []).map((t: any) => t.plai
 function toItem(page: any): PlaygroundItem {
   const p = page.properties ?? {};
   const files = p.Cover?.files ?? [];
+  const clips = p.Preview?.files ?? [];
+  const id = page.id.replace(/-/g, "");
+  const href: string | null = p.Link?.url ?? null;
   return {
     id: page.id,
     title: text(p.Name) || "Untitled",
     summary: text(p.Summary),
     category: p.Category?.select?.name ?? "Other",
     year: p.Year?.number ?? null,
-    href: p.Link?.url ?? null,
-    // Notion's own file links expire, so covers go through a route that fetches a fresh one.
-    cover: files.length ? `/playground/cover/${page.id.replace(/-/g, "")}` : null,
+    href,
+    // Notion's own file links expire, so files go through a route that fetches a fresh one.
+    cover: files.length ? `/playground/cover/${id}` : null,
+    preview: clips.length
+      ? { src: `/playground/cover/${id}?f=preview`, kind: /\.(gif|png|jpe?g|webp|avif)(\?|$)/i.test(clips[0].name ?? "") ? "image" : "video" }
+      : null,
+    embed: safeEmbed(p.Embed?.url ?? null),
+    live: href ? LIVE[href] ?? null : null,
     order: p.Order?.number ?? null,
   };
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
+
+/** Only https pages can be loaded in the Try it window. */
+function safeEmbed(url: string | null) {
+  if (!url) return null;
+  try { return new URL(url).protocol === "https:" ? url : null; } catch { return null; }
+}
 
 export async function getPlaygroundItems(): Promise<PlaygroundItem[]> {
   "use cache";
