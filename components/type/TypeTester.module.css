@@ -10,6 +10,20 @@
 .specimen, .glyphs li { font-family: "KoreanFirst", var(--font-geist-sans), sans-serif; }
 .specimen { line-height: 1; padding: 24px 0 40px; outline: none; overflow-wrap: anywhere; border-bottom: 1px solid var(--line); }
 .specimen:focus-visible { box-shadow: 0 2px 0 var(--ink); }
+.specimen { caret-color: var(--ink); padding-bottom: 28px; border-bottom: 0; }
+/* Blinking caret from the moment the page loads; the real caret takes over once you click in. */
+.specimen:not(:focus)::after {
+  content: ""; display: inline-block; width: 0.05em; min-width: 2px; height: 0.82em; margin-left: 0.04em;
+  vertical-align: -0.04em; background: currentColor; animation: caret 1.06s steps(1) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .specimen:not(:focus)::after { animation: none; } }
+
+/* Plain-font mirror: what the specimen says */
+.mirror { margin: -12px 0 0; padding: 0 0 28px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; border-bottom: 1px solid var(--line); }
+.mirrorLabel { font-size: var(--fs-label); letter-spacing: var(--label-tracking); text-transform: var(--label-case); color: var(--ink-soft); }
+.mirrorText { font-family: var(--sans); font-size: clamp(18px, 2vw, 22px); line-height: 1.4; overflow-wrap: anywhere; }
+.mirrorText[data-empty] { color: var(--ink-soft); }
 
 .sub { margin: 24px 0 0; font-size: 20px; letter-spacing: -0.01em; }
 .glyphs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }

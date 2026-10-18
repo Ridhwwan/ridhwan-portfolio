@@ -14,7 +14,7 @@ const KEY = "playground-view";
 /** Filter chips and a list/grid switch, the (already sorted) projects, and the Try it window. */
 export default function PlaygroundList({ items }: { items: PlaygroundItem[] }) {
   const [filter, setFilter] = useState(ALL);
-  const [view, setView] = useState<View>("list");
+  const [view, setView] = useState<View>("grid");
   const [trying, setTrying] = useState<PlaygroundItem | null>(null);
   const close = useCallback(() => setTrying(null), []);
   const categories = [...new Set(items.map((i) => i.category))];

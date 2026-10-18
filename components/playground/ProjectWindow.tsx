@@ -71,7 +71,7 @@ export default function ProjectWindow({ item, onClose }: { item: PlaygroundItem 
             {item.live === "koreanfirst" ? (
               // The tester's control bar sticks under the site nav; inside the window there is no nav.
               <div className={styles.live} style={{ "--nav-height": "0px" } as React.CSSProperties}>
-                <TypeTester initialSize={typeof window !== "undefined" && window.innerWidth < 700 ? 64 : 120} />
+                <TypeTester autoFocus initialSize={typeof window !== "undefined" && window.innerWidth < 700 ? 64 : 120} />
               </div>
             ) : item.embed ? (
               <>

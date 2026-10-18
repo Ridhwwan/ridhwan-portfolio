@@ -18,7 +18,7 @@ export default function KoreanFirst() {
         subtitle="A variable typeface that writes Latin letters with Hangul-inspired shapes."
         lede="Weights 200 to 700. Type anything below."
       />
-      <TypeTester />
+      <TypeTester autoFocus />
     </div>
   );
 }

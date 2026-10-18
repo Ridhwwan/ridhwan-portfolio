@@ -1,17 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./TypeTester.module.css";
 
 // Exactly the characters KoreanFirst contains.
+const SAMPLE = "Stay curious, build kindly";
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#$%&()+,-;=@[]_~\u2018\u201C".split("");
 
-/** Live specimen for KoreanFirst: size, weight and tracking controls, editable text, character grid. */
-export default function TypeTester({ initialSize = 120 }: { initialSize?: number }) {
+/**
+ * Live specimen for KoreanFirst: size, weight and tracking controls, editable text
+ * with a plain-font mirror underneath (so you can read what you typed), and the character grid.
+ * `autoFocus` puts the caret in the specimen on load (on devices with a mouse;
+ * phones get a blinking caret without the keyboard popping up).
+ */
+export default function TypeTester({ initialSize = 120, autoFocus = false }: { initialSize?: number; autoFocus?: boolean }) {
+  const specimen = useRef<HTMLDivElement>(null);
+  const [text, setText] = useState(SAMPLE);
   const [size, setSize] = useState(initialSize);
   const [track, setTrack] = useState(0);
   const [weight, setWeight] = useState(400);
   const [loaded, setLoaded] = useState<boolean | null>(null);
+
+  // Caret at the end of the sample on load, without scrolling the page.
+  useEffect(() => {
+    const el = specimen.current;
+    if (!autoFocus || !el || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    // Next frame, so it lands after anything that grabs focus on open (e.g. the Try it window).
+    const raf = requestAnimationFrame(() => {
+      el.focus({ preventScroll: true });
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [autoFocus]);
 
   useEffect(() => {
     document.fonts
@@ -47,7 +72,9 @@ export default function TypeTester({ initialSize = 120 }: { initialSize?: number
       </div>
 
       <div
+        ref={specimen}
         className={styles.specimen}
+        onInput={(e) => setText(e.currentTarget.textContent ?? "")}
         contentEditable
         suppressContentEditableWarning
         spellCheck={false}
@@ -55,8 +82,13 @@ export default function TypeTester({ initialSize = 120 }: { initialSize?: number
         aria-label="Editable specimen text"
         style={{ fontSize: size, letterSpacing: `${track / 100}em`, fontWeight: weight }}
       >
-        Stay curious, build kindly
+        {SAMPLE}
       </div>
+
+      <p className={styles.mirror} aria-live="polite">
+        <span className={styles.mirrorLabel}>Reads as</span>
+        <span className={styles.mirrorText} data-empty={!text.trim() || undefined}>{text.trim() ? text : "Type above to see it here"}</span>
+      </p>
 
       <h2 className={styles.sub}>Character set</h2>
       <ul className={styles.glyphs}>
