@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonLink from "@/components/ui/ButtonLink";
 import { RESUME } from "./Nav";
@@ -20,6 +21,7 @@ export default function Footer() {
         <div className="footer-base">
           <span>© Ridhwan Salaudeen</span>
           <nav aria-label="Elsewhere">
+            <Link href="/design-system">Design system</Link>
             <a href="https://github.com/Ridhwwan" target="_blank" rel="noreferrer">GitHub</a>
             <a href={RESUME} target="_blank" rel="noreferrer">Resume</a>
           </nav>

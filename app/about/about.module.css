@@ -1,4 +1,4 @@
-.block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; padding: 64px 0; border-top: 1px solid var(--line); align-items: start; }
+.block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; padding: var(--space-section) 0; border-top: 1px solid var(--line); align-items: start; }
 .block h2 { margin-bottom: 24px; }
 .portrait img { width: 100%; max-width: 420px; border-radius: var(--radius); margin-left: auto; }
 .portrait { margin: 0; }

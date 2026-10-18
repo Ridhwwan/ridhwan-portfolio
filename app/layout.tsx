@@ -5,6 +5,7 @@ import "@fontsource/ibm-plex-serif/500.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import TokenStyle from "@/components/TokenStyle";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ridhwansalaudeen.com"),
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={GeistSans.variable}>
+      <head>
+        <TokenStyle />
+      </head>
       <body>
         <Nav />
         <main>{children}</main>

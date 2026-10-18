@@ -1,9 +1,9 @@
 .page { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 0 72px; align-items: start; }
 .form { display: grid; gap: 20px; margin-top: 96px; }
-.form label { display: grid; gap: 8px; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; }
+.form label { display: grid; gap: 8px; font-size: var(--fs-label); letter-spacing: var(--label-tracking); text-transform: var(--label-case); }
 .form input, .form textarea {
   font: inherit; font-size: 17px; letter-spacing: 0; text-transform: none; color: var(--ink);
-  padding: 14px 16px; border-radius: 6px; border: 1px solid var(--line); background: #fff; resize: vertical;
+  padding: 14px 16px; border-radius: var(--radius-control); border: 1px solid var(--line); background: var(--bg); resize: vertical;
 }
 .form input:focus-visible, .form textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; border-color: var(--ink); }
 .form button { width: 100%; height: 52px; }

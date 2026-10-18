@@ -1,9 +1,9 @@
 .row { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
-  font: inherit; font-size: 14px; font-weight: 400; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink);
-  height: 36px; padding: 0 14px; border-radius: 6px; cursor: pointer;
-  background: #fff; border: 1px solid var(--line);
+  font: inherit; font-size: var(--fs-label); font-weight: 400; letter-spacing: var(--label-tracking); text-transform: var(--label-case); color: var(--ink);
+  height: 36px; padding: 0 14px; border-radius: var(--radius-control); cursor: pointer;
+  background: var(--bg); border: 1px solid var(--line);
   transition: background 0.15s ease;
 }
 .chip:hover { border-color: var(--ink); }
-.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--btn-bg); color: var(--btn-ink); border-color: var(--btn-bg); }

@@ -1,9 +1,9 @@
-.intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px 64px; align-items: start; padding: 96px 0 64px; }
+.intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px 64px; align-items: start; padding: var(--space-page-top) 0 var(--space-section); }
 .left { display: grid; gap: 18px; }
 .left :is(h1, h2) { max-width: 15ch; }
 .right { display: grid; justify-items: end; gap: 40px; text-align: right; padding-top: 4px; }
 .text { margin: 0; max-width: 44ch; font-size: 18px; line-height: 1.45; }
 @media (max-width: 860px) {
-  .intro { grid-template-columns: 1fr; padding: 56px 0 40px; }
+  .intro { grid-template-columns: 1fr; padding: calc(var(--space-page-top) * 0.6) 0 calc(var(--space-section) * 0.6); }
   .right { justify-items: start; text-align: left; gap: 24px; }
 }

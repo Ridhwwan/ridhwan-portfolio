@@ -9,6 +9,6 @@
 .word { font-family: var(--serif); font-size: clamp(28px, 3vw, 40px); padding: 24px; text-align: center; }
 
 .meta { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: var(--ink); }
-.title { margin: 10px 0 0; font-size: 22px; line-height: 1.25; font-weight: 550; letter-spacing: -0.01em; }
+.title { margin: 10px 0 0; font-size: var(--fs-card-title); line-height: 1.25; font-weight: 550; letter-spacing: -0.01em; }
 .card:hover .title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 .summary { margin: 8px 0 0; color: var(--ink-soft); max-width: 48ch; font-size: 16px; line-height: 1.45; }

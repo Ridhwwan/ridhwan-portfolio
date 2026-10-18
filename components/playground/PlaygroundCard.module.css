@@ -14,7 +14,7 @@ a.row:hover .title { text-decoration: underline; text-underline-offset: 4px; tex
 
 .text { display: grid; gap: 4px; }
 .title { margin: 0; font-size: clamp(20px, 2vw, 24px); letter-spacing: -0.01em; font-weight: 550; }
-.meta { margin: 0; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; }
+.meta { margin: 0; font-size: var(--fs-label); letter-spacing: var(--label-tracking); text-transform: var(--label-case); }
 .ext { margin-left: 12px; text-transform: none; letter-spacing: 0; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; }
 .summary { margin: 4px 0 0; max-width: 60ch; color: var(--ink-soft); }
 
