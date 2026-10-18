@@ -13,6 +13,7 @@ export default function KoreanFirst() {
     <div className="wrap">
       <BackLink href="/playground">Playground</BackLink>
       <PageHeader
+        label="Type design, 2026"
         title="KoreanFirst"
         subtitle="A variable typeface that writes Latin letters with Hangul-inspired shapes."
         lede="Weights 200 to 700. Type anything below."

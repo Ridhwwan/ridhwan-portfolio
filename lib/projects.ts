@@ -1,5 +1,5 @@
 // Single source of truth for every project on the site.
-// Layer 1 (universal skeleton): every case study is a "book" of pages, paired into spreads.
+// Layer 1 (shared structure): every case study is a plain scrolling page built from these sections.
 // Layer 2 (per-project theme): each project carries its own palette, type and decoration.
 
 // Images live on this domain. scripts/fetch-images.mjs copies any missing ones
@@ -17,7 +17,7 @@ export type Decoration =
   | "none";
 
 export type Theme = {
-  stage: string; // backdrop around the book
+  stage: string; // backdrop for bands with tone "stage"
   paper: string; // page colour
   ink: string;
   muted: string;
@@ -43,8 +43,12 @@ export type Page =
   | { kind: "images"; srcs: string[]; caption?: string; tone?: Tone }
   | { kind: "end" };
 
+/** What kind of thing it is; drives the small icon + label on project cards. */
+export type Platform = "Web app" | "Mobile" | "Website" | "Hardware" | "Software";
+
 export type Project = {
   slug: string;
+  platform: Platform;
   title: string;
   short: string; // card title
   years: string;
@@ -63,6 +67,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "sos-express",
+    platform: "Web app",
     title: "SOS Express",
     short: "SOS Express",
     years: "2025",
@@ -180,6 +185,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bentosms",
+    platform: "Web app",
     title: "Bento School Management System",
     short: "BentoSMS",
     years: "2024 – present",
@@ -244,12 +250,13 @@ export const projects: Project[] = [
   },
   {
     slug: "cendmate",
+    platform: "Mobile",
     title: "Cendmate",
     short: "Cendmate",
     years: "2023",
     summary:
       "Text-message-simple transfers between Nigeria, Canada and parts of East Africa.",
-    cover: F("ciBgi0f1zWpAwOpPzeOlCmT80o.png"),
+    cover: F("oA2h9vxHayjXzLXibcFwPtrrLGE.png"),
     role: "UI/UX designer",
     team: ["Daniel Bello, CEO", "Jazz Grewal, developer", "Ridhwan Salaudeen, UI/UX designer"],
     tools: ["Figma", "Notion", "Maze", "Google Forms"],
@@ -315,6 +322,7 @@ export const projects: Project[] = [
   },
   {
     slug: "miog1",
+    platform: "Hardware",
     title: "MIO-G1 swimming goggles",
     short: "MIO-G1",
     years: "2024",
@@ -395,6 +403,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-query",
+    platform: "Mobile",
     title: "File search with large language models",
     short: "AI Query",
     years: "2024",
@@ -454,11 +463,12 @@ export const projects: Project[] = [
   },
   {
     slug: "monievend",
+    platform: "Website",
     title: "Monievend",
     short: "Monievend",
     years: "2022 – 2023",
     summary: "Bill payments, transfers and airtime for Nigerian businesses, with or without internet.",
-    cover: F("YH2r9yLnE8X0AtS8ZjHDzho5krM.png"),
+    cover: F("JdxwqHkpxOghILSJfELqMQLxQzE.png"),
     role: "UI/UX designer",
     team: ["Buhari Abdulhakeem, CEO", "Pitwa Isaac, CTO", "Ridhwan Salaudeen, UI/UX designer", "Buhari Amina, front-end developer"],
     tools: ["Figma", "Maze", "Google Forms", "Paper questionnaires"],
@@ -517,6 +527,7 @@ export const projects: Project[] = [
   },
   {
     slug: "preset-saver",
+    platform: "Mobile",
     title: "Preset saver",
     short: "Preset saver",
     years: "2023",
@@ -578,6 +589,7 @@ export const projects: Project[] = [
   },
   {
     slug: "warehouse",
+    platform: "Web app",
     title: "Warehouse management system",
     short: "Warehouse management",
     years: "2024 – 2025",
@@ -592,6 +604,7 @@ export const projects: Project[] = [
   },
   {
     slug: "jjaibot",
+    platform: "Software",
     title: "JJAIBOT",
     short: "JJAIBOT",
     years: "2019 – 2020",

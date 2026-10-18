@@ -14,7 +14,7 @@ const F = (id: string) => `/work/img/${id}`;
 export default function About() {
   return (
     <div className="wrap">
-      <PageHeader title={<>I&rsquo;m a designer, builder, teacher and student</>} />
+      <PageHeader label="About" title={<>I&rsquo;m a designer, builder, teacher and student</>} />
 
       <section className={styles.block}>
         <div className="prose">

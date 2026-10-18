@@ -1,0 +1,129 @@
+/* ═════════ Case study: shared structure ═════════
+   Every case study uses this layout. Themes only swap the --cs-* variables
+   and add one decoration (bottom of this file). */
+
+.cs { background: var(--cs-paper); color: var(--cs-ink); font-family: var(--cs-body); }
+.cs ::selection { background: var(--cs-accent); color: var(--cs-accent-ink); }
+
+.cs-hero { padding: 40px 0 72px; }
+.cs-hero > .wrap > a:first-child { color: var(--cs-muted); }
+.cs-label { margin: 48px 0 0; font-family: var(--sans); font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--cs-muted); }
+.cs-title { margin: 14px 0 0; font-family: var(--cs-display); font-weight: var(--cs-dw); font-size: clamp(44px, 6.4vw, 92px); line-height: 1.02; letter-spacing: -0.02em; max-width: 16ch; }
+.cs-summary { margin: 24px 0 0; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.45; max-width: 46ch; color: var(--cs-ink); }
+
+.cs-facts { margin: 48px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; border-top: 1px solid color-mix(in srgb, var(--cs-ink) 18%, transparent); padding-top: 24px; }
+.cs-facts dt { font-family: var(--sans); font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 8px; }
+.cs-facts dd { margin: 0 0 4px; font-size: 16px; line-height: 1.4; }
+
+.cs-cover { margin-top: 56px; border-radius: var(--cs-r); overflow: hidden; background: var(--cs-stage); }
+.cs-cover:empty { display: none; }
+.cs-cover > img { width: 100%; height: auto; }
+
+/* sections */
+.cs-band { padding: 72px 0; }
+.cs-band[data-tone="accent"] { background: var(--cs-accent); color: var(--cs-accent-ink); --cs-muted: color-mix(in srgb, var(--cs-accent-ink) 72%, transparent); }
+.cs-band[data-tone="stage"] { background: var(--cs-stage); color: var(--cs-paper); --cs-muted: color-mix(in srgb, var(--cs-paper) 72%, transparent); }
+.cs-band[data-tone="paper"] + .cs-band[data-tone="paper"] { padding-top: 8px; }
+
+.cs-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px 64px; }
+.cs-h { margin: 0; font-family: var(--cs-display); font-weight: var(--cs-dw); font-size: clamp(28px, 3.2vw, 44px); line-height: 1.1; letter-spacing: -0.015em; max-width: 14ch; }
+.cs-copy p { margin: 0 0 1em; font-size: 19px; line-height: 1.55; max-width: 56ch; }
+.cs-copy p:last-child { margin-bottom: 0; }
+.cs-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; font-size: 19px; line-height: 1.5; }
+.cs-list li { position: relative; padding-left: 26px; max-width: 56ch; }
+.cs-list li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 9px; height: 9px; border-radius: var(--cs-r); background: currentColor; }
+
+.cs-statement { margin: 0; font-family: var(--cs-display); font-weight: var(--cs-dw); font-size: clamp(32px, 4.6vw, 64px); line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
+
+.cs-fig { margin: 0; }
+.cs-frame { border-radius: var(--cs-r); overflow: hidden; background: color-mix(in srgb, var(--cs-ink) 6%, transparent); }
+.cs-frame img { width: 100%; height: auto; }
+.cs-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.cs-fig figcaption { margin-top: 14px; font-size: 15px; color: var(--cs-muted); }
+
+/* end */
+.cs-next { padding: 96px 0 24px; border-top: 1px solid color-mix(in srgb, var(--cs-ink) 18%, transparent); margin-top: 48px; }
+.cs-next .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.cs-next-link { display: grid; gap: 4px; text-decoration: none; }
+.cs-next-link .cs-label { margin: 0; }
+.cs-next-title { font-family: var(--cs-display); font-weight: var(--cs-dw); font-size: clamp(32px, 4.6vw, 64px); line-height: 1.05; }
+.cs-next-link:hover .cs-next-title { text-decoration: underline; text-underline-offset: 0.12em; text-decoration-thickness: 2px; }
+.cs-all { font-size: 16px; color: var(--cs-muted); }
+
+@media (max-width: 860px) {
+  .cs-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-split { grid-template-columns: 1fr; gap: 20px; }
+  .cs-band { padding: 48px 0; }
+  .cs-pair { grid-template-columns: 1fr; }
+  .cs-copy p, .cs-list { font-size: 17px; }
+}
+
+/* ═════════ Theme decorations ═════════ */
+
+/* SOS Express: dispatch. Dashed route rule over headings; a dot marks statements. */
+[data-deco="route"] .cs-split { border-top: 2px dashed var(--cs-accent); padding-top: 32px; }
+[data-deco="route"] .cs-band[data-tone="accent"] .cs-split { border-top-color: var(--cs-accent-ink); }
+[data-deco="route"] .cs-statement::before { content: ""; display: block; width: 14px; height: 14px; border-radius: 50%; background: var(--cs-accent); margin-bottom: 24px; box-shadow: 0 0 0 7px color-mix(in srgb, var(--cs-accent) 30%, transparent); }
+
+/* Cendmate: messaging. Statements arrive as chat bubbles. */
+[data-deco="chat"] .cs-statement { display: inline-block; background: var(--cs-accent); color: var(--cs-accent-ink); padding: 28px 34px; border-radius: 32px 32px 32px 6px; font-size: clamp(26px, 3.4vw, 44px); }
+[data-deco="chat"] .cs-band[data-tone="stage"] .cs-statement { background: var(--cs-paper); color: var(--cs-ink); border-radius: 32px 32px 6px 32px; }
+[data-deco="chat"] .cs-band[data-tone="stage"] .cs-inner { display: flex; justify-content: flex-end; }
+[data-deco="chat"] .cs-list li::before { border-radius: 50% 50% 50% 15%; }
+
+/* MIO-G1: the pool. Tile grid on paper, light rippling on dark bands. */
+[data-deco="tiles"] .cs-band[data-tone="paper"], [data-deco="tiles"] .cs-hero {
+  background-image: linear-gradient(color-mix(in srgb, var(--cs-accent) 14%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--cs-accent) 14%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+[data-deco="tiles"] .cs-band[data-tone="stage"] {
+  background-image: radial-gradient(ellipse 40% 30% at 30% 30%, rgba(255, 255, 255, 0.16), transparent 70%), radial-gradient(ellipse 30% 25% at 70% 60%, rgba(255, 255, 255, 0.12), transparent 70%);
+  background-size: 200% 200%; animation: cs-caustic 9s ease-in-out infinite alternate;
+}
+@keyframes cs-caustic { from { background-position: 0% 0%, 100% 100%; } to { background-position: 100% 60%, 0% 30%; } }
+
+/* AI Query: search. Headings sit in a search field with a live caret. */
+[data-deco="query"] .cs-h { font-size: clamp(22px, 2.4vw, 32px); padding: 14px 22px; border-radius: 999px; max-width: none; align-self: start; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: color-mix(in srgb, currentColor 6%, transparent); }
+[data-deco="query"] .cs-h::after, [data-deco="query"] .cs-statement::after { content: ""; display: inline-block; width: 0.08em; height: 0.9em; margin-left: 0.1em; vertical-align: -0.1em; background: var(--cs-accent); animation: cs-caret 1.1s steps(1) infinite; }
+[data-deco="query"] .cs-band[data-tone="accent"] .cs-h::after { background: var(--cs-accent-ink); }
+@keyframes cs-caret { 50% { opacity: 0; } }
+
+/* Monievend: the feature phone. LCD scanlines and pixel type. */
+[data-deco="lcd"] .cs-band, [data-deco="lcd"] .cs-hero { background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0 1px, transparent 1px 3px); }
+[data-deco="lcd"] :is(.cs-h, .cs-title, .cs-statement, .cs-next-title) { letter-spacing: 0; line-height: 1.15; text-shadow: 3px 3px 0 color-mix(in srgb, currentColor 20%, transparent); }
+[data-deco="lcd"] .cs-statement { font-size: clamp(26px, 3.6vw, 48px); }
+[data-deco="lcd"] .cs-title { font-size: clamp(40px, 5.6vw, 76px); }
+[data-deco="lcd"] .cs-frame { border: 4px solid currentColor; }
+
+/* Preset saver: the viewfinder. Corner brackets frame every image. */
+[data-deco="viewfinder"] .cs-frame, [data-deco="viewfinder"] .cs-cover { position: relative; }
+[data-deco="viewfinder"] .cs-frame::before, [data-deco="viewfinder"] .cs-frame::after, [data-deco="viewfinder"] .cs-cover::before, [data-deco="viewfinder"] .cs-cover::after {
+  content: ""; position: absolute; width: 36px; height: 36px; border: 0 solid var(--cs-accent); z-index: 1; pointer-events: none;
+}
+[data-deco="viewfinder"] :is(.cs-frame, .cs-cover)::before { top: 14px; left: 14px; border-top-width: 2px; border-left-width: 2px; }
+[data-deco="viewfinder"] :is(.cs-frame, .cs-cover)::after { bottom: 14px; right: 14px; border-bottom-width: 2px; border-right-width: 2px; }
+[data-deco="viewfinder"] :is(.cs-h, .cs-title, .cs-statement) { letter-spacing: 0; }
+
+/* BentoSMS: bubbly and childlike. Big short words, round everything, floating bubbles. */
+[data-deco="bubbles"] .cs-statement { font-size: clamp(44px, 7vw, 104px); line-height: 0.98; letter-spacing: -0.03em; position: relative; z-index: 1; max-width: 14ch; }
+[data-deco="bubbles"] .cs-band[data-kind="statement"] { position: relative; overflow: hidden; }
+[data-deco="bubbles"] .cs-band[data-kind="statement"]::before, [data-deco="bubbles"] .cs-band[data-kind="statement"]::after {
+  content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+  box-shadow: inset -14px -18px 0 rgba(0, 0, 0, 0.08), inset 12px 14px 0 rgba(255, 255, 255, 0.45);
+  animation: cs-bob 4.5s ease-in-out infinite;
+}
+[data-deco="bubbles"] .cs-band[data-kind="statement"]::before { width: 220px; height: 220px; right: 8%; top: 18%; background: #d4fb84; }
+[data-deco="bubbles"] .cs-band[data-kind="statement"]::after { width: 70px; height: 70px; right: 30%; bottom: 14%; background: var(--cs-ink); animation-delay: -2s; }
+[data-deco="bubbles"] .cs-band[data-kind="statement"][data-tone="accent"]::after { background: var(--cs-paper); }
+[data-deco="bubbles"] .cs-list { gap: 10px; }
+[data-deco="bubbles"] .cs-list li { background: color-mix(in srgb, currentColor 8%, transparent); border-radius: 999px; padding: 12px 22px 12px 48px; font-weight: 500; max-width: none; }
+[data-deco="bubbles"] .cs-list li::before { left: 20px; top: 50%; translate: 0 -50%; width: 14px; height: 14px; border-radius: 50%; }
+[data-deco="bubbles"] .cs-cover { aspect-ratio: 16 / 7; background: #e6efe9; }
+.cs-cover-bento { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+.cs-cover-bento img { position: relative; width: min(220px, 30%); height: auto; z-index: 1; }
+.cs-cover-bento span { position: absolute; border-radius: 50%; box-shadow: inset -12px -16px 0 rgba(0, 0, 0, 0.08), inset 10px 12px 0 rgba(255, 255, 255, 0.5); animation: cs-bob 5s ease-in-out infinite; }
+.cs-cover-bento span:nth-child(1) { width: 26%; aspect-ratio: 1; right: 8%; top: 8%; background: #d4fb84; }
+.cs-cover-bento span:nth-child(2) { width: 15%; aspect-ratio: 1; left: 9%; bottom: 10%; background: #004b3d; animation-delay: -1.5s; }
+.cs-cover-bento span:nth-child(3) { width: 7%; aspect-ratio: 1; left: 24%; top: 14%; background: #fff; animation-delay: -3s; }
+.cs-cover-bento span:nth-child(4) { width: 5%; aspect-ratio: 1; right: 30%; bottom: 16%; background: #d4fb84; animation-delay: -2s; }
+@keyframes cs-bob { 50% { transform: translateY(-12px) scale(1.03); } }

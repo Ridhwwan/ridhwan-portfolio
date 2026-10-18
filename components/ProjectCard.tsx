@@ -1,34 +1,38 @@
 /* eslint-disable @next/next/no-img-element */
+import { Box, Code2, Globe, Monitor, Smartphone } from "lucide-react";
 import SmartLink from "@/components/ui/SmartLink";
-import type { Project } from "@/lib/projects";
+import type { Platform, Project } from "@/lib/projects";
 import styles from "./ProjectCard.module.css";
 
-export default function ProjectCard({ p, size }: { p: Project; size: "feature" | "standard" }) {
+const icons: Record<Platform, typeof Monitor> = {
+  "Web app": Monitor,
+  Mobile: Smartphone,
+  Website: Globe,
+  Hardware: Box,
+  Software: Code2,
+};
+
+/** Image on top, then platform label, title and one-line summary. */
+export default function ProjectCard({ p }: { p: Project }) {
   const href = p.external ?? `/work/${p.slug}`;
-  const ext = Boolean(p.external);
-  const inner = (
-    <>
-      {/* The cover sits on the project's own stage colour: a preview of its book. */}
-      <div className={styles.cover} style={{ background: p.theme.stage }}>
+  const Icon = icons[p.platform];
+  return (
+    <SmartLink className={styles.card} href={href}>
+      <div className={styles.media} style={{ background: p.theme.stage }}>
         {p.cover ? (
           <img src={p.cover} alt="" loading="lazy" />
         ) : p.slug === "bentosms" ? (
-          <div className={styles.bento}>
-            <span className={styles.b1} /><span className={styles.b2} /><span className={styles.b3} />
-            <img src="/work/bentosms-logo.png" alt="" className={styles.bentoLogo} />
-          </div>
+          <img src="/work/bentosms-logo.png" alt="" className={styles.logo} />
         ) : (
           <span className={styles.word} style={{ color: p.theme.paper }}>{p.short}</span>
         )}
       </div>
-      <div className={styles.meta}>
-        <h3>{p.short}</h3>
-        <span className={styles.years}>{p.years}</span>
-        <p>{p.summary}</p>
-        {ext && <span className={styles.ext}>Opens {p.external?.includes("figma") ? "Figma prototype" : "website"}</span>}
-      </div>
-    </>
+      <p className={`label ${styles.meta}`}>
+        <Icon aria-hidden size={18} strokeWidth={1.5} />
+        {p.platform}, {p.years}
+      </p>
+      <h3 className={styles.title}>{p.short}</h3>
+      <p className={styles.summary}>{p.summary}</p>
+    </SmartLink>
   );
-  const cls = `${styles.card} ${size === "feature" ? styles.feature : ""}`;
-  return <SmartLink className={cls} href={href}>{inner}</SmartLink>;
 }

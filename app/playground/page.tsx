@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/ui/PageHeader";
 import PlaygroundList from "@/components/playground/PlaygroundList";
-import { GlassCubes } from "@/components/three/Scene";
 import { getPlaygroundItems } from "@/lib/playground";
 
 export const metadata: Metadata = {
@@ -14,10 +13,10 @@ export default async function Playground() {
   return (
     <div className="wrap">
       <PageHeader
+        label="Side projects"
         title="Playground"
         subtitle="They may not be job worthy, but they end up stealing my time somehow 😒"
         lede="Design is my go-to, but bringing things to life is part of the process too."
-        aside={<GlassCubes layout="single" />}
       />
       <PlaygroundList items={items} />
     </div>

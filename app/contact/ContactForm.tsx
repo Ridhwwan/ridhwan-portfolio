@@ -22,7 +22,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form className={`${styles.form} glass`} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <label>
         <span>Name</span>
         <input name="name" required autoComplete="name" />

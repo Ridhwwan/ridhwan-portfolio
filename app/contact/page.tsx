@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
-import { GlassCubes } from "@/components/three/Scene";
+import PageHeader from "@/components/ui/PageHeader";
 import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
@@ -11,13 +11,11 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <div className={`wrap ${styles.page}`}>
-      <div className={styles.copy}>
-        <h1 className="h-xl">Want to work together, or just say hi?</h1>
-        <p className="lede">Leave a message and I&rsquo;ll reply by email.</p>
-        <div className={styles.cube} aria-hidden>
-          <GlassCubes layout="single" />
-        </div>
-      </div>
+      <PageHeader
+        label="Contact"
+        title="Want to work together, or just say hi?"
+        lede="Leave a message and I'll reply by email."
+      />
       <ContactForm />
     </div>
   );

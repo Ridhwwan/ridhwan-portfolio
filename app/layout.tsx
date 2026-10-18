@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import "@fontsource/ibm-plex-serif/400.css";
+import "@fontsource/ibm-plex-serif/500.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";

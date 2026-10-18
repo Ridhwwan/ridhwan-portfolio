@@ -28,7 +28,7 @@ export default function TypeTester() {
         </p>
       )}
 
-      <div className={`${styles.controls} glass`}>
+      <div className={styles.controls}>
         <label>
           <span>Size</span>
           <input type="range" min={32} max={260} value={size} onChange={(e) => setSize(+e.target.value)} />
