@@ -191,6 +191,7 @@ export const projects: Project[] = [
     years: "2024 – present",
     featured: true,
     summary: "A multi-portal school management system for Nigerian secondary schools.",
+    cover: F("bentosms-cover.webp"),
     // The book below is a draft, kept for review. Until then the card opens the live product.
     external: "https://bentosms.com",
     role: "Founder, product designer and developer",
