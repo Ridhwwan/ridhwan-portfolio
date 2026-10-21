@@ -17,7 +17,7 @@ export default function ProjectCard({ p }: { p: Project }) {
   const href = p.external ?? `/work/${p.slug}`;
   const Icon = icons[p.platform];
   return (
-    <SmartLink className={styles.card} href={href}>
+    <SmartLink className={styles.card} href={href} data-lily>
       <div className={styles.media} style={{ background: p.theme.stage }}>
         {p.cover ? (
           <img src={p.cover} alt="" loading="lazy" />

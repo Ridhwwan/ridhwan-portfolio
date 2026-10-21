@@ -131,6 +131,15 @@ export const COMPONENTS: ComponentDef[] = [
     usedOn: [{ label: "Playground", href: "/playground" }],
   },
   {
+    slug: "water-ripple",
+    name: "Water ripple",
+    file: "components/effects/WaterRipple.tsx",
+    description: "A sheet of water over every page. The mouse drops ripples and the page bends where they pass (Chromium browsers; others get soft light rings). Clickable things never start ripples; project cards float like lily pads.",
+    tokens: ["--ripple-strength", "--card-float"],
+    relations: [{ slug: "project-card", how: "A lily pad: ripples barely touch it and it drifts when the cursor passes under." }, { slug: "playground-card", how: "Also a lily pad, in both list and grid view." }, { slug: "button", how: "Buttons are masked out, so they never bend or start ripples." }],
+    usedOn: [{ label: "Every page", href: "/" }],
+  },
+  {
     slug: "back-link",
     name: "Back link",
     file: "components/ui/BackLink.tsx",

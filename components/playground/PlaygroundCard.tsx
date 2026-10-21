@@ -28,7 +28,7 @@ export default function PlaygroundCard({ item, view = "list", onTry }: Props) {
 
   return (
     <li className={grid ? styles.tileItem : styles.item}>
-      <article ref={ref} className={grid ? styles.tile : styles.row} data-active={active || undefined}>
+      <article ref={ref} className={grid ? styles.tile : styles.row} data-active={active || undefined} data-lily>
         <div className={styles.thumb}>
           <PlaygroundThumb item={item} active={active} />
         </div>

@@ -118,6 +118,19 @@ export default function GroupDemo({ group }: { group: TokenGroup }) {
     );
   }
 
+  if (group === "motion") {
+    return (
+      <div className={styles.demo}>
+        <p className={styles.demoHint}>Move your mouse across this box to make ripples, then pass it over the card.</p>
+        <div style={{ height: 160, borderRadius: "var(--radius)", background: "repeating-linear-gradient(90deg, var(--tile) 0 24px, var(--bg) 24px 48px)" }} />
+        <div data-lily style={{ maxWidth: 280, padding: 20, borderRadius: "var(--radius)", border: "1px solid var(--line)", background: "var(--bg)" }}>
+          <p className="label">Lily pad</p>
+          <p style={{ margin: "6px 0 0" }}>A project card drifts slightly as the cursor swims under it.</p>
+        </div>
+      </div>
+    );
+  }
+
   // buttons
   return (
     <div className={styles.demo}>

@@ -6,7 +6,7 @@
  * Every value is validated against this registry before it reaches CSS.
  */
 
-export type TokenGroup = "colors" | "typography" | "spacing" | "radius" | "buttons";
+export type TokenGroup = "colors" | "typography" | "spacing" | "radius" | "buttons" | "motion";
 
 type Base = { name: string; label: string; group: TokenGroup; description: string };
 
@@ -83,6 +83,17 @@ export const GROUPS: GroupDef[] = [
       "Colours come from the Colour foundation (Button fill and Button text) and the corners from Corner radius, so a button touches three foundations.",
     ],
   },
+  {
+    id: "motion",
+    title: "Motion",
+    intro: "The water under the page: ripples that follow the cursor.",
+    ties: [
+      "Moving the cursor drops ripples into a sheet of water over the whole site, and the page bends where they pass. Ripple strength sets how far it bends; 0 turns the bending off.",
+      "Anything you click (buttons, links, form fields) never starts a ripple, so controls always stay crisp and still.",
+      "Project cards on Home and the Playground are lily pads: ripples barely touch them, and when the cursor swims underneath they drift by Card float, like a fish passing below.",
+      "Everything stops for visitors who've asked their device for less motion, on touch screens, and on computers too slow to keep it smooth.",
+    ],
+  },
 ];
 
 export const TOKENS: TokenDef[] = [
@@ -127,6 +138,10 @@ export const TOKENS: TokenDef[] = [
   { name: "--btn-pad-x", label: "Button side padding", group: "buttons", type: "length", unit: "px", min: 6, max: 48, step: 1, default: "18", description: "Space either side of the button text." },
   { name: "--btn-weight", label: "Button text weight", group: "buttons", type: "number", min: 300, max: 800, step: 50, default: "550", description: "How bold button text is." },
   { name: "--btn-border", label: "Button border width", group: "buttons", type: "length", unit: "px", min: 0, max: 4, step: 0.5, default: "1.5", description: "Outline thickness on buttons." },
+
+  // motion
+  { name: "--ripple-strength", label: "Ripple strength", group: "motion", type: "number", min: 0, max: 40, step: 1, default: "16", description: "How far the page bends under a ripple. 0 turns the bending off." },
+  { name: "--card-float", label: "Card float", group: "motion", type: "length", unit: "px", min: 0, max: 6, step: 0.5, default: "2", description: "How far a project card drifts when the cursor passes underneath." },
 ];
 
 export const TOKEN_MAP = new Map(TOKENS.map((t) => [t.name, t]));
