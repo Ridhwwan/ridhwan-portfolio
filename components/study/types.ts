@@ -29,8 +29,39 @@ export type StudySection =
   | { kind: "final"; label: string; heading: string; intro: string; steps: { tab: string; src: string; caption: string }[] }
   | { kind: "outcomes"; label: string; heading: string; intro?: string; stats: { value: string; text: string }[] }
   | { kind: "learnings"; label: string; heading: string; items: { title: string; text: string }[] }
+  /** A section assembled from blocks (see Block). `tone` gives it a warm tint or the dark band. */
+  | { kind: "blocks"; label: string; heading: string; intro?: string; body?: string[]; tone?: "plain" | "tint" | "dark"; blocks: Block[] }
   /** Free-form chapter: heading, text, an optional list and figures. */
   | { kind: "story"; label: string; heading: string; intro?: string; body?: string[]; points?: string[]; images?: Figure[] };
+
+/** Building blocks for "blocks" sections, modelled on the reference case studies. */
+export type Block =
+  /** Big accent numbers in outlined cards, with an optional note underneath. */
+  | { type: "stats"; items: { value: string; label: string; text?: string }[]; note?: string }
+  /** A quote on a warm panel with an accent edge. */
+  | { type: "quote"; text: string; by?: string }
+  /** Tinted panel with a small label, for a key insight. */
+  | { type: "callout"; label?: string; text: string[]; tone?: "accent" | "warm" }
+  /** Two numbered step lists side by side; "after" is tinted. */
+  | { type: "beforeAfter"; before: { title: string; steps: string[] }; after: { title: string; steps: string[] } }
+  /** "The problem" headline on the left, numbered hairline list on the right. */
+  | { type: "problem"; label?: string; heading: string; items: string[] }
+  /** Numbered cards joined into a 2-up grid (product decisions, trade-offs, findings). */
+  | { type: "decisions"; label?: string; items: { title: string; text: string }[] }
+  /** Image and numbered text, alternating sides. */
+  | { type: "features"; items: { title: string; text: string; image: Pic }[] }
+  /** Process chips in a row. */
+  | { type: "phases"; items: string[]; note?: string }
+  /** People cards: initials, a line in their words, a name and a short description. */
+  | { type: "archetypes"; label?: string; items: { initials: string; quote?: string; title: string; meta?: string; text: string }[] }
+  /** Numbered rows with tags, a description and a pain/fix pair. */
+  | { type: "rows"; items: { title: string; tags?: string[]; text: string; pain?: string; fix?: string }[] }
+  /** Stages across, rows down (journey map, blueprint); a row's tone tints it. */
+  | { type: "table"; label?: string; columns: string[]; rows: { name: string; cells: string[]; tone?: "pain" | "gain" }[] }
+  /** Icon cards for reflections, with an optional "what I'd do differently" panel. */
+  | { type: "reflections"; items: { icon: "research" | "system" | "balance" | "craft"; title: string; text: string }[]; differently?: string[] }
+  /** Figures: one full width, or two side by side. */
+  | { type: "images"; images: Figure[] };
 
 export type Study = {
   /** Must match the project's slug in lib/projects.ts. */
@@ -38,7 +69,7 @@ export type Study = {
   accent: string;
   back?: { href: string; label: string };
   hero: {
-    mark: string; markBg: string; markImg?: string; title: string; intro: string;
+    mark: string; markBg: string; markImg?: string; wordmark?: string; title: string; intro: string;
     meta: { label: string; text: string }[];
     image: Pic;
   };

@@ -1,5 +1,6 @@
 // Cendmate case study (/work/cendmate). Facts from the original case study and
 // Ridhwan's resume: Feb–Mar 2023, remote, concept to tested prototype in 2 months.
+// Layout leans on the "fictiv workbench" reference: problem split, decisions grid, alternating screens.
 import type { Study } from "@/components/study/types";
 
 const F = (id: string) => `/work/img/${id}`;
@@ -9,6 +10,7 @@ export const cendmate: Study = {
   accent: "#6B2EE6",
   hero: {
     mark: "C",
+    wordmark: "cendmate",
     markBg: "#6B2EE6",
     title: "Sending money from Canada to West Africa as easily as a text.",
     intro:
@@ -33,53 +35,75 @@ export const cendmate: Study = {
       ],
     },
     {
-      kind: "context",
-      label: "Context & problem",
-      heading: "Two kinds of bank account, one transfer.",
-      intro:
-        "Cendmate moves money between Canada and West Africa. Some banks identify you by account number, others by email. The challenge was a mobile web flow that handles both with as little effort from the user as possible.",
-    },
-    {
-      kind: "discovery",
+      kind: "blocks",
       label: "Research",
       heading: "Bad bank apps had made people wary of trying new ones.",
-      intro: "Research looked at how people already split their money across accounts, and why.",
-      pains: [
-        { title: "Wary of new apps", text: "Bad bank apps make people reluctant to try new ones." },
-        { title: "Accounts for different jobs", text: "People keep separate accounts for separate jobs, like foreign currency and stipends." },
-        { title: "Digital wins abroad", text: "Digital accounts win on international payments." },
-        { title: "Banks win at home", text: "Local payments stay with traditional banks because they match local account norms." },
+      intro:
+        "Cendmate moves money between Canada and West Africa. Some banks identify you by account number, others by email, so the flow had to handle both with as little effort from the user as possible.",
+      blocks: [
+        {
+          type: "problem",
+          label: "What research told us",
+          heading: "People split their money by job, not by bank.",
+          items: [
+            "Bad bank apps make people reluctant to try new ones.",
+            "People keep separate accounts for separate jobs, like foreign currency and stipends.",
+            "Digital accounts win on international payments.",
+            "Local payments stay with traditional banks because they match local account norms.",
+          ],
+        },
+        { type: "callout", label: "The opportunity", text: ["In a crowded fintech market, merging account types into one transfer was the differentiator."] },
       ],
-      hmw: "Let people send money abroad without caring which kind of account is on the other end?",
     },
     {
-      kind: "story",
+      kind: "blocks",
       label: "Testing",
       heading: "Not every page needs a navigation bar.",
-      intro:
-        "Moderated, screen-recorded sessions showed the bottom nav blocking parts of top-level pages without helping anyone, so it was removed there.",
-      body: ["Copy mattered just as much. The navigation labels were rewritten until they were short and clear for every market."],
-      images: [{ src: F("6SUXuMd14c9STHNMlX4eR9LiHI.png"), alt: "Early iterations of the navigation", caption: "Early iterations of the currency page and navigation bar, later rejected." }],
+      intro: "Moderated, screen-recorded sessions shaped every decision below.",
+      blocks: [
+        {
+          type: "decisions",
+          label: "Product decisions",
+          items: [
+            { title: "No bottom nav on top-level pages", text: "Testing showed it blocked parts of those pages without helping anyone, so it came off there." },
+            { title: "Labels rewritten for every market", text: "Navigation copy was rewritten until it was short and clear in every market." },
+            { title: "One transfer for both account types", text: "Account-number and email-based accounts go through the same flow." },
+            { title: "Live rates kept out of the way", text: "Rates are there when you convert, without crowding the transfer itself." },
+          ],
+        },
+        { type: "images", images: [{ src: F("6SUXuMd14c9STHNMlX4eR9LiHI.png"), alt: "Early iterations of the navigation", caption: "Early iterations of the currency page and navigation bar, later rejected." }] },
+      ],
     },
     {
-      kind: "final",
+      kind: "blocks",
       label: "Final design",
       heading: "From sign-up to money sent, in a few taps.",
       intro: "The finished prototype covers onboarding, deposits and transfers, built on a small design system.",
-      steps: [
-        { tab: "Onboarding", src: F("ShxebgBfY26HxXpGeLqpv5Kf0.png"), caption: "Onboarding, the accounts home and a successful withdrawal." },
-        { tab: "Deposit", src: F("oA2h9vxHayjXzLXibcFwPtrrLGE.png"), caption: "Choosing a currency and making a deposit." },
-        { tab: "Transfer", src: F("vAnXpgiyC5Sr08XL6zMPoj9A68.png"), caption: "A transfer from details to confirmation, with live rates kept out of the way." },
-        { tab: "Design system", src: F("xSm9SSAeCPiXmha4J8XBEJBmKX4.png"), caption: "Input components from the design system." },
+      blocks: [
+        {
+          type: "features",
+          items: [
+            { title: "Onboarding to accounts", text: "A short onboarding lands people on their accounts, with Naira and Canadian dollar balances side by side.", image: { src: F("ShxebgBfY26HxXpGeLqpv5Kf0.png"), alt: "Onboarding, accounts and a successful withdrawal" } },
+            { title: "Deposit", text: "Pick a currency, then deposit into it.", image: { src: F("oA2h9vxHayjXzLXibcFwPtrrLGE.png"), alt: "Choosing a currency and making a deposit" } },
+            { title: "Transfer", text: "Details, a review, a short wait and a clear confirmation.", image: { src: F("vAnXpgiyC5Sr08XL6zMPoj9A68.png"), alt: "Transfer flow from details to confirmation" } },
+            { title: "Design system", text: "Inputs, headers and settings rows built as components, so every screen stays consistent.", image: { src: F("xSm9SSAeCPiXmha4J8XBEJBmKX4.png"), alt: "Input components from the design system" } },
+          ],
+        },
       ],
     },
     {
-      kind: "learnings",
-      label: "Learnings",
-      heading: "In a crowded fintech market, merging account types was the differentiator.",
-      items: [
-        { title: "Remove what doesn't help", text: "A navigation bar on every page felt standard, but testing showed it got in the way on top-level pages." },
-        { title: "Copy is part of the interface", text: "Labels that work in one market can confuse another, so they were tested and rewritten for every market." },
+      kind: "blocks",
+      label: "Reflection",
+      heading: "The differentiator was what we merged, not what we added.",
+      blocks: [
+        {
+          type: "reflections",
+          items: [
+            { icon: "craft", title: "Remove what doesn't help", text: "A navigation bar on every page felt standard, but testing showed it got in the way." },
+            { icon: "research", title: "Copy is part of the interface", text: "Labels that work in one market can confuse another, so they were tested and rewritten." },
+            { icon: "system", title: "Merge, don't multiply", text: "One transfer for every kind of account did more than any extra feature could." },
+          ],
+        },
       ],
     },
   ],

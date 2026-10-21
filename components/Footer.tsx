@@ -8,7 +8,8 @@ import { EMAIL, GITHUB_URL, X_URL } from "@/lib/contact";
 
 export default function Footer() {
   const path = usePathname();
-  const onContact = path === "/contact";
+  // Contact has the form, and case studies end with their own "Say hi!", so neither repeats the CTA.
+  const onContact = path === "/contact" || path.startsWith("/work/");
 
   return (
     <footer className="footer">

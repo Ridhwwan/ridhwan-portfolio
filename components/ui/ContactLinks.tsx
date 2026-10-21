@@ -24,28 +24,29 @@ function GitHubIcon() {
   );
 }
 
-type Props = { showEmailText?: boolean; className?: string };
+type Channel = "email" | "x" | "github";
+type Props = { showEmailText?: boolean; className?: string; only?: Channel[] };
 
 /** Icon links for reaching Ridhwan directly: email (opens the visitor's mail app), X and GitHub. */
-export default function ContactLinks({ showEmailText = false, className }: Props) {
+export default function ContactLinks({ showEmailText = false, className, only = ["email", "x", "github"] }: Props) {
   return (
     <ul className={`${styles.list} ${className ?? ""}`} aria-label="Other ways to reach me">
-      <li>
+      {only.includes("email") && <li>
         <a className={styles.link} href={`mailto:${EMAIL}`} aria-label={`Email ${EMAIL}`} title="Email me">
           <MailIcon />
           {showEmailText && <span className={styles.text}>{EMAIL}</span>}
         </a>
-      </li>
-      <li>
+      </li>}
+      {only.includes("x") && <li>
         <a className={styles.link} href={X_URL} target="_blank" rel="noreferrer" aria-label="X (Twitter): @Ridhwwan" title="@Ridhwwan on X">
           <XIcon />
         </a>
-      </li>
-      <li>
+      </li>}
+      {only.includes("github") && <li>
         <a className={styles.link} href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub: Ridhwwan" title="GitHub">
           <GitHubIcon />
         </a>
-      </li>
+      </li>}
     </ul>
   );
 }

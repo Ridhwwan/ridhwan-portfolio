@@ -1,4 +1,5 @@
 // MIO-G1 case study (/work/miog1). Facts from the original case study.
+// Layout mixes the references: stat cards up front, numbered findings, a parts grid.
 import type { Study } from "@/components/study/types";
 
 const F = (id: string) => `/work/img/${id}`;
@@ -8,6 +9,7 @@ export const miog1: Study = {
   accent: "#0B7FA0",
   hero: {
     mark: "M",
+    wordmark: "MIO-G1",
     markBg: "#0B4F6C",
     title: "Swim goggles you can wear over your glasses.",
     intro: "MIO-G1 lets visually impaired swimmers keep their prescription glasses on in the water, so they can see where they're going.",
@@ -20,17 +22,27 @@ export const miog1: Study = {
   },
   sections: [
     {
-      kind: "context",
+      kind: "blocks",
       label: "Context",
       heading: "A boy stood in shallow water, waving at lifeguards. He couldn't tell which way the beach was.",
       intro:
         "Prescription swim goggles exist, but they're niche and hard to get. Glasses aren't built for water: frames fail, metal rusts, and they don't stay on.",
+      blocks: [
+        {
+          type: "stats",
+          items: [
+            { value: "~10 min", label: "With contacts in water", text: "Before a focus group felt pain and redness" },
+            { value: "~20mm", label: "Lens to cornea", text: "Room left for glasses inside the frame" },
+            { value: "3", label: "Criteria", text: "For anything that ships" },
+          ],
+        },
+      ],
     },
     {
       kind: "discovery",
       label: "Research",
       heading: "Contacts were the obvious answer, until they weren't.",
-      intro: "A focus group could only bear contacts in water for about ten minutes before pain and redness set in. Swimmers with glasses told me:",
+      intro: "A focus group could only bear contacts in water for about ten minutes. Swimmers with glasses told me:",
       pains: [
         { title: "Frames aren't made for swimming." },
         { title: "Contacts dry the eyes within ten minutes." },
@@ -41,24 +53,49 @@ export const miog1: Study = {
       hmw: "Let swimmers keep their own glasses on in the water?",
     },
     {
-      kind: "story",
+      kind: "blocks",
       label: "Requirements",
-      heading: "Three criteria for anything that ships.",
-      points: ["No special lens preparation", "Easy for the public to get", "Simple enough for a child"],
-      images: [
-        { src: F("TGNFZKjQu5NKMFVvjyMqzG0.png"), alt: "A pair of glasses taken apart", caption: "Taking glasses apart." },
-        { src: F("RaLKNmTm2M8qvZKZIU5ZNoSg88.png"), alt: "Labelled parts of a pair of glasses", caption: "The parts of a pair of glasses." },
+      heading: "Simple enough for a child, easy for anyone to get.",
+      blocks: [
+        {
+          type: "problem",
+          label: "Criteria",
+          heading: "Three rules for anything that ships.",
+          items: ["No special lens preparation.", "Easy for the public to get.", "Simple enough for a child."],
+        },
+        {
+          type: "images",
+          images: [
+            { src: F("TGNFZKjQu5NKMFVvjyMqzG0.png"), alt: "A pair of glasses taken apart", caption: "Taking glasses apart." },
+            { src: F("RaLKNmTm2M8qvZKZIU5ZNoSg88.png"), alt: "Labelled parts of a pair of glasses", caption: "The parts of a pair of glasses." },
+          ],
+        },
       ],
     },
     {
-      kind: "story",
+      kind: "blocks",
       label: "Design",
+      tone: "tint",
       heading: "Glasses fit inside the frame, with room to spare.",
-      intro: "A distortion-free view frame, a corner seal, an over-ear strap with an entry slot and temple housing, a rear buckle and a silicone hinge strap.",
-      body: ["The frame leaves about 20mm between lens and cornea so glasses fit inside. The curve at the hinge was thickened after asking which part of a pair of glasses breaks first."],
-      images: [
-        { src: F("FtEKcSH8JiMaxGWMLRgAAgTTW4Q.png"), alt: "Pencil sketch of the first goggles", caption: "First iteration." },
-        { src: F("Y2PcVUJ6GrSzuNh1BpxgQ1CqW4Q.png"), alt: "Sketch note asking which parts of glasses are easily damaged", caption: "Asking which part of a pair of glasses breaks first." },
+      blocks: [
+        {
+          type: "decisions",
+          label: "Parts",
+          items: [
+            { title: "Distortion-free view frame", text: "Leaves about 20mm between lens and cornea so glasses fit inside." },
+            { title: "Corner seal", text: "Keeps water off the eyes, which swimmers asked for." },
+            { title: "Over-ear strap", text: "With an entry slot and temple housing for the arms of the glasses." },
+            { title: "Silicone hinge strap", text: "Thickened at the curve after asking which part of a pair of glasses breaks first." },
+            { title: "Rear buckle", text: "Closes the strap at the back of the head." },
+          ],
+        },
+        {
+          type: "images",
+          images: [
+            { src: F("FtEKcSH8JiMaxGWMLRgAAgTTW4Q.png"), alt: "Pencil sketch of the first goggles", caption: "First iteration." },
+            { src: F("Y2PcVUJ6GrSzuNh1BpxgQ1CqW4Q.png"), alt: "Sketch note asking which parts of glasses are easily damaged", caption: "Asking which part of a pair of glasses breaks first." },
+          ],
+        },
       ],
     },
     {

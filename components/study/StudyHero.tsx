@@ -9,9 +9,14 @@ export default function StudyHero({ study }: { study: Study }) {
   return (
     <header className={s.hero}>
       <BackLink href={study.back?.href ?? "/#work"}>{study.back?.label ?? "Selected work"}</BackLink>
-      <span className={s.mark} style={{ background: h.markBg }} aria-hidden>
-        {h.markImg ? <Img src={h.markImg} alt="" sizes="64px" priority /> : h.mark}
-      </span>
+      {h.markImg ? (
+        <span className={s.mark} style={{ background: h.markBg }} aria-hidden>
+          <Img src={h.markImg} alt="" sizes="64px" priority />
+        </span>
+      ) : (
+        // No logo file: the project's name as a wordmark in its accent colour.
+        <span className={s.wordmark} aria-hidden>{h.wordmark ?? h.mark}</span>
+      )}
       <h1 className={s.title}>{h.title}</h1>
       <p className={s.lede}>{h.intro}</p>
       <dl className={s.meta}>
