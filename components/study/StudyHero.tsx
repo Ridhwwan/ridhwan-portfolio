@@ -8,7 +8,7 @@ export default function StudyHero({ study }: { study: Study }) {
   const h = study.hero;
   return (
     <header className={s.hero}>
-      <BackLink href={study.back.href}>{study.back.label}</BackLink>
+      <BackLink href={study.back?.href ?? "/#work"}>{study.back?.label ?? "Selected work"}</BackLink>
       <span className={s.mark} style={{ background: h.markBg }} aria-hidden>
         {h.markImg ? <Img src={h.markImg} alt="" sizes="64px" priority /> : h.mark}
       </span>

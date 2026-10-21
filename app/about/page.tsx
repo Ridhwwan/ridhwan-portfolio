@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import styles from "./about.module.css";
 import PageHeader from "@/components/ui/PageHeader";
@@ -32,7 +31,7 @@ export default function About() {
           </p>
           <p>
             I&rsquo;ve worked with startups, small businesses and enterprise companies to refine their infrastructure and
-            grow revenue, including one that processed over $40 million in transactions in three years. Clarity,
+            grow. Clarity,
             scalability and a sound long-term strategy matter the same at every size.
           </p>
         </div>

@@ -10,7 +10,7 @@ export default function Home() {
         as="h1"
         label="Product designer and front-end developer"
         title="I build scalable products that feel natural to use."
-        text="Currently building BentoSMS at Bento Development. Previously designed for SOS Express, Cendmate and Monievend."
+        text="Currently building BentoSMS at Bento Development. Previously designed for SOS Express, Alveum, Cendmate and Monievend."
         action={<ButtonLink href="/contact" variant="outline">Let&rsquo;s talk</ButtonLink>}
       />
       <ProjectGrid projects={projects} />

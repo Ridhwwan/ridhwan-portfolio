@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CaseStudy from "@/components/case/CaseStudy";
+import Study from "@/components/study/Study";
 import { caseStudies, getProject, publishedStudies } from "@/lib/projects";
+import { STUDIES } from "@/lib/studies";
 
 export function generateStaticParams() {
   return caseStudies.map((p) => ({ slug: p.slug }));
@@ -11,11 +12,12 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   const { slug } = await params;
   const p = getProject(slug);
   if (!p) return {};
+  const study = STUDIES[slug];
   return {
     title: p.title,
-    description: p.summary,
-    openGraph: { images: p.cover ? [p.cover] : undefined },
-    // Draft case studies (projects whose card links elsewhere) stay out of search.
+    description: study.hero.intro,
+    openGraph: { images: [study.hero.image.src] },
+    // Drafts (projects whose card links elsewhere) stay out of search.
     robots: p.external ? { index: false, follow: false } : undefined,
   };
 }
@@ -25,12 +27,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const p = getProject(slug);
   if (!p) notFound();
   const i = publishedStudies.indexOf(p);
-  const next = publishedStudies[(i + 1) % publishedStudies.length];
-
-  return (
-    <>
-      {p.theme.fonts && <link rel="stylesheet" href={p.theme.fonts} precedence="default" />}
-      <CaseStudy project={p} next={next} />
-    </>
-  );
+  const n = publishedStudies[(i + 1) % publishedStudies.length];
+  const next = n && n !== p ? { href: `/work/${n.slug}`, title: n.short } : undefined;
+  return <Study study={STUDIES[slug]} next={next} />;
 }

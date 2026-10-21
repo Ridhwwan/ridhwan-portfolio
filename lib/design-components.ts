@@ -154,7 +154,7 @@ export const COMPONENTS: ComponentDef[] = [
     file: "components/ui/BackLink.tsx",
     description: "Small '‹ Parent' link at the top of a nested page.",
     tokens: ["--ink-soft", "--ink"],
-    relations: [{ slug: "page-header", how: "Sits above the page header on nested pages." }, { slug: "case-study", how: "Opens every case study ('All work')." }],
+    relations: [{ slug: "page-header", how: "Sits above the page header on nested pages." }, { slug: "case-study", how: "Opens every case study ('Selected work')." }],
     usedOn: [
       { label: "KoreanFirst", href: "/playground/koreanfirst" },
       { label: "Case studies", href: "/work/sos-express" },
@@ -190,14 +190,15 @@ export const COMPONENTS: ComponentDef[] = [
   {
     slug: "case-study",
     name: "Case study layout",
-    file: "components/case/CaseStudy.tsx",
-    description: "Hero, stacked sections and 'Next project'. Colours and fonts come from each project's own theme in lib/projects.ts, so only the label font and page margins follow the site tokens.",
-    tokens: ["--sans", "--gutter-max", "--wrap"],
-    relations: [{ slug: "back-link", how: "Starts with a Back link." }, { slug: "nav", how: "Sits between the site's top bar and footer, so those stay on site tokens while the inside follows the project theme." }],
+    file: "components/study/Study.tsx",
+    description: "Hero with a meta row, then numbered sections (TL;DR, context, discovery, users, ideation, a step-by-step final design, outcomes on a dark band, learnings) and 'Next case study'. Content lives in lib/studies; each project only sets its accent colour.",
+    tokens: ["--sans", "--ink", "--ink-soft", "--bg", "--gutter-max", "--nav-height"],
+    relations: [{ slug: "back-link", how: "Starts with a Back link to the work grid." }, { slug: "project-card", how: "Each published card opens one of these." }, { slug: "nav", how: "Sits between the site's top bar and footer." }],
     usedOn: [
       { label: "SOS Express", href: "/work/sos-express" },
       { label: "Cendmate", href: "/work/cendmate" },
       { label: "MIO-G1", href: "/work/miog1" },
+      { label: "Monievend", href: "/work/monievend" },
     ],
   },
 ];

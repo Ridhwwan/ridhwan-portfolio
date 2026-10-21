@@ -18,7 +18,7 @@ export default function Discovery({ quotes, pains, hmw }: P) {
           <li key={p.title} className={s.card}>
             <span className={s.num}>{i + 1}</span>
             <h3 className={s.cardTitle}>{p.title}</h3>
-            <p>{p.text}</p>
+            {p.text && <p>{p.text}</p>}
           </li>
         ))}
       </ol>

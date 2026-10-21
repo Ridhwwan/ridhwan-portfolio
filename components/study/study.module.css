@@ -159,3 +159,10 @@
   .grid2 { grid-template-columns: 1fr; }
   .learnings li { grid-template-columns: 36px minmax(0, 1fr); }
 }
+
+/* free-form chapters */
+.storyDots { max-width: 62ch; margin-top: 24px; border-top: 0; padding-top: 0; }
+.storyDots li { font-size: 15.5px; }
+.stack { display: grid; gap: 28px; margin-top: 32px; }
+.grid2 > .figure, .stack > .figure { margin: 0; }
+.figure .caption { text-align: left; }

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- light WebP copies are made at build time (scripts/optimize-images.mjs) */
 import manifest from "@/lib/image-manifest.json";
 
 type Entry = { w: number; h: number; widths: number[]; base: string };

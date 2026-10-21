@@ -1,4 +1,4 @@
-// SOS Express, long-form case study (hidden draft at /work/sos-express-v2).
+// SOS Express case study (/work/sos-express).
 // Layout follows the "Support Application" study on amandesign.in.
 // Facts come from the existing SOS Express case study and Ridhwan's resume
 // (Oct 2026). Nothing here is measured after handoff, so there are no
@@ -7,10 +7,9 @@ import type { Study } from "@/components/study/types";
 
 const F = (id: string) => `/work/img/${id}`;
 
-export const sosExpressV2: Study = {
-  slug: "sos-express-v2",
+export const sosExpress: Study = {
+  slug: "sos-express",
   accent: "#2F5BFF",
-  back: { href: "/#work", label: "Selected work" },
   hero: {
     mark: "SOS",
     markBg: "#0F1B4C",
@@ -141,5 +140,4 @@ export const sosExpressV2: Study = {
       ],
     },
   ],
-  next: { href: "/work/cendmate", title: "Cendmate" },
 };
