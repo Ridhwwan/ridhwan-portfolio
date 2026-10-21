@@ -191,9 +191,9 @@ export const COMPONENTS: ComponentDef[] = [
     slug: "case-study",
     name: "Case study layout",
     file: "components/study/Study.tsx",
-    description: "Hero with a meta row, then numbered sections (TL;DR, context, discovery, users, ideation, a step-by-step final design, outcomes on a dark band, learnings) and 'Next case study'. Content lives in lib/studies; each project only sets its accent colour.",
+    description: "Hero with a meta row, then numbered sections (TL;DR, context, discovery, users, ideation, a step-by-step final design, outcomes on a dark band, learnings), reusable blocks (stats, quotes, before/after, problem lists, decision grids, alternating features, personas, pain/fix rows, journey tables, reflections), then 'Next case study' and 'Say hi!' with the email and X icons. Content lives in lib/studies; each project only sets its accent colour.",
     tokens: ["--sans", "--ink", "--ink-soft", "--bg", "--gutter-max", "--nav-height"],
-    relations: [{ slug: "back-link", how: "Starts with a Back link to the work grid." }, { slug: "project-card", how: "Each published card opens one of these." }, { slug: "nav", how: "Sits between the site's top bar and footer." }],
+    relations: [{ slug: "contact-links", how: "Ends with the email and X icons under 'Say hi!'." }, { slug: "back-link", how: "Starts with a Back link to the work grid." }, { slug: "project-card", how: "Each published card opens one of these." }, { slug: "nav", how: "Sits between the site's top bar and footer." }],
     usedOn: [
       { label: "SOS Express", href: "/work/sos-express" },
       { label: "Cendmate", href: "/work/cendmate" },
