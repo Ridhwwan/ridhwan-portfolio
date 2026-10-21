@@ -595,6 +595,7 @@ export const projects: Project[] = [
     short: "Warehouse management",
     years: "2024 – 2025",
     summary: "Admin portal, design system and architecture for a warehouse management system.",
+    cover: F("alveum-cover.webp"),
     external:
       "https://www.figma.com/proto/PVo6t4Wtpn4KRwPDOGMfsv/Warehouse-Management-System--Copy-?node-id=2701-37387&t=Fka9RTuVAsLJMjHa-1",
     theme: {
