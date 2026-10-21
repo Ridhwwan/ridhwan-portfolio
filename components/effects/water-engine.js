@@ -15,18 +15,21 @@
  *   touch them, and a cursor passing underneath makes them drift by
  *   --card-float, like a fish swimming below.
  * - Bend strength comes from the --ripple-strength design token (0 = off).
- * - Nothing runs for reduced motion or touch/pen; the loop sleeps whenever the
- *   water is still; the filter only covers the patch that is moving. If a
- *   machine still can't keep up, ripples switch off for the visit (the
- *   lily-pad drift stays).
+ * - Phones and tablets: a tap or a swipe drops ripples where the finger goes.
+ *   There the engine waits until the page has fully loaded and the browser is
+ *   idle, so it never competes with the page itself.
+ * - Nothing runs for reduced motion; the loop sleeps whenever the water is
+ *   still; the filter only covers the patch that is moving. If a device
+ *   can't keep up, ripples pause for a few seconds and then try again (the
+ *   lily-pad drift stays). Pauses caused by leaving the tab never count.
  */
 export function waterEngine() {
   if (window.__water) return;
   window.__water = true;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  var TOUCH = !matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  var CELL = 8; // simulation cell size in CSS px
+  var CELL = TOUCH ? 10 : 8; // simulation cell size in CSS px
   var DAMP = 0.965; // how quickly ripples die away
   var ACTIVE = 0.003; // below this a cell counts as still
   var NO_SPAWN = 'button,.btn,input,textarea,select,label,summary,[contenteditable="true"],[contenteditable=""],[role="button"],[data-lily],[data-no-ripple],dialog';
@@ -81,7 +84,7 @@ export function waterEngine() {
     var pixels = null;
     var strength = readToken("--ripple-strength", 16);
     var floatPx = readToken("--card-float", 2);
-    var running = false, ripplesOff = false, raf = 0;
+    var running = false, ripplesOff = false, raf = 0, retryAt = 0;
     var quiet = 0, frame = 0, lastT = 0;
     var times = [];
     var lilies = new Map();
@@ -225,14 +228,19 @@ export function waterEngine() {
       }
       var energy = 0;
       if (!ripplesOff) {
-        if (lastT) {
-          times.push(t - lastT);
+        var gap = lastT ? t - lastT : 0;
+        // A long gap means the browser paused us (tab switch, window in the
+        // background), not that the device is slow, so it never counts.
+        if (gap > 0 && gap < 120 && !document.hidden) {
+          times.push(gap);
           if (times.length > 30) times.shift();
-          // Too slow to stay smooth on this machine: ripples off for the rest of the visit.
+          // Too slow to stay smooth right now: pause ripples, try again shortly.
           if (frame > 40 && times.length === 30 && times.reduce(function (a, b) { return a + b; }, 0) / 30 > 34) {
             ripplesOff = true;
+            retryAt = performance.now() + 8000;
             document.documentElement.dataset.water = "off";
             hideWater();
+            cur.fill(0); prev.fill(0);
           }
         }
         lastT = t;
@@ -262,6 +270,46 @@ export function waterEngine() {
       cur.fill(0); prev.fill(0);
     }
 
+    function wake() {
+      // Called after leaving the tab or a slow spell: fresh timings, fresh grid.
+      times.length = 0; lastT = 0; lastX = -1; lastY = -1;
+      if (cols !== Math.ceil(innerWidth / CELL) + 4 || rows !== Math.ceil(innerHeight / CELL) + 4) resize();
+    }
+    function ripplesAllowed() {
+      if (ripplesOff && performance.now() > retryAt) {
+        ripplesOff = false;
+        delete document.documentElement.dataset.water;
+        wake();
+      }
+      return !ripplesOff && strength > 0;
+    }
+
+    // Touch: a tap makes one ring, a swipe leaves a trail behind the finger.
+    function touchAt(x, y, target, dx, dy) {
+      if (target && target.closest(NO_SPAWN.replace(",[data-lily]", ""))) return;
+      if (!ripplesAllowed()) return;
+      var now = performance.now();
+      if (now - lastDrop < 24) return;
+      lastDrop = now;
+      var speed = Math.hypot(dx, dy);
+      drop(x, y, 2.4, speed ? Math.min(0.4 + speed * 0.03, 1.2) : 0.9);
+      start();
+    }
+    var tx = -1, ty = -1;
+    function onTouchStart(e) {
+      var p = e.touches[0];
+      if (!p) return;
+      tx = p.clientX; ty = p.clientY;
+      touchAt(tx, ty, e.target instanceof Element ? e.target : null, 0, 0);
+    }
+    function onTouchMove(e) {
+      var p = e.touches[0];
+      if (!p) return;
+      var dx = tx < 0 ? 0 : p.clientX - tx, dy = ty < 0 ? 0 : p.clientY - ty;
+      tx = p.clientX; ty = p.clientY;
+      touchAt(tx, ty, e.target instanceof Element ? e.target : null, dx, dy);
+    }
+
     function onMove(e) {
       if (e.pointerType !== "mouse") return;
       var target = e.target instanceof Element ? e.target : null;
@@ -282,7 +330,7 @@ export function waterEngine() {
         start();
       }
 
-      if (ripplesOff || strength <= 0 || speed < 2 || (target && target.closest(NO_SPAWN))) return;
+      if (speed < 2 || (target && target.closest(NO_SPAWN)) || !ripplesAllowed()) return;
       var now = performance.now();
       if (now - lastDrop < 16) return;
       lastDrop = now;
@@ -293,11 +341,33 @@ export function waterEngine() {
     resize();
     dmap.setAttribute("scale", String(strength));
     addEventListener("resize", resize);
-    addEventListener("pointermove", onMove, { passive: true });
-    document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); });
+    if (TOUCH) {
+      addEventListener("touchstart", onTouchStart, { passive: true });
+      addEventListener("touchmove", onTouchMove, { passive: true });
+    } else {
+      addEventListener("pointermove", onMove, { passive: true });
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop();
+      else wake();
+    });
+    addEventListener("focus", wake);
+    addEventListener("pageshow", wake);
     performance.mark("water-ready");
   }
 
-  if (document.body) init();
-  else document.addEventListener("DOMContentLoaded", init, { once: true });
+  function boot() {
+    if (!TOUCH) return init();
+    // Phones: the page comes first. Start only once everything has loaded
+    // and the browser has a quiet moment.
+    var go = function () {
+      if (window.requestIdleCallback) requestIdleCallback(init, { timeout: 2500 });
+      else setTimeout(init, 300);
+    };
+    if (document.readyState === "complete") go();
+    else addEventListener("load", go, { once: true });
+  }
+
+  if (document.body) boot();
+  else document.addEventListener("DOMContentLoaded", boot, { once: true });
 }

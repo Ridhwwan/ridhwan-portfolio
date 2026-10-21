@@ -161,6 +161,15 @@ export const COMPONENTS: ComponentDef[] = [
     ],
   },
   {
+    slug: "contact-links",
+    name: "Contact links",
+    file: "components/ui/ContactLinks.tsx",
+    description: "Icon links to reach Ridhwan directly: email (opens the visitor's mail app), X and GitHub.",
+    tokens: ["--ink", "--ink-soft", "--line", "--tile", "--radius-control"],
+    relations: [{ slug: "page-header", how: "Sits under the Contact page header as the no-form way to get in touch." }, { slug: "contact-form", how: "The alternative to the form for people who'd rather email directly." }],
+    usedOn: [{ label: "Contact", href: "/contact" }],
+  },
+  {
     slug: "contact-form",
     name: "Contact form",
     file: "app/contact/ContactForm.tsx",

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonLink from "@/components/ui/ButtonLink";
 import { RESUME } from "./Nav";
+import { EMAIL, GITHUB_URL, X_URL } from "@/lib/contact";
 
 export default function Footer() {
   const path = usePathname();
@@ -22,7 +23,9 @@ export default function Footer() {
           <span>© Ridhwan Salaudeen</span>
           <nav aria-label="Elsewhere">
             <Link href="/design-system">Design system</Link>
-            <a href="https://github.com/Ridhwwan" target="_blank" rel="noreferrer">GitHub</a>
+            <a href={`mailto:${EMAIL}`}>Email</a>
+            <a href={X_URL} target="_blank" rel="noreferrer">X</a>
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
             <a href={RESUME} target="_blank" rel="noreferrer">Resume</a>
           </nav>
         </div>

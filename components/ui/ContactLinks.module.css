@@ -1,0 +1,10 @@
+.list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.link {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; min-width: 44px; justify-content: center;
+  padding: 0 12px; border: 1px solid var(--line); border-radius: var(--radius-control);
+  color: var(--ink); text-decoration: none; font-size: 15px;
+  transition: background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link:hover { background: var(--tile); border-color: var(--ink-soft); }
+.link:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.text { overflow-wrap: anywhere; }

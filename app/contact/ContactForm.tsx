@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { EMAIL as TO } from "@/lib/contact";
 import styles from "./contact.module.css";
-
-const TO = "salaudeenridhwan@gmail.com";
 
 // v1: no mail service yet, so the form hands a ready-made email to the visitor's mail app.
 export default function ContactForm() {
