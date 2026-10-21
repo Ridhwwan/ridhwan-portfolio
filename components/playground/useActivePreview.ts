@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type RefObject } from "react";
+import { HOVER_SETTLE_MS } from "@/components/ui/useSettledHover";
 
 /**
  * True while a card's preview should play:
@@ -18,8 +19,11 @@ export function useActivePreview(ref: RefObject<HTMLElement | null>) {
 
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (canHover) {
-      const on = () => setActive(true);
-      const off = () => setActive(false);
+      // Follow-through: once on, stay on long enough for the motion to complete.
+      let since = 0;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const on = () => { clearTimeout(timer); since = performance.now(); setActive(true); };
+      const off = () => { clearTimeout(timer); timer = setTimeout(() => setActive(false), Math.max(0, HOVER_SETTLE_MS - (performance.now() - since))); };
       const blur = (e: FocusEvent) => { if (!el.contains(e.relatedTarget as Node)) off(); };
       el.addEventListener("pointerenter", on);
       el.addEventListener("pointerleave", off);
@@ -27,6 +31,7 @@ export function useActivePreview(ref: RefObject<HTMLElement | null>) {
       el.addEventListener("focusout", blur);
       return () => {
         el.removeEventListener("pointerenter", on);
+        clearTimeout(timer);
         el.removeEventListener("pointerleave", off);
         el.removeEventListener("focusin", on);
         el.removeEventListener("focusout", blur);

@@ -23,12 +23,12 @@ export type PlaygroundItem = {
   /** What the "Try it" window loads. Null means no in-page window (unless `live` is set). */
   embed: string | null;
   /** A preview built into the site instead of an image or iframe. */
-  live: "koreanfirst" | null;
+  live: "koreanfirst" | "design-system" | null;
   order: number | null;
 };
 
 /** Built-in live previews, keyed by the project's on-site link. */
-const LIVE: Record<string, PlaygroundItem["live"]> = { "/playground/koreanfirst": "koreanfirst" };
+const LIVE: Record<string, PlaygroundItem["live"]> = { "/playground/koreanfirst": "koreanfirst", "/design-system": "design-system" };
 
 const DATABASE_ID = process.env.NOTION_PLAYGROUND_DB ?? "dbe395ab3ea346268bc3897c736fe27a";
 const NOTION_VERSION = "2022-06-28";
@@ -59,6 +59,19 @@ const fallback: PlaygroundItem[] = [
     embed: "https://sketch-converter.streamlit.app/?embed=true",
     live: null,
     order: 2,
+  },
+  {
+    id: "design-system",
+    title: "Design system",
+    summary: "The living design system behind this site. Change its colours, type and spacing and the whole site follows, just for you.",
+    category: "Design system",
+    year: 2026,
+    href: "/design-system",
+    cover: null,
+    preview: null,
+    embed: null,
+    live: "design-system",
+    order: 3,
   },
 ];
 

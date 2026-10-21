@@ -18,6 +18,7 @@ const ICONS: Record<string, LucideIcon> = {
  */
 export default function PlaygroundThumb({ item, active }: { item: PlaygroundItem; active: boolean }) {
   if (item.live === "koreanfirst") return <KoreanFirstSpecimen active={active} />;
+  if (item.live === "design-system") return <DesignSystemSpecimen active={active} />;
   if (item.cover || item.preview) return <Media item={item} active={active} />;
   return <DrawnWindow item={item} active={active} />;
 }
@@ -27,6 +28,22 @@ function KoreanFirstSpecimen({ active }: { active: boolean }) {
     <div className={styles.specimen} data-active={active || undefined} aria-hidden>
       <span className={styles.specimenGlyphs}>Aa</span>
       <span className={styles.specimenScale}>200 — 700</span>
+    </div>
+  );
+}
+
+/** Swatches, a slider and a sample: the knob slides and the sample restyles while active. */
+function DesignSystemSpecimen({ active }: { active: boolean }) {
+  return (
+    <div className={styles.ds} data-active={active || undefined} aria-hidden>
+      <div className={styles.dsSwatches}>
+        <i style={{ background: "var(--ink)" }} />
+        <i style={{ background: "#3E8E87" }} />
+        <i style={{ background: "#F2C14E" }} />
+        <i style={{ background: "var(--tile)", boxShadow: "inset 0 0 0 1px var(--line)" }} />
+      </div>
+      <span className={styles.dsSample}>Aa</span>
+      <span className={styles.dsTrack}><span className={styles.dsKnob} /></span>
     </div>
   );
 }

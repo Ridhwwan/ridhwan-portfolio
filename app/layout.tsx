@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import TokenStyle from "@/components/TokenStyle";
 import WaterRipple from "@/components/effects/WaterRipple";
+import VisitorThemePill from "@/components/design/VisitorThemePill";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ridhwansalaudeen.com"),
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main>{children}</main>
         <Footer />
         <WaterRipple />
+        <VisitorThemePill />
       </body>
     </html>
   );

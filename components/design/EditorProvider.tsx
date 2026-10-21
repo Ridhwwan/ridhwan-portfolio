@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { TOKEN_MAP, toCss, validate } from "@/lib/design-tokens";
 import { isUnlocked, lock as lockAction, saveTokens } from "@/app/design-system/actions";
+import { visitorTokens } from "@/lib/visitor-tokens";
 
 /**
  * Holds the working copy of every token while someone edits the design system.
@@ -10,7 +11,8 @@ import { isUnlocked, lock as lockAction, saveTokens } from "@/app/design-system/
  * - Any change previews instantly by writing the CSS variable onto <html>.
  * - When unlocked, valid changes auto-save to Notion a few seconds after the
  *   last edit (or on "Save now"), then the live site refreshes.
- * - When locked, changes are a preview in this browser only.
+ * - When locked, changes are the visitor's own: they apply across the whole
+ *   site while they browse, and vanish when they reload or leave.
  *
  * The lock state is fetched from the browser after load, so these pages stay
  * statically prerendered (reading cookies on the server would make them dynamic).
@@ -53,7 +55,8 @@ function paint(name: string, value: string) {
 
 export default function EditorProvider({ initial, children }: { initial: Record<string, string>; children: React.ReactNode }) {
   const [saved, setSaved] = useState(initial);
-  const [values, setValues] = useState(initial);
+  // Start from any changes this visitor already made earlier in the visit.
+  const [values, setValues] = useState(() => ({ ...initial, ...visitorTokens.entries() }));
   const [unlocked, setUnlocked] = useState(false);
   const [autosave, setAutosave] = useState(true);
   const [state, setState] = useState<SaveState>("idle");
@@ -93,6 +96,7 @@ export default function EditorProvider({ initial, children }: { initial: Record<
     const res = await saveTokens(changes);
     if (res.ok) {
       setSaved((s) => ({ ...s, ...changes }));
+      for (const k of Object.keys(changes)) visitorTokens.delete(k);
       setState("saved");
       setTimeout(() => setState((s) => (s === "saved" ? "idle" : s)), 2500);
     } else {
@@ -112,6 +116,8 @@ export default function EditorProvider({ initial, children }: { initial: Record<
     (name: string, value: string) => {
       setValues((v) => ({ ...v, [name]: value }));
       paint(name, value);
+      if (value === savedRef.current[name]) visitorTokens.delete(name);
+      else visitorTokens.set(name, value);
       if (unlocked && autosave) schedule();
     },
     [unlocked, autosave, schedule],
@@ -126,6 +132,7 @@ export default function EditorProvider({ initial, children }: { initial: Record<
     if (timer.current) clearTimeout(timer.current);
     const base = savedRef.current;
     for (const k of Object.keys(base)) paint(k, base[k]);
+    visitorTokens.reset();
     setValues(base);
     setState("idle");
     setError(null);
@@ -148,13 +155,14 @@ export default function EditorProvider({ initial, children }: { initial: Record<
     if (autosave && hasPending()) schedule();
   };
 
-  // Warn before leaving with edits that haven't been saved.
+  // Warn the owner before leaving with edits that haven't been saved.
+  // Visitors' edits are meant to vanish when they leave, so they get no warning.
   useEffect(() => {
-    if (!dirty.length) return;
+    if (!dirty.length || !unlocked) return;
     const h = (e: BeforeUnloadEvent) => { e.preventDefault(); e.returnValue = ""; };
     window.addEventListener("beforeunload", h);
     return () => window.removeEventListener("beforeunload", h);
-  }, [dirty.length]);
+  }, [dirty.length, unlocked]);
 
   const ctx: Ctx = {
     values, saved, unlocked, dirty, invalid, autosave, setAutosave: toggleAutosave, state, error,

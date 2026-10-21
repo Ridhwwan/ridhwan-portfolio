@@ -1,7 +1,11 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+import { useRef } from "react";
 import { Box, Code2, Globe, Monitor, Smartphone } from "lucide-react";
 import SmartLink from "@/components/ui/SmartLink";
 import type { Platform, Project } from "@/lib/projects";
+import { useSettledHover } from "@/components/ui/useSettledHover";
 import styles from "./ProjectCard.module.css";
 
 const icons: Record<Platform, typeof Monitor> = {
@@ -12,12 +16,15 @@ const icons: Record<Platform, typeof Monitor> = {
   Software: Code2,
 };
 
-/** Image on top, then platform label, title and one-line summary. */
+/** Image on top, then platform label, title and one-line summary. Hover follows through (see useSettledHover). */
 export default function ProjectCard({ p }: { p: Project }) {
   const href = p.external ?? `/work/${p.slug}`;
   const Icon = icons[p.platform];
+  const ref = useRef<HTMLDivElement>(null);
+  const hover = useSettledHover(ref);
   return (
-    <SmartLink className={styles.card} href={href} data-lily>
+    <div ref={ref} className={styles.pad} data-hover={hover || undefined} data-lily>
+    <SmartLink className={styles.card} href={href}>
       <div className={styles.media} style={{ background: p.theme.stage }}>
         {p.cover ? (
           <img src={p.cover} alt="" loading="lazy" />
@@ -31,8 +38,9 @@ export default function ProjectCard({ p }: { p: Project }) {
         <Icon aria-hidden size={18} strokeWidth={1.5} />
         {p.platform}, {p.years}
       </p>
-      <h3 className={styles.title}>{p.short}</h3>
+      <h3 className={styles.title}><span>{p.short}</span></h3>
       <p className={styles.summary}>{p.summary}</p>
     </SmartLink>
+    </div>
   );
 }

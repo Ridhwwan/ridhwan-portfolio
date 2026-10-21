@@ -1,5 +1,5 @@
 /* Fills whatever box the card gives it (small square in rows, big square in tiles). */
-.specimen, .media, .drawn { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
+.specimen, .media, .drawn, .ds { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; }
 
 /* KoreanFirst: the font itself, weight sweeping 200 → 700 while active */
 .specimen { background: var(--ink); color: var(--bg); container-type: size; }
@@ -34,3 +34,18 @@
 }
 /* Small row thumbnails: no room for the label */
 @container (max-width: 140px) { .badge, .specimenScale { display: none; } .window { width: 80%; } }
+
+/* Design system: swatches, a sample and a slider that moves while active */
+.ds { background: var(--bg); color: var(--ink); container-type: size; box-shadow: inset 0 0 0 1px var(--line); border-radius: inherit; align-content: center; justify-items: center; gap: 7cqmin; }
+.dsSwatches { display: flex; gap: 3cqmin; }
+.dsSwatches i { width: 11cqmin; height: 11cqmin; border-radius: 50%; display: block; transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
+.ds[data-active] .dsSwatches i { transform: translateY(-2cqmin); }
+.ds[data-active] .dsSwatches i:nth-child(2) { transition-delay: 60ms; }
+.ds[data-active] .dsSwatches i:nth-child(3) { transition-delay: 120ms; }
+.ds[data-active] .dsSwatches i:nth-child(4) { transition-delay: 180ms; }
+.dsSample { font-family: var(--serif); font-size: 26cqmin; line-height: 1; letter-spacing: -0.02em; transition: letter-spacing 0.9s cubic-bezier(0.22, 1, 0.36, 1), font-weight 0.9s; }
+.ds[data-active] .dsSample { letter-spacing: 0.06em; font-weight: 500; }
+.dsTrack { position: relative; width: 52cqmin; height: 1.6cqmin; border-radius: 999px; background: var(--line); }
+.dsKnob { position: absolute; top: 50%; left: 15%; width: 6cqmin; height: 6cqmin; translate: -50% -50%; border-radius: 50%; background: var(--ink); transition: left 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.ds[data-active] .dsKnob { left: 80%; }
+@container (max-width: 140px) { .dsSwatches { display: none; } }

@@ -17,7 +17,7 @@ export default function SaveBar() {
   if (!dirty.length && state !== "saved") return null;
 
   const n = dirty.length;
-  let note = unlocked ? (error ?? STATUS[state]) : "Preview in this browser only. Unlock to save it for everyone.";
+  let note = unlocked ? (error ?? STATUS[state]) : "Only you see this, across the whole site, until you leave. Unlock to save it for everyone.";
   if (unlocked && invalid.length && state !== "saving") note = `${invalid.length} value${invalid.length > 1 ? "s aren't" : " isn't"} valid yet and won't be saved.`;
 
   return (

@@ -140,6 +140,15 @@ export const COMPONENTS: ComponentDef[] = [
     usedOn: [{ label: "Every page", href: "/" }],
   },
   {
+    slug: "visitor-pill",
+    name: "Your-version pill",
+    file: "components/design/VisitorThemePill.tsx",
+    description: "Appears at the bottom of every page while a visitor browses with their own design-system changes, with Edit and Reset. Their changes vanish when they reload or leave.",
+    tokens: ["--ink", "--bg"],
+    relations: [{ slug: "water-ripple", how: "Marked so ripples never start on it." }],
+    usedOn: [{ label: "Every page, after editing the design system", href: "/design-system" }],
+  },
+  {
     slug: "back-link",
     name: "Back link",
     file: "components/ui/BackLink.tsx",
