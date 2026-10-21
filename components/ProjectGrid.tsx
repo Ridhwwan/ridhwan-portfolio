@@ -6,8 +6,8 @@ import styles from "./ProjectGrid.module.css";
 export default function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <ul className={styles.grid}>
-      {projects.map((p) => (
-        <li key={p.slug}><ProjectCard p={p} /></li>
+      {projects.map((p, i) => (
+        <li key={p.slug}><ProjectCard p={p} priority={i < 3} /></li>
       ))}
     </ul>
   );

@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import styles from "./about.module.css";
 import PageHeader from "@/components/ui/PageHeader";
+import Img from "@/components/ui/Img";
 
 export const metadata: Metadata = {
   title: "About",
@@ -36,7 +37,7 @@ export default function About() {
           </p>
         </div>
         <figure className={styles.portrait}>
-          <img src={F("97aaHf49tOePKgw0z0uGAev7QgU.jpg")} alt="Portrait of Ridhwan Salaudeen" />
+          <Img src={F("97aaHf49tOePKgw0z0uGAev7QgU.jpg")} alt="Portrait of Ridhwan Salaudeen" sizes="(max-width: 860px) 100vw, 40vw" priority />
         </figure>
       </section>
 
@@ -50,7 +51,7 @@ export default function About() {
         </div>
         <div className={styles.gallery}>
           {["ItxhDVbd489k63JPrtCHkea2gc.jpg", "HxHVvH1TOEyOz6CK3iDI00FuSDo.png", "nwI111HKBHRJy4rRtH0GURt1HE.png", "57p1oPO8XiMsT2uE46P7GcxYOI.png"].map((id) => (
-            <img key={id} src={F(id)} alt="" loading="lazy" />
+            <Img key={id} src={F(id)} sizes="(max-width: 860px) 50vw, 25vw" />
           ))}
         </div>
       </section>
@@ -61,7 +62,7 @@ export default function About() {
           <p>Having benefited from other people&rsquo;s knowledge, I find it fulfilling to give back to people learning the way I did.</p>
         </div>
         <figure className={styles.video}>
-          <video src="/work/img/u1dSpFl4jBU5QZriSwx2xmbbfw.mp4" controls playsInline preload="metadata" poster={F("81pJXMLq0ICGo6psgax9NdIF26g.png")} />
+          <video src="/work/img/u1dSpFl4jBU5QZriSwx2xmbbfw.mp4" controls playsInline preload="metadata" poster="/work/img/opt/81pJXMLq0ICGo6psgax9NdIF26g-644.webp" />
           <figcaption>Teaching a group of students web development at The Renewed Hope Agenda, 2025.</figcaption>
         </figure>
       </section>

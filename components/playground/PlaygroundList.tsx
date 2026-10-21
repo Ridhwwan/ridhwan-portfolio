@@ -4,9 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import FilterChips from "@/components/ui/FilterChips";
 import ViewToggle, { type View } from "@/components/ui/ViewToggle";
 import PlaygroundCard from "./PlaygroundCard";
-import ProjectWindow from "./ProjectWindow";
+import dynamic from "next/dynamic";
 import type { PlaygroundItem } from "@/lib/playground";
 import styles from "./PlaygroundList.module.css";
+
+// The Try-it window (and the type tester inside it) only loads once someone opens it.
+const ProjectWindow = dynamic(() => import("./ProjectWindow"), { ssr: false });
 
 const ALL = "All";
 const KEY = "playground-view";
@@ -17,6 +20,9 @@ export default function PlaygroundList({ items }: { items: PlaygroundItem[] }) {
   const [view, setView] = useState<View>("grid");
   const [trying, setTrying] = useState<PlaygroundItem | null>(null);
   const close = useCallback(() => setTrying(null), []);
+  // Once the window has been opened it stays mounted, so closing can animate normally.
+  const [windowUsed, setWindowUsed] = useState(false);
+  const tryItem = useCallback((item: PlaygroundItem) => { setWindowUsed(true); setTrying(item); }, []);
   const categories = [...new Set(items.map((i) => i.category))];
   const shown = filter === ALL ? items : items.filter((i) => i.category === filter);
 
@@ -46,9 +52,9 @@ export default function PlaygroundList({ items }: { items: PlaygroundItem[] }) {
         <ViewToggle value={view} onChange={choose} />
       </div>
       <ul className={view === "grid" ? styles.grid : styles.list}>
-        {shown.map((item) => <PlaygroundCard key={item.id} item={item} view={view} onTry={setTrying} />)}
+        {shown.map((item) => <PlaygroundCard key={item.id} item={item} view={view} onTry={tryItem} />)}
       </ul>
-      <ProjectWindow item={trying} onClose={close} />
+      {windowUsed && <ProjectWindow item={trying} onClose={close} />}
     </section>
   );
 }

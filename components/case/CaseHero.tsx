@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import BackLink from "@/components/ui/BackLink";
 import type { Project } from "@/lib/projects";
+import Img from "@/components/ui/Img";
 
 /** Title, summary, the project facts, and the cover image. */
 export default function CaseHero({ project: p }: { project: Project }) {
@@ -32,7 +33,7 @@ export default function CaseHero({ project: p }: { project: Project }) {
 
         <div className="cs-cover">
           {p.cover ? (
-            <img src={p.cover} alt="" />
+            <Img src={p.cover} priority />
           ) : p.slug === "bentosms" ? (
             <div className="cs-cover-bento" aria-hidden>
               <span /><span /><span /><span />

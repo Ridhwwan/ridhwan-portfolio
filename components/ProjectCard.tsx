@@ -7,6 +7,7 @@ import SmartLink from "@/components/ui/SmartLink";
 import type { Platform, Project } from "@/lib/projects";
 import { useSettledHover } from "@/components/ui/useSettledHover";
 import styles from "./ProjectCard.module.css";
+import Img from "@/components/ui/Img";
 
 const icons: Record<Platform, typeof Monitor> = {
   "Web app": Monitor,
@@ -17,7 +18,7 @@ const icons: Record<Platform, typeof Monitor> = {
 };
 
 /** Image on top, then platform label, title and one-line summary. Hover follows through (see useSettledHover). */
-export default function ProjectCard({ p }: { p: Project }) {
+export default function ProjectCard({ p, priority = false }: { p: Project; priority?: boolean }) {
   const href = p.external ?? `/work/${p.slug}`;
   const Icon = icons[p.platform];
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ export default function ProjectCard({ p }: { p: Project }) {
     <SmartLink className={styles.card} href={href}>
       <div className={styles.media} style={{ background: p.theme.stage }}>
         {p.cover ? (
-          <img src={p.cover} alt="" loading="lazy" />
+          <Img src={p.cover} sizes="(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw" priority={priority} />
         ) : p.slug === "bentosms" ? (
           <img src="/work/bentosms-logo.png" alt="" className={styles.logo} />
         ) : (

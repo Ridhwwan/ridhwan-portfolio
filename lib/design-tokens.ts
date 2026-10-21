@@ -19,7 +19,7 @@ export type TokenDef =
 
 /** Fonts the site has loaded; a font token can only pick from these. */
 export const FONT_STACKS: Record<string, string> = {
-  "IBM Plex Serif": '"IBM Plex Serif", Georgia, serif',
+  "IBM Plex Serif": 'var(--font-plex-serif), "IBM Plex Serif", Georgia, serif',
   Geist: "var(--font-geist-sans), system-ui, sans-serif",
   Georgia: 'Georgia, "Times New Roman", serif',
   KoreanFirst: '"KoreanFirst", var(--font-geist-sans), sans-serif',

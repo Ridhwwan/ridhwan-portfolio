@@ -1,0 +1,56 @@
+# Keeps the link preview (what shows when someone shares ridhwansalaudeen.com)
+# a current screenshot of the home page. After each successful production
+# deploy on Vercel it screenshots the live site; if the page looks different
+# it commits the new image, which Vercel then deploys. When nothing changed,
+# nothing is committed, so it never loops.
+name: Link preview screenshot
+
+on:
+  deployment_status:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1" # weekly safety net, Monday morning
+
+permissions:
+  contents: write
+
+concurrency:
+  group: link-preview
+  cancel-in-progress: true
+
+jobs:
+  screenshot:
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install screenshot tools
+        run: |
+          npm ci --ignore-scripts
+          npm install --no-save playwright@1
+          npx playwright install --with-deps chromium
+      - name: Give the new deploy a moment to reach the domain
+        if: github.event_name == 'deployment_status'
+        run: sleep 30
+      - name: Screenshot the home page
+        run: node scripts/og-screenshot.mjs https://ridhwansalaudeen.com
+      - name: Commit if it changed
+        run: |
+          if git diff --quiet -- app/opengraph-image.png app/twitter-image.png; then
+            echo "Preview unchanged."
+            exit 0
+          fi
+          git config user.name "link-preview-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/opengraph-image.png app/twitter-image.png
+          git commit -m "Update link preview screenshot"
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Box, Code2, Film, Lightbulb, Sparkles, Trophy, Type, type LucideIcon } from "lucide-react";
 import type { PlaygroundItem } from "@/lib/playground";
 import styles from "./PlaygroundThumb.module.css";
+import Img from "@/components/ui/Img";
 
 const ICONS: Record<string, LucideIcon> = {
   Code: Code2, "Type design": Type, "AI tool": Sparkles, "3D": Box, Motion: Film, "Design concept": Lightbulb, Hackathon: Trophy,
@@ -66,7 +67,7 @@ function Media({ item, active }: { item: PlaygroundItem; active: boolean }) {
 
   return (
     <div className={styles.media} data-active={active || undefined}>
-      {item.cover ? <img src={item.cover} alt="" loading="lazy" /> : <DrawnWindow item={item} active={false} />}
+      {item.cover ? <Img src={item.cover} sizes="(max-width: 620px) 100vw, 33vw" /> : <DrawnWindow item={item} active={false} />}
       {item.preview && wanted && (item.preview.kind === "video" ? (
         <video ref={video} className={styles.clip} src={item.preview.src} muted loop playsInline preload="auto" aria-hidden />
       ) : (

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Page } from "@/lib/projects";
+import Img from "@/components/ui/Img";
 
 /** One section of a case study. Tone decides the band colour: paper, accent or stage. */
 export default function CaseSection({ page }: { page: Page }) {
@@ -32,7 +33,7 @@ function body(page: Page) {
     case "image":
       return (
         <figure className="cs-fig">
-          <div className="cs-frame"><img src={page.src} alt={page.caption ?? ""} loading="lazy" /></div>
+          <div className="cs-frame"><Img src={page.src} alt={page.caption ?? ""} sizes="(max-width: 1200px) 100vw, 1200px" /></div>
           {page.caption && <figcaption>{page.caption}</figcaption>}
         </figure>
       );
@@ -40,7 +41,7 @@ function body(page: Page) {
       return (
         <figure className="cs-fig">
           <div className="cs-pair">
-            {page.srcs.map((s) => <div className="cs-frame" key={s}><img src={s} alt="" loading="lazy" /></div>)}
+            {page.srcs.map((s) => <div className="cs-frame" key={s}><Img src={s} sizes="(max-width: 860px) 100vw, 50vw" /></div>)}
           </div>
           {page.caption && <figcaption>{page.caption}</figcaption>}
         </figure>
