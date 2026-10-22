@@ -970,6 +970,26 @@
   ],
   "base": "/work/img/opt/j7PGO6smEPg8HvISFM6bYD44xg"
  },
+ "/work/img/jjaibot-models.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/jjaibot-models"
+ },
+ "/work/img/jjaibot-site.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/jjaibot-site"
+ },
  "/work/img/lA2AYLQ9hxSq7QuDYg6t5SehZY.png": {
   "w": 842,
   "h": 695,
