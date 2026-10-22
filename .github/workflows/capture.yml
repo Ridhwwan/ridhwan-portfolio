@@ -1,0 +1,40 @@
+# Downloads files and takes screenshots from places the editing environment
+# can't reach, then commits them with their light WebP copies.
+# Triggered with a JSON payload (see scripts/capture.mjs).
+name: Capture assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: 'JSON: {"files":[{"url","name"}],"shots":[{"url","name","width","height","fullPage"}]}'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hide the payload from logs
+        run: echo "::add-mask::${{ inputs.payload }}"
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts && npm rebuild sharp && npm install --no-save playwright@1 && npx playwright install --with-deps chromium
+      - run: node scripts/capture.mjs && node scripts/optimize-images.mjs
+        env:
+          CAPTURE_JSON: ${{ inputs.payload }}
+      - name: Commit
+        run: |
+          git add public/work/img lib/image-manifest.json
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git config user.name "capture-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Capture assets"
+          git pull --rebase origin main
+          git push origin HEAD:main
