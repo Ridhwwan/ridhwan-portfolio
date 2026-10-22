@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ButtonLink from "@/components/ui/ButtonLink";
 
-export const RESUME =
-  "https://docs.google.com/document/d/1NVXvr309FesbqY0WjajDDoWTk5Jack18PKSNY66YGj4/edit";
+import { RESUME } from "@/lib/contact";
 
 const links = [
   { href: "/#work", label: "Work" },

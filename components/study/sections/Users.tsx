@@ -24,7 +24,10 @@ export default function Users({ map, roles, research }: P) {
           <p className={s.intro}>{research.text}</p>
           <div className={s.grid2}>
             {research.images.map((im) => (
-              <figure key={im.src} className={s.panel}><Img src={im.src} alt={im.alt} sizes="(max-width: 860px) 100vw, 520px" /></figure>
+              <figure key={im.src} className={s.figure}>
+                <div className={s.panel}><Img src={im.src} alt={im.alt} sizes="(max-width: 860px) 100vw, 520px" /></div>
+                {im.caption && <figcaption className={s.caption}>{im.caption}</figcaption>}
+              </figure>
             ))}
           </div>
         </div>

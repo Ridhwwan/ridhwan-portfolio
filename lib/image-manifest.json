@@ -780,6 +780,16 @@
   ],
   "base": "/work/img/opt/bentosms-about"
  },
+ "/work/img/bentosms-before-after.jpg": {
+  "w": 2880,
+  "h": 2432,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-before-after"
+ },
  "/work/img/bentosms-cover.webp": {
   "w": 1000,
   "h": 1040,
@@ -789,6 +799,26 @@
    1000
   ],
   "base": "/work/img/opt/bentosms-cover"
+ },
+ "/work/img/bentosms-devices.jpg": {
+  "w": 2880,
+  "h": 1185,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-devices"
+ },
+ "/work/img/bentosms-enroll.jpg": {
+  "w": 2880,
+  "h": 848,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-enroll"
  },
  "/work/img/bentosms-features.png": {
   "w": 2880,
@@ -800,15 +830,15 @@
   ],
   "base": "/work/img/opt/bentosms-features"
  },
- "/work/img/bentosms-home-full.jpg": {
+ "/work/img/bentosms-fees-before-after.jpg": {
   "w": 2880,
-  "h": 20620,
+  "h": 1104,
   "widths": [
    480,
    960,
    1600
   ],
-  "base": "/work/img/opt/bentosms-home-full"
+  "base": "/work/img/opt/bentosms-fees-before-after"
  },
  "/work/img/bentosms-home.png": {
   "w": 2880,
@@ -820,6 +850,16 @@
   ],
   "base": "/work/img/opt/bentosms-home"
  },
+ "/work/img/bentosms-integrations.jpg": {
+  "w": 2880,
+  "h": 1281,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-integrations"
+ },
  "/work/img/bentosms-pricing.png": {
   "w": 2880,
   "h": 1800,
@@ -829,6 +869,16 @@
    1600
   ],
   "base": "/work/img/opt/bentosms-pricing"
+ },
+ "/work/img/bentosms-roles.jpg": {
+  "w": 2880,
+  "h": 960,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-roles"
  },
  "/work/img/bentosms-tutorials.png": {
   "w": 2880,

@@ -11,6 +11,8 @@ import Rows from "./blocks/Rows";
 import Table from "./blocks/Table";
 import Reflections from "./blocks/Reflections";
 import Images from "./blocks/Images";
+import LogoMarquee from "@/components/ui/LogoMarquee";
+import Video from "./blocks/Video";
 import type { Block } from "./types";
 import s from "./study.module.css";
 
@@ -29,6 +31,8 @@ function One({ b }: { b: Block }) {
     case "table": return <Table {...b} />;
     case "reflections": return <Reflections {...b} />;
     case "images": return <Images {...b} />;
+    case "logos": return <LogoMarquee label={b.label} />;
+    case "video": return <Video {...b} />;
   }
 }
 

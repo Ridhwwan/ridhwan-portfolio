@@ -9,5 +9,7 @@ export const plexSerif = localFont({
   ],
   variable: "--font-plex-serif",
   display: "swap",
+  // Headlines are Geist now; the serif stays available to the design-system editor without slowing every page.
+  preload: false,
   fallback: ["Georgia", "serif"],
 });

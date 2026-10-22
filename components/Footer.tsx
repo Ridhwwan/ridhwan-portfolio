@@ -2,23 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ButtonLink from "@/components/ui/ButtonLink";
-import { RESUME } from "./Nav";
-import { EMAIL, GITHUB_URL, X_URL } from "@/lib/contact";
+import SayHi from "@/components/ui/SayHi";
+import { EMAIL, GITHUB_URL, RESUME, X_URL } from "@/lib/contact";
 
 export default function Footer() {
   const path = usePathname();
-  // Contact has the form, and case studies end with their own "Say hi!", so neither repeats the CTA.
-  const onContact = path === "/contact" || path.startsWith("/work/");
+  // Every page ends with "Say hi!", except Contact, which has the form.
+  const onContact = path === "/contact";
 
   return (
     <footer className="footer">
       <div className="wrap">
         {!onContact && (
-          <div className="footer-cta">
-            <h2 className="h-lg">Want to work with me or be friends?</h2>
-            <ButtonLink href="/contact" variant="outline">Send me a message</ButtonLink>
-          </div>
+          <SayHi />
         )}
         <div className="footer-base">
           <span>© Ridhwan Salaudeen</span>

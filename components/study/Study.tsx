@@ -12,7 +12,6 @@ import Outcomes from "./sections/Outcomes";
 import Learnings from "./sections/Learnings";
 import Story from "./sections/Story";
 import Blocks from "./Blocks";
-import SayHi from "./SayHi";
 import type { Study as StudyData, StudySection } from "./types";
 import s from "./study.module.css";
 
@@ -57,7 +56,6 @@ export default function Study({ study, next }: { study: StudyData; next?: { href
             <span className={s.nextCta}>View next case study <ArrowRight aria-hidden size={16} /></span>
           </Link>
         )}
-        <SayHi />
       </div>
     </article>
   );

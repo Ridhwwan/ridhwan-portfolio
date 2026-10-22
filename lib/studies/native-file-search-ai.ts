@@ -1,16 +1,16 @@
-// AI Query (LLM-powered file search) case study (/work/ai-query).
+// Native File Search AI case study (/work/native-file-search-ai), formerly "AI Query".
 // Facts from the original case study, its persona/journey/test images and the resume.
 // Layout leans on the research-heavy "Designing for loyalty" reference.
 import type { Study } from "@/components/study/types";
 
 const F = (id: string) => `/work/img/${id}`;
 
-export const aiQuery: Study = {
-  slug: "ai-query",
+export const nativeFileSearchAi: Study = {
+  slug: "native-file-search-ai",
   accent: "#6D4AE0",
   hero: {
     mark: "AI",
-    wordmark: "AI Query",
+    wordmark: "Native File Search AI",
     markBg: "#160F29",
     title: "Find any file on your phone just by describing it.",
     intro: "A file manager that finds images and documents through natural-language queries and image recognition.",
@@ -19,14 +19,20 @@ export const aiQuery: Study = {
       { label: "Timeline", text: "2024." },
       { label: "Team", text: "Me as product designer, with Dr. Habeeb Salaudeen as AI expert." },
     ],
-    image: { src: F("NaJhIOx6sqaPjDNOtFdzmAiQ8.png"), alt: "AI Query recent files screen" },
+    logo: { src: "/logos/native-file-search-ai.webp", alt: "Native File Search AI", height: 64 },
+    links: [
+      { label: "Interactive prototype", href: "https://www.figma.com/proto/AEanDuhJMWeEQJuanwhPpI/AI-Query?node-id=1886-17499&node-type=frame&viewport=-354%2C-656%2C0.1&t=Dkns3XaH4aXymvqH-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=767%3A16098" },
+      { label: "Personas (Notion)", href: "https://www.notion.so/ridhwan/AI-Query-7efb838741bf46c4af2b49c21b0aecdf?pvs=4#59f492c8ca844e63bbcbb808e94d5b96" },
+      { label: "User testing (Notion)", href: "https://www.notion.so/ridhwan/AI-Query-7efb838741bf46c4af2b49c21b0aecdf?source=copy_link#01d6bfb0fb5c4e02a034f563d319add5" },
+    ],
+    image: { src: F("NaJhIOx6sqaPjDNOtFdzmAiQ8.png"), alt: "Native File Search AI recent files screen" },
   },
   sections: [
     {
       kind: "blocks",
       label: "The brief",
       heading: "Tens of thousands of screenshots. No way to find the one I needed.",
-      intro: "Describe an image or document, or show a similar one, and the phone finds it.",
+      intro: "Describe an image or document by voice or text, or show a similar one, and the phone finds it. Surveys tested whether people would make room for this in their phone routine; Google's Pixel 9 later shipped a similar idea, after this was designed.",
       blocks: [
         { type: "phases", items: ["Research", "Personas", "Site maps and flows", "Mid-fidelity prototype", "Usability testing", "High-fidelity design"], note: "The process, in order." },
         { type: "images", images: [{ src: F("hHkGjZjqWrRcRHhsz5HSKz6TQk.png"), alt: "Photo albums with 55,430 screenshots", caption: "55,430 screenshots in one album." }] },

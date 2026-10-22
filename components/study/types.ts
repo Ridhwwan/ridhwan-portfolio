@@ -19,7 +19,7 @@ export type StudySection =
       kind: "users"; label: string; heading: string; intro: string;
       map?: { top: MapPerson[]; hub: string; bottom: MapPerson[] };
       roles: { tag: string; title: string; text: string }[];
-      research?: { heading: string; text: string; images: Pic[] };
+      research?: { heading: string; text: string; images: Figure[] };
     }
   | {
       kind: "ideation"; label: string; heading: string; intro: string;
@@ -61,17 +61,26 @@ export type Block =
   /** Icon cards for reflections, with an optional "what I'd do differently" panel. */
   | { type: "reflections"; items: { icon: "research" | "system" | "balance" | "craft"; title: string; text: string }[]; differently?: string[] }
   /** Figures: one full width, or two side by side. */
-  | { type: "images"; images: Figure[] };
+  | { type: "images"; images: Figure[] }
+  /** The scrolling row of client logos. */
+  | { type: "logos"; label?: string }
+  /** A video with a poster and an optional caption. */
+  | { type: "video"; src: string; poster?: string; caption?: string };
 
 export type Study = {
   /** Must match the project's slug in lib/projects.ts. */
   slug: string;
   accent: string;
-  back?: { href: string; label: string };
+  /** Where the back link goes; false hides it (e.g. on About). */
+  back?: { href: string; label: string } | false;
   hero: {
-    mark: string; markBg: string; markImg?: string; wordmark?: string; title: string; intro: string;
+    mark?: string; markBg?: string; markImg?: string; wordmark?: string; title: string; intro: string;
+    /** The client or product logo shown above the headline (any shape; shown at a fixed height). */
+    logo?: { src: string; alt: string; height?: number };
+    /** Live site, prototype, design file and so on; shown next to the timeline. */
+    links?: { label: string; href: string }[];
     meta: { label: string; text: string }[];
-    image: Pic;
+    image?: Pic;
   };
   sections: StudySection[];
 };

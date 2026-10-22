@@ -5,10 +5,12 @@ import { sosExpress } from "./sos-express";
 import { bentosms } from "./bentosms";
 import { cendmate } from "./cendmate";
 import { miog1 } from "./miog1";
-import { aiQuery } from "./ai-query";
+import { nativeFileSearchAi } from "./native-file-search-ai";
 import { monievend } from "./monievend";
 import { presetSaver } from "./preset-saver";
+import { alveum } from "./alveum";
+import { jjaibot } from "./jjaibot";
 
 export const STUDIES: Record<string, Study> = Object.fromEntries(
-  [sosExpress, bentosms, cendmate, miog1, aiQuery, monievend, presetSaver].map((s) => [s.slug, s]),
+  [sosExpress, bentosms, cendmate, miog1, nativeFileSearchAi, monievend, presetSaver, alveum, jjaibot].map((s) => [s.slug, s]),
 );

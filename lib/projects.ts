@@ -48,8 +48,6 @@ export const projects: Project[] = [
     featured: true,
     summary: "A multi-portal school management system for Nigerian secondary schools.",
     cover: F("bentosms-cover.webp"),
-    // The book below is a draft, kept for review. Until then the card opens the live product.
-    external: "https://bentosms.com",
     theme: { stage: "#E6EFE9", paper: "#F5F7F5" },
   },
   {
@@ -74,10 +72,10 @@ export const projects: Project[] = [
     theme: { stage: "#0B4F6C", paper: "#EAF7FA" },
   },
   {
-    slug: "ai-query",
+    slug: "native-file-search-ai",
     platform: "Mobile",
-    title: "File search with large language models",
-    short: "AI Query",
+    title: "Native File Search AI",
+    short: "Native File Search AI",
     years: "2024",
     summary: "Find images and documents on your phone just by describing them.",
     cover: F("NaJhIOx6sqaPjDNOtFdzmAiQ8.png"),
@@ -104,15 +102,13 @@ export const projects: Project[] = [
     theme: { stage: "#141414", paper: "#222222" },
   },
   {
-    slug: "warehouse",
+    slug: "alveum",
     platform: "Web app",
     title: "Alveum warehouse management system",
     short: "Alveum",
     years: "2024 – 2025",
     summary: "A 300+ variant design system and the full back office for a warehouse management SaaS.",
     cover: F("alveum-cover.webp"),
-    external:
-      "https://www.figma.com/proto/PVo6t4Wtpn4KRwPDOGMfsv/Warehouse-Management-System--Copy-?node-id=2701-37387&t=Fka9RTuVAsLJMjHa-1",
     theme: { stage: "#2A2A2E", paper: "#EDEDEF" },
   },
   {
@@ -122,7 +118,7 @@ export const projects: Project[] = [
     short: "JJAIBOT",
     years: "2020 – 2021",
     summary: "Interface for remote weather-prediction software used in wildfire tracking.",
-    external: "https://jjaibot.org/",
+    cover: F("jjaibot-site.png"),
     theme: { stage: "#24402F", paper: "#EEF2EC" },
   },
 ];

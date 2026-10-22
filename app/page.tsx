@@ -1,6 +1,7 @@
 import SectionIntro from "@/components/ui/SectionIntro";
 import ButtonLink from "@/components/ui/ButtonLink";
 import ProjectGrid from "@/components/ProjectGrid";
+import LogoMarquee from "@/components/ui/LogoMarquee";
 import { projects } from "@/lib/projects";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
         text="Currently building BentoSMS at Bento Development. Previously designed for SOS Express, Alveum, Cendmate and Monievend."
         action={<ButtonLink href="/contact" variant="outline">Let&rsquo;s talk</ButtonLink>}
       />
+      <div className="home-logos"><LogoMarquee /></div>
       <ProjectGrid projects={projects} />
     </div>
   );

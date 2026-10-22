@@ -107,11 +107,11 @@ export const TOKENS: TokenDef[] = [
   { name: "--btn-ink", label: "Button text", group: "colors", type: "color", default: "#ffffff", description: "Text on solid buttons and selected chips." },
 
   // typography
-  { name: "--serif", label: "Headline font", group: "typography", type: "font", default: "IBM Plex Serif", options: FONTS, description: "Page titles, section headings, the footer line." },
+  { name: "--serif", label: "Headline font", group: "typography", type: "font", default: "Geist", options: FONTS, description: "Page titles, section headings, the footer line." },
   { name: "--sans", label: "Body font", group: "typography", type: "font", default: "Geist", options: FONTS, description: "Body text, labels, nav and buttons." },
   { name: "--fs-display", label: "Page title size", group: "typography", type: "length", unit: "px", min: 36, max: 120, step: 1, default: "76", description: "Largest size of page titles; shrinks on small screens." },
-  { name: "--display-weight", label: "Headline weight", group: "typography", type: "select", options: ["400", "500"], default: "400", description: "Weight of the headline font." },
-  { name: "--display-tracking", label: "Headline letter-spacing", group: "typography", type: "length", unit: "em", min: -0.06, max: 0.04, step: 0.005, default: "-0.015", description: "Tighter or looser headlines." },
+  { name: "--display-weight", label: "Headline weight", group: "typography", type: "select", options: ["400", "500", "600"], default: "500", description: "Weight of the headline font." },
+  { name: "--display-tracking", label: "Headline letter-spacing", group: "typography", type: "length", unit: "em", min: -0.06, max: 0.04, step: 0.005, default: "-0.035", description: "Tighter or looser headlines." },
   { name: "--fs-heading", label: "Section heading size", group: "typography", type: "length", unit: "px", min: 22, max: 72, step: 1, default: "46", description: "About section headings and the footer line." },
   { name: "--fs-body", label: "Body size", group: "typography", type: "length", unit: "px", min: 14, max: 22, step: 0.5, default: "17", description: "Default text size." },
   { name: "--fs-card-title", label: "Card title size", group: "typography", type: "length", unit: "px", min: 16, max: 36, step: 1, default: "22", description: "Project names under the cards." },

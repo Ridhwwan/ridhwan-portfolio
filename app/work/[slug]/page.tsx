@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   return {
     title: p.title,
     description: study.hero.intro,
-    openGraph: { images: [study.hero.image.src] },
+    openGraph: { images: study.hero.image ? [study.hero.image.src] : undefined },
     // Drafts (projects whose card links elsewhere) stay out of search.
     robots: p.external ? { index: false, follow: false } : undefined,
   };

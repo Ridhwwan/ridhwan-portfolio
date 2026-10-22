@@ -80,8 +80,6 @@ img, video { max-width: 100%; display: block; }
 
 /* ───── footer ───── */
 .footer { margin-top: var(--space-footer); border-top: 1px solid var(--line); }
-.footer-cta { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px; padding: 72px 0; }
-.footer-cta h2 { max-width: 16ch; }
 .footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 24px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-soft); }
 .footer-base nav { display: flex; gap: 20px; }
 .footer-base a { text-decoration: none; }
@@ -91,3 +89,6 @@ img, video { max-width: 100%; display: block; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 .footer-base:first-child { border-top: 0; }
+
+/* logo row between the home intro and the work grid */
+.home-logos { margin: 0 0 clamp(48px, 6vw, 72px); }
