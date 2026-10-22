@@ -13,6 +13,7 @@ export const bentosms: Study = {
     mark: "B",
     markBg: "#004B3D",
     markImg: "/work/bentosms-logo.png",
+    logo: { src: "/logos/bentosms.webp", alt: "BentoSMS", height: 64 },
     title: "Everything a school needs. Nothing it doesn't.",
     intro:
       "BentoSMS is a school management platform for Nigerian secondary schools, from JSS 1 to SSS 3. I researched it, designed it, built it and sold it, as the founder of Bento Development.",
