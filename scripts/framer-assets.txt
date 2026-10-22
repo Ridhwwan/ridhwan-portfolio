@@ -1,0 +1,64 @@
+# Images from the original Framer case studies (ridhwan.framer.website).
+# scripts/fetch-images.mjs downloads any listed here that aren't in public/work/img yet.
+# SOS Express
+a1fzz6ti2nPbLJUHwbzmcVQtgc.png
+40m9ZkyM51tsFhH7SfXwmFo.png
+H0RQQ0G9elER3iZRzqaDfs3qEE.png
+lA2AYLQ9hxSq7QuDYg6t5SehZY.png
+gk2PvUhdtWFhpD38SqXui395A.png
+oK7Ny8il8Ppz1TdmdoEWnEUlbkI.png
+q58HpsmRDKhhAz6QktOhgTZnDmo.png
+M7MZq2AFEpTQeD4QlVUBUozxTzw.png
+OewULOFRU6aiKBRVtdGbVII62w.png
+hWagCOIp0RFvbBOI1ekCWJrBj8.png
+EITATngERU36IJ9kVc2zJNy1Y.png
+Y712fLZc4U4f4NpdHHk6jfQvyR4.jpg
+CsWUVfSIlpR3Nw4M468GRuOx7mU.png
+qTc3ZecPjTqaeLmGzJ1NDi15r0Q.png
+uZWi2cB2zh69Q3v5piZzODamqc.png
+b2I44wNBXvhIulCVUR7SBCjrI.png
+0C1U5qN8pXI25QojlUeVlvzDA.png
+6bVBIJH3YVldGoqc7K73eDaZHs.gif
+byu0y6mfoP2pnG9R4uDKuuAjNsU.png
+vXRr8mfSJs7fXOidDCqlLUq8wE.jpg
+sUaf3UQDGRtqXh7JpToamcE2UtU.png
+FJ7fakVQWvIy0Ywue7BMrt5KA.png
+SI1zNL38eEjjU3sqJ2yf7MZHZA.jpg
+ISKYIKopAepEOHOZmAqxn90SDVY.png
+rpzorslCUdYUGDXDbPN0NM59ak.png
+1cuYyQjrun5V6lkCq1SiTVXsEY.png
+KdlUiXiqnaWUmQIUk90T8vjfIXo.png
+zfADuTRuk0HnyNEvCFFEZAdPxo.png
+Jsxus0dPyzkvcdl9rEaZVUftU6Y.png
+8NOJgNBF2snHU7Hq54MriaBtg4.png
+q0bYVfBDpseUzIhggHoOonXMtk.png
+# MIO-G1
+m4meWxWWV1UFLlh3kvLlHkju9B8.png
+weBQnMvTpWjh2QvRZOEvLmX7B0.png
+aHDyiMWCXTuFDi3MXRqGRPbaE.png
+BUU3FMyY1nrUGmn22RMcPuHBJIw.png
+HlshhNayL1xi0kIlPByBU9oQM.png
+# Cendmate
+tb82lzUP1RIcwLEHuE0lMhvQ8.png
+MMNYD2J7aaajQW9dGoVYFFgbUo.png
+dMdxpZrAkSsvYfn7aFkV9TsH98.png
+njjoMLzNncqDRBgQb8mqH9oABI.png
+lJGCCjrGGanUTwn6B7IZ69thAg.png
+# Native File Search AI
+RnHxGp9uFwnowJYVhHdLnA5VlA.png
+# Monievend
+7IxV2dC3I4gZf0LtGlYInOtthPY.png
+nKsKHdoGX0hof1MT6WcRXyyHNKs.png
+acHTs1d4qiv68Vzmk1Xsx5rst0.png
+024RIqvPelioqdoGdJeybyZLO6o.png
+7vQBIxh8RflSIFPPPfCscN1YWA.png
+# Preset saver
+Uzg0fsztnboU4Uo8lGVLSTqHQ.png
+WNI2f5670EatzvNlYuWcuLGk0.png
+Q3kQr12CsYdj7fdbsaQaCIsxqM.png
+dUfEJkZ4DjGByQA489djnWZs.png
+CxN4skdLjJeaMu69SReyhZQQM.png
+23prVUyPwCJdZbXcK1XDiBEQ.png
+ZEjvY4Srrn9efsRARErQiHfQHg.png
+# About
+PeoH9iIYeOLEpoaNHsDC5ZW3sY.png

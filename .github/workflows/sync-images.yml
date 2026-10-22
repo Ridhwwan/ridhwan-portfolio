@@ -1,0 +1,32 @@
+# Downloads any referenced images that aren't in the repo yet (from the old
+# Framer site), makes their light WebP copies, and commits them. Run by hand
+# from the Actions tab (or `gh workflow run sync-images.yml`).
+name: Sync images
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts && npm rebuild sharp
+      - run: node scripts/fetch-images.mjs && node scripts/optimize-images.mjs
+      - name: Commit new images
+        run: |
+          git add public/work/img lib/image-manifest.json
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git config user.name "image-sync-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync images from the original case studies"
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -14,6 +14,11 @@ const out = join(root, "public/work/img");
 const sources = ["lib/projects.ts", "app/about/page.tsx", ...readdirSync(join(root, "lib/studies")).map((f) => `lib/studies/${f}`)];
 
 const ids = new Set();
+// Plus the explicit list of images carried over from the old Framer case studies.
+for (const line of readFileSync(join(root, "scripts/framer-assets.txt"), "utf8").split("\n")) {
+  const id = line.trim();
+  if (id && !id.startsWith("#")) ids.add(id);
+}
 for (const file of sources) {
   const text = readFileSync(join(root, file), "utf8");
   for (const m of text.matchAll(/["'`/]([A-Za-z0-9]{16,40}\.(?:png|jpe?g|gif|webp|mp4))["'`]/g)) ids.add(m[1]);
