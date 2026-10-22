@@ -620,6 +620,26 @@
   ],
   "base": "/work/img/opt/acHTs1d4qiv68Vzmk1Xsx5rst0"
  },
+ "/work/img/alveum-analytics.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-analytics"
+ },
+ "/work/img/alveum-budget.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-budget"
+ },
  "/work/img/alveum-cover.webp": {
   "w": 1000,
   "h": 1040,
@@ -629,6 +649,96 @@
    1000
   ],
   "base": "/work/img/opt/alveum-cover"
+ },
+ "/work/img/alveum-customer-profile.png": {
+  "w": 1752,
+  "h": 1816,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-customer-profile"
+ },
+ "/work/img/alveum-dashboard.png": {
+  "w": 1728,
+  "h": 2037,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-dashboard"
+ },
+ "/work/img/alveum-decline-request.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-decline-request"
+ },
+ "/work/img/alveum-new-promotion.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-new-promotion"
+ },
+ "/work/img/alveum-pricing.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-pricing"
+ },
+ "/work/img/alveum-purchase-requests.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-purchase-requests"
+ },
+ "/work/img/alveum-review-purchase.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-review-purchase"
+ },
+ "/work/img/alveum-stock-detail.png": {
+  "w": 1753,
+  "h": 2492,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-stock-detail"
+ },
+ "/work/img/alveum-stock.png": {
+  "w": 1752,
+  "h": 1141,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/alveum-stock"
  },
  "/work/img/amTwC9TGHQqVHjy7zso7wy4UA.png": {
   "w": 1440,
@@ -660,6 +770,16 @@
   ],
   "base": "/work/img/opt/b8C6kkmdCNWE3VpuJx6mWGhud4"
  },
+ "/work/img/bentosms-about.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-about"
+ },
  "/work/img/bentosms-cover.webp": {
   "w": 1000,
   "h": 1040,
@@ -669,6 +789,56 @@
    1000
   ],
   "base": "/work/img/opt/bentosms-cover"
+ },
+ "/work/img/bentosms-features.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-features"
+ },
+ "/work/img/bentosms-home-full.jpg": {
+  "w": 2880,
+  "h": 20620,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-home-full"
+ },
+ "/work/img/bentosms-home.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-home"
+ },
+ "/work/img/bentosms-pricing.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-pricing"
+ },
+ "/work/img/bentosms-tutorials.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/bentosms-tutorials"
  },
  "/work/img/byu0y6mfoP2pnG9R4uDKuuAjNsU.png": {
   "w": 2160,
@@ -976,6 +1146,16 @@
    1600
   ],
   "base": "/work/img/opt/smHhuR2DUJPsN5AxRBjazdPFXIw"
+ },
+ "/work/img/sos-live-site.png": {
+  "w": 2880,
+  "h": 1800,
+  "widths": [
+   480,
+   960,
+   1600
+  ],
+  "base": "/work/img/opt/sos-live-site"
  },
  "/work/img/tb82lzUP1RIcwLEHuE0lMhvQ8.png": {
   "w": 2160,
