@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
       { source: "/work/ai-query", destination: "/work/native-file-search-ai", permanent: true },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/store-map",
+        destination: "https://store-map-pwa.vercel.app/store-map/",
+      },
+      {
+        source: "/store-map/:path*",
+        destination: "https://store-map-pwa.vercel.app/store-map/:path*",
+      },
+    ];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
