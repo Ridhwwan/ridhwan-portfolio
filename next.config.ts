@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/store-map",
-        destination: "https://store-map-pwa.vercel.app/store-map/",
+        destination: "https://store-map-pwa.vercel.app/store-map",
       },
       {
         source: "/store-map/:path*",
