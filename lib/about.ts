@@ -62,9 +62,9 @@ export const about: Study = {
           type: "rows",
           items: [
             { title: "Bento Development", tags: ["Jun 2023 – present", "Abuja"], text: "Founder and CTO. Designed and built BentoSMS solo in 6 months: a multi-tenant, offline-capable school platform with 12 modules and 7 kinds of user, now live at Alpha Academy, Abuja." },
-            { title: "SOS Express", tags: ["Jan – Aug 2025", "Contract"], text: "Product designer and brand designer. Three portals as progressive web apps, a 500+ variant component library and a brand used across 7 touchpoints." },
-            { title: "Alveum", tags: ["Dec 2024 – Mar 2025", "Contract"], text: "Product designer and UX strategist. A 300+ variant design system and the full back office for a warehouse management SaaS." },
-            { title: "Cerebro Hive", tags: ["Oct – Nov 2023", "Contract"], text: "Product designer. User interviews and usability tests that shaped an admin portal for student documentation and international payments, delivered in 2 months." },
+            { title: "SOS Express", tags: ["Jan – Aug 2025"], text: "Product designer and brand designer. Three portals as progressive web apps, a 500+ variant component library and a brand used across 7 touchpoints." },
+            { title: "Alveum", tags: ["Dec 2024 – Mar 2025"], text: "Product designer and UX strategist. A 300+ variant design system and the full back office for a warehouse management SaaS." },
+            { title: "Cerebro Hive", tags: ["Oct – Nov 2023"], text: "Product designer. User interviews and usability tests that shaped an admin portal for student documentation and international payments, delivered in 2 months." },
             { title: "Cendmate", tags: ["Feb – Mar 2023", "Remote"], text: "UI/UX designer. A cross-border money transfer app from concept to a tested high-fidelity prototype in 2 months." },
             { title: "Monievend", tags: ["May 2022 – Jul 2023", "Lagos"], text: "Web designer and UI/UX designer. The company website and client portal, with dev-ready specs." },
             { title: "JJAIBOT", tags: ["Aug 2020 – Feb 2021", "Remote"], text: "Front-end developer and UI/UX designer. The interface for remote weather-prediction software used in wildfire tracking." },
