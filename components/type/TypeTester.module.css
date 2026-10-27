@@ -8,7 +8,7 @@
 .controls output { font-variant-numeric: tabular-nums; font-weight: 400; color: var(--ink-soft); min-width: 5ch; }
 
 .specimen, .glyphs li { font-family: "KoreanFirst", var(--font-geist-sans), sans-serif; }
-.specimen { line-height: 1; padding: 24px 0 40px; outline: none; overflow-wrap: anywhere; border-bottom: 1px solid var(--line); }
+.specimen { line-height: 1.25; padding: 24px 0 40px; outline: none; overflow-wrap: anywhere; border-bottom: 1px solid var(--line); word-spacing: 0.12em; }
 .specimen:focus-visible { box-shadow: 0 2px 0 var(--ink); }
 .specimen { caret-color: var(--ink); padding-bottom: 28px; border-bottom: 0; }
 /* Blinking caret from the moment the page loads; the real caret takes over once you click in. */

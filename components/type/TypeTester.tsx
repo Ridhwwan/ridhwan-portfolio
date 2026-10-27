@@ -13,10 +13,17 @@ const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!#$
  * `autoFocus` puts the caret in the specimen on load (on devices with a mouse;
  * phones get a blinking caret without the keyboard popping up).
  */
-export default function TypeTester({ initialSize = 120, autoFocus = false }: { initialSize?: number; autoFocus?: boolean }) {
+export default function TypeTester({ initialSize, autoFocus = false }: { initialSize?: number; autoFocus?: boolean }) {
+  // Default: 32px on mobile (<760px), 72px on tablet, 120px on desktop.
+  const getResponsiveDefault = () => {
+    if (typeof window === "undefined") return 72;
+    if (window.innerWidth <= 760) return 32;
+    if (window.innerWidth <= 1024) return 72;
+    return 120;
+  };
   const specimen = useRef<HTMLDivElement>(null);
   const [text, setText] = useState(SAMPLE);
-  const [size, setSize] = useState(initialSize);
+  const [size, setSize] = useState(initialSize ?? getResponsiveDefault());
   const [track, setTrack] = useState(0);
   const [weight, setWeight] = useState(400);
   const [loaded, setLoaded] = useState<boolean | null>(null);
