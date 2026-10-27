@@ -144,6 +144,16 @@ export const TOKENS: TokenDef[] = [
   { name: "--card-float", label: "Card float", group: "motion", type: "length", unit: "px", min: 0, max: 6, step: 0.5, default: "2", description: "How far a project card drifts when the cursor passes underneath." },
 ];
 
+/**
+ * Fixed tokens: written onto :root alongside TOKENS, but not editable on
+ * /design-system (their values aren't a single colour or length).
+ */
+export const FIXED_TOKENS: Record<string, string> = {
+  "--frost-bg": "rgba(255,255,255,0.45)", // frosted hero panel fill
+  "--frost-blur": "40px", // frosted hero panel blur
+  "--lily-size": "clamp(280px, 50vw, 600px)", // hero water lily width
+};
+
 export const TOKEN_MAP = new Map(TOKENS.map((t) => [t.name, t]));
 
 /** Returns a clean value if it's allowed for this token, otherwise null. */
@@ -184,5 +194,6 @@ export function rootCss(values: Record<string, string>): string {
     const v = validate(t, values[t.name] ?? "") ?? t.default;
     return `${t.name}:${toCss(t, v)}`;
   });
+  for (const [name, value] of Object.entries(FIXED_TOKENS)) decls.push(`${name}:${value}`);
   return `:root{${decls.join(";")}}`;
 }
