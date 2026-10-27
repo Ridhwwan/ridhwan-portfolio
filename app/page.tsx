@@ -9,6 +9,7 @@ export default function Home() {
     <div className="wrap" id="work">
       <SectionIntro
         as="h1"
+        layout="stacked"
         label="Product designer and front-end developer"
         title="I build scalable products that feel natural to use."
         text="Currently building BentoSMS at Bento Development. Previously designed for SOS Express, Alveum, Cendmate and Monievend."
