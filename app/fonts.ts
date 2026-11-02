@@ -13,3 +13,14 @@ export const plexSerif = localFont({
   preload: false,
   fallback: ["Georgia", "serif"],
 });
+
+// Arabic naskh for the Arabic classes page (Amiri, SIL Open Font License). Only that page imports it.
+export const amiri = localFont({
+  src: [
+    { path: "./fonts/amiri-arabic-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/amiri-arabic-700-normal.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-amiri",
+  display: "swap",
+  fallback: ["Noto Naskh Arabic", "Traditional Arabic", "serif"],
+});
