@@ -10,7 +10,8 @@ import { monievend } from "./monievend";
 import { presetSaver } from "./preset-saver";
 import { alveum } from "./alveum";
 import { jjaibot } from "./jjaibot";
+import { koreanfirst } from "./koreanfirst";
 
 export const STUDIES: Record<string, Study> = Object.fromEntries(
-  [sosExpress, bentosms, cendmate, miog1, nativeFileSearchAi, monievend, presetSaver, alveum, jjaibot].map((s) => [s.slug, s]),
+  [sosExpress, bentosms, cendmate, miog1, nativeFileSearchAi, monievend, presetSaver, alveum, jjaibot, koreanfirst].map((s) => [s.slug, s]),
 );

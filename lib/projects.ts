@@ -28,6 +28,28 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "miog1",
+    platform: "Hardware",
+    title: "MIO-G1 swimming goggles",
+    short: "MIO-G1",
+    years: "2024 – 2026",
+    featured: true,
+    summary: "Swim goggles that let visually impaired people keep their prescription glasses on in the water.",
+    cover: F("dRx9NfOEZ4RcVDJ6WILZq2aTwI.png"),
+    theme: { stage: "#0B4F6C", paper: "#EAF7FA" },
+  },
+  {
+    slug: "koreanfirst",
+    platform: "Software",
+    title: "KoreanFirst typeface",
+    short: "KoreanFirst",
+    years: "2026",
+    featured: true,
+    summary: "A variable typeface that writes Latin letters with Hangul-inspired shapes based on phonetic proximity.",
+    cover: F("koreanfirst-cover.webp"),
+    theme: { stage: "#2C1810", paper: "#F5E6DA" },
+  },
+  {
     slug: "sos-express",
     platform: "Web app",
     title: "SOS Express",
@@ -60,16 +82,6 @@ export const projects: Project[] = [
       "Text-message-simple transfers from Canada to West Africa.",
     cover: F("oA2h9vxHayjXzLXibcFwPtrrLGE.png"),
     theme: { stage: "#0D3B35", paper: "#F3F8F5" },
-  },
-  {
-    slug: "miog1",
-    platform: "Hardware",
-    title: "MIO-G1 swimming goggles",
-    short: "MIO-G1",
-    years: "2024",
-    summary: "Swim goggles that let visually impaired people keep their prescription glasses on in the water.",
-    cover: F("dRx9NfOEZ4RcVDJ6WILZq2aTwI.png"),
-    theme: { stage: "#0B4F6C", paper: "#EAF7FA" },
   },
   {
     slug: "native-file-search-ai",
