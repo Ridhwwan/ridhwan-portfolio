@@ -14,8 +14,8 @@ export const miog1: Study = {
     title: "Swim goggles you can wear over your glasses.",
     intro: "MIO-G1 lets visually impaired swimmers keep their prescription glasses on in the water, so they can see where they're going.",
     meta: [
-      { label: "My contributions", text: "Research, a focus group, product requirements, sketches and orthographic drawings." },
-      { label: "Timeline", text: "2024." },
+      { label: "My contributions", text: "Research, a focus group, product requirements, sketches, orthographic drawings and production planning." },
+      { label: "Timeline", text: "2024 – 2026." },
       { label: "Role", text: "Product designer." },
     ],
     logo: { src: "/logos/miog1.webp", alt: "MIO-G1", height: 64 },
@@ -144,13 +144,40 @@ export const miog1: Study = {
         { tab: "Back view A", src: F("m4meWxWWV1UFLlh3kvLlHkju9B8.png"), caption: "An alternative back view, with a thinner rubber housing." },
       ],
     },
+    /* ── 2026 restart ── */
+    {
+      kind: "blocks",
+      label: "2026 restart",
+      heading: "Two years later, the project came back with a production target.",
+      intro:
+        "In October 2026 the project was restarted with one goal: get as close to a manufacturable product as possible. The scope expanded from a single prototype to a v1 that works for both personal purchase and public or rental use, in three sizes.",
+      blocks: [
+        {
+          type: "stats",
+          items: [
+            { value: "3", label: "Sizes", text: "Small, medium and large — covering most adult head shapes" },
+            { value: "2", label: "Use cases", text: "Personal purchase and public pool or rental use" },
+          ],
+        },
+        {
+          type: "decisions",
+          label: "What changed",
+          items: [
+            { title: "S / M / L sizing", text: "The original design assumed one size. Production needs a range that fits most adults without custom fitting." },
+            { title: "Rental-friendly materials", text: "Public pools and rental outlets need goggles that survive repeated sanitisation and different wearers." },
+            { title: "Production-grade drawings", text: "The orthographic views are being reworked with manufacturing tolerances and material callouts." },
+          ],
+        },
+      ],
+    },
     {
       kind: "learnings",
       label: "What's next",
       heading: "Physical products are slower to fix than screens, so every part has to work before release.",
       items: [
-        { title: "Proper 3D renders", text: "Turning the drawings into renders that show every part in context." },
-        { title: "Printed prototypes", text: "Putting printed goggles in the hands of swimmers." },
+        { title: "3D renders for manufacturing", text: "Turning the orthographic drawings into full 3D models with material specs and tolerances." },
+        { title: "Printed prototypes in three sizes", text: "Testing the S / M / L range with swimmers of different head shapes." },
+        { title: "Material and seal testing", text: "Validating the silicone housing and corner seal under real pool conditions." },
         { title: "Iterate until it's right", text: "Changing the design from what swimmers find in the water." },
       ],
     },
