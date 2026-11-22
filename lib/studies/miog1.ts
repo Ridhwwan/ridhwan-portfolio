@@ -41,7 +41,7 @@ export const miog1: Study = {
           type: "stats",
           items: [
             { value: "~10 min", label: "With contacts in water", text: "Before a focus group felt pain and redness" },
-            { value: "~20mm", label: "Lens to cornea", text: "Room left for glasses inside the frame" },
+            { value: "~20mm", label: "Lens to cornea", text: "Room left for glasses in 2024, raised to ~35mm in 2026 for thick lenses" },
             { value: "3", label: "Criteria", text: "For anything that ships" },
           ],
         },
@@ -116,7 +116,7 @@ export const miog1: Study = {
           type: "decisions",
           label: "Parts",
           items: [
-            { title: "Distortion-free view frame", text: "Leaves about 20mm between lens and cornea so glasses fit inside." },
+            { title: "Distortion-free view frame", text: "Left about 20mm between lens and cornea so glasses fit inside. Version 2 raises this to about 35mm." },
             { title: "Corner seal", text: "Keeps water off the eyes, which swimmers asked for." },
             { title: "Over-ear strap", text: "With an entry slot and temple housing for the arms of the glasses." },
             { title: "Silicone hinge strap", text: "Thickened at the curve after asking which part of a pair of glasses breaks first." },
@@ -171,11 +171,47 @@ export const miog1: Study = {
       ],
     },
     {
+      kind: "blocks",
+      label: "Version 2",
+      tone: "tint",
+      heading: "28 sketch pages, a cardboard proof of concept and a first CAD model.",
+      intro:
+        "The redesign split the goggles into six parts: frame, visor, face seal, temple pockets, strap and buckle. Each one was worked out on paper, tested in cardboard and then modelled in CAD.",
+      blocks: [
+        {
+          type: "images",
+          images: [
+            { src: F("miog1-v2-render.png"), alt: "CAD render of the MIO-G1 version 2 goggles with a pair of glasses inside", caption: "Concept CAD model, size M, with a wide pair of glasses inside. Dimensions are placeholders until fit testing." },
+          ],
+        },
+        {
+          type: "decisions",
+          label: "Design decisions",
+          items: [
+            { title: "One wide visor, no divider", text: "A single polycarbonate visor, curved side to side only so it doesn't distort, and wide enough for glasses frames that point outward." },
+            { title: "Room for thick lenses", text: "Strong prescriptions mean thick lenses. The visor sits about 35mm from the eye, up from 20mm in 2024, which only fit thin lenses." },
+            { title: "A seal in two parts", text: "One silicone seal: a base about 1cm thick off the frame, then a lip that thins toward the face. It runs longer at the sides than at the top and bottom." },
+            { title: "Temple pockets in the strap", text: "The arms of the glasses enter through a slit midway inside the seal and rest in a pocket on top of the strap, over the ear." },
+            { title: "Strap load stays on the frame", text: "Fixed anchors on the sides of the frame and one toothed buckle at the back, so the strap never pulls on the glasses." },
+            { title: "Printable where it can be", text: "Frame and buckle print in PETG or nylon. The visor is cut from polycarbonate sheet, and the seal and strap are cast in silicone using printed moulds." },
+          ],
+        },
+        {
+          type: "images",
+          images: [
+            { src: F("miog1-v2-cardboard.jpg"), alt: "Cardboard proof-of-concept model of the goggles", caption: "Cardboard proof of concept, built to find holes in the design. It showed the shell was too wide and the way glasses go in needed work." },
+            { src: F("miog1-v2-render-back.png"), alt: "CAD render from behind showing the seal, temple pockets and back buckle", caption: "From behind: the seal, the temple pockets above each ear and the buckle at the back." },
+          ],
+        },
+      ],
+    },
+    {
       kind: "learnings",
       label: "What's next",
       heading: "Physical products are slower to fix than screens, so every part has to work before release.",
       items: [
-        { title: "3D renders for manufacturing", text: "Turning the orthographic drawings into full 3D models with material specs and tolerances." },
+        { title: "Prototype 2", text: "A narrower shell and a better way to put the glasses in, based on what the cardboard model showed." },
+        { title: "Fit data for three sizes", text: "Measuring real faces and real glasses to set the S / M / L dimensions in the CAD model." },
         { title: "Printed prototypes in three sizes", text: "Testing the S / M / L range with swimmers of different head shapes." },
         { title: "Material and seal testing", text: "Validating the silicone housing and corner seal under real pool conditions." },
         { title: "Iterate until it's right", text: "Changing the design from what swimmers find in the water." },
