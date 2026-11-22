@@ -14,7 +14,7 @@ export const miog1: Study = {
     title: "Swim goggles you can wear over your glasses.",
     intro: "MIO-G1 lets visually impaired swimmers keep their prescription glasses on in the water, so they can see where they're going.",
     meta: [
-      { label: "My contributions", text: "Research, a focus group, product requirements, sketches, orthographic drawings and production planning." },
+      { label: "My contributions", text: "Research, a focus group, product requirements, sketches, orthographic drawings, engineering specifications, materials research, a cardboard prototype and production planning." },
       { label: "Timeline", text: "2024 – 2026." },
       { label: "Role", text: "Product designer." },
     ],
@@ -150,35 +150,116 @@ export const miog1: Study = {
       label: "2026 restart",
       heading: "Two years later, the project came back with a production target.",
       intro:
-        "In October 2026 the project was restarted with one goal: get as close to a manufacturable product as possible. The scope expanded from a single prototype to a v1 that works for both personal purchase and public or rental use, in three sizes.",
+        "In October 2026 I picked the project back up with one aim: get as close to a manufacturable product as possible. The scope expanded from a single prototype to a first run that works for both personal purchase and public or rental use, in three sizes. Five new sketch pages explored two directions — a flat visor and a ski-goggle-style wrap — before settling on the flat visor.",
       blocks: [
         {
           type: "stats",
           items: [
             { value: "3", label: "Sizes", text: "Small, medium and large — covering most adult head shapes" },
-            { value: "2", label: "Use cases", text: "Personal purchase and public pool or rental use" },
+            { value: "~35mm", label: "Visor depth", text: "From the cornea to the inner visor at the edges, enough for even thick prescription lenses" },
+            { value: "28", label: "Sketch pages", text: "Covering every part from sealing to strapping to temple pockets" },
           ],
         },
         {
           type: "decisions",
-          label: "What changed",
+          label: "V2 key decisions",
           items: [
-            { title: "S / M / L sizing", text: "The original design assumed one size. Production needs a range that fits most adults without custom fitting." },
-            { title: "Rental-friendly materials", text: "Public pools and rental outlets need goggles that survive repeated sanitisation and different wearers." },
-            { title: "Production-grade drawings", text: "The orthographic views are being reworked with manufacturing tolerances and material callouts." },
+            { title: "3-layer sealing system", text: "Protection, fastening and sealing as three separate layers, stacked like those on large-frame swimming goggles but angled for reverse suction." },
+            { title: "Temple pockets carry no strap load", text: "The strap anchors to the rigid front housing. Temple pockets stay soft and floating — they hold the temples but the pull goes around them, not through them." },
+            { title: "Single curved visor", text: "Cylindrical, not bowl-shaped. Even thickness, no nose divider, with a transparent silicone skirt so edges almost disappear. Optically neutral by design." },
+            { title: "Ratchet buckle at the back", text: "A toothed strap with a ratchet buckle, chosen over elastic cord. The buckle sits at the back of the head, not the sides, keeping adjustment away from the seal." },
+            { title: "S / M / L via parametric modelling", text: "One Onshape model with a Variable Studio, so all three sizes come from the same geometry." },
           ],
         },
       ],
     },
+    /* ── Engineering ── */
+    {
+      kind: "blocks",
+      label: "Engineering",
+      tone: "tint",
+      heading: "Every millimetre matters when someone's glasses are inside.",
+      intro:
+        "November 2026 was spent on the engineering: vertex distance calculations, materials research, parts glossaries and cross-section sketches. I corrected a measurement from the original case study — the 20mm cornea-to-visor gap only fits average glasses with thin lenses, not the thick prescriptions this product is for.",
+      blocks: [
+        {
+          type: "table",
+          label: "Materials and manufacturing",
+          columns: ["Part", "Prototype", "Production"],
+          rows: [
+            { name: "Frame / housing", cells: ["PETG or nylon (FDM)", "Injection-moulded PC or PP"], tone: "gain" },
+            { name: "Lens (curved visor)", cells: ["Cut from clear polycarbonate sheet", "Injection-moulded optical PC"], tone: "gain" },
+            { name: "Face seal (3-layer)", cells: ["Cast silicone in a printed mould", "Liquid silicone rubber moulded onto the frame"], tone: "gain" },
+            { name: "Temple pocket and hinge guard", cells: ["Cast silicone", "LSR, co-moulded with the seal"], tone: "gain" },
+            { name: "Strap (toothed)", cells: ["TPU 95A print, then cast silicone", "Silicone compression moulding"], tone: "gain" },
+            { name: "Ratchet buckles", cells: ["PETG or nylon, printed flexure as the spring", "Injection-moulded nylon or acetal"], tone: "gain" },
+          ],
+        },
+        {
+          type: "decisions",
+          label: "Optical and fit",
+          items: [
+            { title: "Vertex distance: up to 20mm", text: "Typical is 12–14mm, but the design accounts for deep-set eyes and glasses that sit lower on the nose." },
+            { title: "Thick-lens clearance", text: "A −10 lens in standard plastic has edges about 12mm thick. At high-index (1.74) that drops to 7–8mm. The visor depth of ~35mm at the edges covers both." },
+            { title: "Hybrid direction", text: "Wide ~180° view and soft skirt seal from scuba masks, low profile and small air volume from large-frame goggles. The wearer's glasses frame will be the most visible edge, not the goggles." },
+          ],
+        },
+        {
+          type: "callout",
+          label: "Parts glossary",
+          text: [
+            "Lens groove: a channel in the frame opening where the visor edge slots in, like a window pane in its frame. Hinge guard: thick silicone padding around the glasses' hinges, the part most likely to break. Mouth seal: a stretchy silicone membrane where the temple exits into its pocket. Corners: the thickened left and right ends of the frame that hold the face seal, strap socket and temple exit.",
+          ],
+        },
+      ],
+    },
+    /* ── Cardboard prototype ── */
+    {
+      kind: "blocks",
+      label: "Cardboard prototype",
+      heading: "A cardboard mockup to find holes in the design before cutting silicone.",
+      intro:
+        "The first physical prototype was made from cardboard — not a one-to-one replica, but a proof of concept to test proportions, the temple opening and the strap buckle. It used a slot-and-hook mechanism inspired by one of the sketch pages.",
+      blocks: [
+        {
+          type: "decisions",
+          label: "Findings from the prototype",
+          items: [
+            { title: "Insert method needs rethinking", text: "How the glasses go into the goggles is a bigger problem than expected. The temple pocket opening and the face seal interact in ways the sketches didn't predict." },
+            { title: "Prototype was too wide", text: "A smaller, more fitting size is needed for the second prototype." },
+            { title: "Halfway seal and strap", text: "Merging the seal and strap at the midpoint keeps the temple opening in check — the strap's temple opening starts from inside the seal." },
+          ],
+        },
+      ],
+    },
+    /* ── Testing plan ── */
+    {
+      kind: "blocks",
+      label: "Testing plan",
+      heading: "Simulation first, then real water.",
+      blocks: [
+        {
+          type: "decisions",
+          label: "Planned tests",
+          items: [
+            { title: "FEA simulation", text: "Stress points at tooth roots, temple pocket mouth and the strap-to-housing joint, using Fusion 360 or FreeCAD with CalculiX." },
+            { title: "Real-world durability", text: "Fatigue cycling, chlorine and salt water soaking, sunscreen exposure, UV, pull-off and drop tests." },
+            { title: "Leak testing on actual faces", text: "The seal has more flex points than a normal goggle, so performance has to be tested, not assumed." },
+            { title: "ISO 18527-3 review", text: "The swimming goggles standard, to be checked before finalising the test plan." },
+          ],
+        },
+      ],
+    },
+    /* ── What's next ── */
     {
       kind: "learnings",
       label: "What's next",
-      heading: "Physical products are slower to fix than screens, so every part has to work before release.",
+      heading: "Physical products are slower to fix than screens, so every part has to work before cutting a mould.",
       items: [
-        { title: "3D renders for manufacturing", text: "Turning the orthographic drawings into full 3D models with material specs and tolerances." },
-        { title: "Printed prototypes in three sizes", text: "Testing the S / M / L range with swimmers of different head shapes." },
-        { title: "Material and seal testing", text: "Validating the silicone housing and corner seal under real pool conditions." },
-        { title: "Iterate until it's right", text: "Changing the design from what swimmers find in the water." },
+        { title: "Measure real glasses at the next focus group", text: "Calipers on the thickest pair available, to validate the 35mm visor depth." },
+        { title: "Begin Onshape modelling", text: "Variable Studio for S / M / L, building in this order: frame, lens groove, seal, corners, strap sockets." },
+        { title: "Source materials for prototyping", text: "Platinum-cure silicone for casting seals, clear polycarbonate sheet for cutting visors, and the easy-to-pour material for first reference samples." },
+        { title: "FEA and leak testing", text: "Simulate stress points digitally, then test the first silicone prototype under real pool conditions." },
       ],
     },
   ],
