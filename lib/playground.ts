@@ -1,4 +1,5 @@
 import { cacheLife } from "next/cache";
+import { cadModels } from "./cad-models";
 
 /**
  * Playground projects come from the "Playground" database in Notion
@@ -128,11 +129,29 @@ function safeEmbed(url: string | null) {
   try { return new URL(url).protocol === "https:" ? url : null; } catch { return null; }
 }
 
+/** Convert CAD models to PlaygroundItems so they appear alongside other playground projects. */
+function cadToPlayground(): PlaygroundItem[] {
+  return cadModels.map((m, i) => ({
+    id: `cad-${m.id}`,
+    title: m.name,
+    summary: `CAD model designed in Onshape.`,
+    category: "CAD",
+    year: 2026,
+    href: m.link,
+    cover: m.thumbnail,
+    preview: null,
+    embed: null,
+    live: null,
+    order: 100 + i, // After hand-ordered playground items
+  }));
+}
+
 export async function getPlaygroundItems(): Promise<PlaygroundItem[]> {
   "use cache";
   cacheLife("minutes");
 
-  if (!process.env.NOTION_TOKEN) return sortPlayground(fallback);
+  const cad = cadToPlayground();
+  if (!process.env.NOTION_TOKEN) return sortPlayground([...fallback, ...cad]);
 
   try {
     const items: PlaygroundItem[] = [];
@@ -152,9 +171,9 @@ export async function getPlaygroundItems(): Promise<PlaygroundItem[]> {
       items.push(...data.results.map(toItem));
       cursor = data.has_more ? data.next_cursor : undefined;
     } while (cursor);
-    return sortPlayground(items);
+    return sortPlayground([...items, ...cad]);
   } catch (e) {
     console.error("Playground: falling back to built-in list.", e);
-    return sortPlayground(fallback);
+    return sortPlayground([...fallback, ...cad]);
   }
 }
