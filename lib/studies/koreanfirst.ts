@@ -21,6 +21,7 @@ export const koreanfirst: Study = {
     ],
     links: [
       { label: "Try the type tester", href: "/playground/koreanfirst" },
+      { label: "Original glyphs (Figma)", href: "https://www.figma.com/design/JOtJmqf2gYPP0SR32dCcbr/New-Font?node-id=0-1&t=GWsk4OOTaS79VECA-1" },
       { label: "Phonetic context (Notion)", href: "https://app.notion.com/p/3f0604900d42819eaf7bdd3b5c89382b" },
     ],
     image: { src: F("koreanfirst-cover.webp"), alt: "The word KOREANFIRST set in the KoreanFirst typeface, mixing Latin and Hangul glyphs" },

@@ -42,7 +42,7 @@ const fallback: PlaygroundItem[] = [
     category: "Type design",
     year: 2026,
     href: "/playground/koreanfirst",
-    cover: null,
+    cover: "/work/img/koreanfirst-glyphs.png",
     preview: null,
     embed: null,
     live: "koreanfirst",
